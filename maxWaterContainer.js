@@ -16,3 +16,24 @@ let maxWater = 0;
   }
   return maxWater;
 )}
+
+
+
+function container(arr){
+if(arr.length === 0) return [];
+
+let n = arr.length;
+if(n < 2) return [];
+let max = 0;
+for(let i=0; i<n-1; i++){
+ for(let j=i+1; j<n; j++){
+    let height = arr[i] < arr[j] ? arr[i] : arr[j];
+    let base = j - i;  
+  let area =  base * height;
+if(area > max){
+     max = area;
+    }
+   }
+ }
+return max;
+}
