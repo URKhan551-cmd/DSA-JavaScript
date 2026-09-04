@@ -1,0 +1,19 @@
+Valid Palindrome
+LeetCode #125
+↗
+Easy
+
+▶
+details
+Converging pointers · skip non-alphanumerics
+Given a string, return true if it is a palindrome considering only alphanumeric characters and ignoring case
+
+
+function validPalindrome(STRING){
+  let str = STRING.replace(/[^a-zA-Z0-9]/g, "").toLowerCase();   // check it frst with regex it holds other than alphabets and number 
+  let reversed = str.split("").reverse().join("");     // split create a char then reverse last join will combine these char to sentense 
+  if(str === reversed){   // str is the string we clean it.    and reverse the same string but in reverse manner are they same 
+return true;  
+}
+return false;
+}
