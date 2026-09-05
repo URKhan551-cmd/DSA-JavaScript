@@ -72,3 +72,29 @@ totalWater += waterI;
 }
 return totalWater;
 }
+
+
+// first brute force possible way to solve problem  
+function trappingRain(arr){
+let n = arr.length;
+if(n === 0)return 0;
+
+let totalWater = 0;
+for(let i=0; i<n; i++){
+  let leftMax = 0;
+for(let j=0; j<i; j++){
+ leftMax = Math.max(leftMax, arr[j]);
+}
+
+let rightMax = 0;
+
+for(let k=i+1; k<n; k++){
+  rightMax = Math.max(rightMax, arr[k]);
+}
+
+let waterAlt = Math.max(0, Math.min(leftMax, rightMax) - arr[i]);
+
+totalWater += waterAlt;
+}
+return totalWater;
+}
