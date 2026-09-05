@@ -38,3 +38,37 @@ right--;
 }
 return totalWater;
 }
+
+
+
+
+
+ // two array an extra space solution 
+SECOND BEST OPTIMIZED WAYS TO SOLVE TRAPPING WATER 
+
+BY HELP OF CREATING ARRAY FOR HOLDING LEFT MAX AND RIGHT MAX
+ 
+function trappingRain(arr){
+let n = arr.length;
+if(n === 0)return 0;
+
+let totalWater = 0;
+let leftArr = new Array(n);
+let rightArr = new Array(n);
+
+leftArr[0] = arr[0]; 
+for(let i=1;i<n; i++){
+  leftArr[i] = Math.max(leftArr[i - 1], arr[i]);
+}
+
+rightArr[n-1] = arr[n -1];
+for(let j=n-2; j>=0; j--){
+ rightArr[j] = Math.max(rightArr[j+1], arr[j]);
+}
+
+for(let i=0;i<n;i++){
+  let waterI =  Math.max(0, Math.min(leftArr[i], rightArr[i]) - arr[i]);
+totalWater += waterI;
+}
+return totalWater;
+}
