@@ -52,3 +52,20 @@ console.log(moveZero([0, 1, 0, 3, 12])); // Output: [1, 3, 12, 0, 0]
 
 
 
+function moveZeros(arr){
+let n = arr.length;
+if(n === 0)return arr;
+
+let left = 0;
+let right = 0;
+
+while(right < n){
+ if(arr[right] !== 0){
+  [arr[left], arr[right]] = [arr[right], arr[left]];
+
+left++;
+ }
+right++
+}
+return arr;
+}
