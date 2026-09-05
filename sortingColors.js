@@ -41,3 +41,31 @@ for(let color=0; color<=2; color++){
 return arr;
 
 }
+
+
+
+ // TWO POINTER APPROACH
+
+ function sortColor(arr){
+let n = arr.length;
+if(n === 0 )return arr;
+let low = 0;
+let mid = 0;
+let high = n-1;
+while(mid <= high){
+   if(arr[mid] === 0){ 
+    [arr[low], arr[mid]] = [arr[mid], arr[low]];
+   low++;
+   mid++;
+ }else if(arr[mid] === 1){
+ mid++;
+}else {
+  [arr[mid], arr[high]] = [arr[high], arr[mid]];
+ high--;
+}
+
+
+}
+
+return arr;
+}
