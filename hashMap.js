@@ -264,4 +264,44 @@ true
 Then:
 !true  === false
 
-  
+
+
+  // HASH MAP APPROACH  
+3rd HASHMAP APPROACH
+
+// more flexible for unicode or extended char
+function isAnagram(s, t){
+if(s.length !== t.length){
+ return false;
+}
+
+// more flexible than array for non-ASCII chars
+let charMap = new Map();
+
+// first pass count all chars in string. s
+for(let char of s){
+ //   increment count for each char
+// if char is not exists in map, default =0 then add 1;
+
+// common frequency pattern;
+charMap.set(char, (charMap.get(char) || 0) + 1);
+
+// second pass  substract char from string t
+
+for(char of t){
+  // if char doesnot exist or count = 0
+// then t has a char not in s or too many occurences
+
+if(!charMap.has(char) || charMap.get(char) === 0){
+  return false;
+}
+
+// ddecrement count for this char
+// this effectively use up char from s
+charMap.set(char, charMap.get(char) -  1);
+// if we have proccessed all char without getting false
+// lenngth is also equal then the string must be anagrams
+}
+}
+}
+  // ********************************************
