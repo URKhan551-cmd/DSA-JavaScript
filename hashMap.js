@@ -28,7 +28,21 @@ store the current number and continue. This gives us
 O(n) time and O(n) space, instead of checking 
 every possible pair with O(n²).
 
-  
+  // HASH MAP APPROACH
+  function sum(arr, target){
+let n = arr.length;
+if(n === 0)return arr;
+
+let seen = new Map();
+for(let i=0; i<n; i++){
+  let complement = target - arr[i];
+if(seen.has(complement)){
+   return [seen.get(complement), i];
+}
+seen.set(arr[i], i);
+}
+return null;
+}
 
 
 // **************
