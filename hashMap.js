@@ -288,7 +288,7 @@ charMap.set(char, (charMap.get(char) || 0) + 1);
 
 // second pass  substract char from string t
 
-for(char of t){
+for(let char of t){
   // if char doesnot exist or count = 0
 // then t has a char not in s or too many occurences
 
@@ -303,5 +303,8 @@ charMap.set(char, charMap.get(char) -  1);
 // lenngth is also equal then the string must be anagrams
 }
 }
-}
+};
+
+
+ 
   // ********************************************
