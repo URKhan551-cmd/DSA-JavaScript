@@ -45,4 +45,27 @@ return null;
 }
 
 
-// **************
+// ***************************** **************
+
+Contains Duplicate
+LeetCode #217
+Easy
+details
+Any value appear twice?
+Given an integer array, return true if any value appears at least twice, and false if every element is distinct.
+
+  // BRUTE FORCE 
+  function contains(arr){
+let n = arr.length;
+if(n === 0) return arr;
+
+for(let i =0; i<n-1; i++){
+ for(let j=i+1; j<n;j++){
+  if(arr[i] === arr[j]){
+   return true;
+   }
+ }
+}
+return false;
+}
+  
