@@ -108,3 +108,38 @@ function containsDuplicate(nums) {
 // already in the Set; if it is, we immediately know there is a duplicate. Otherwise, 
 // we add it and continue. We use a Hash Set because it gives us average O(1) lookup, 
 // reducing the solution from O(n²) brute force to O(n) time at the cost of O(n) extra space.
+
+
+
+      // &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+// PROBLEM
+What does "Valid Anagram" actually mean?
+
+An anagram means:
+
+Two strings contain exactly the same characters, 
+with exactly the same frequency, but the characters can be in a different order.
+
+function anagram(s, t){
+ if(s.length !== t.length){
+  return false;
+}
+
+let sortedS = s.split("").sort();
+let sortedT = t.split("").sort();
+
+return sortedS.join("") === sortedT.join("")
+}
+}
+
+//   Time:  O(n log n)
+// Space: O(n)
+
+// The important idea is:
+
+// If two strings are anagrams, their
+//  sorted versions must be identical.
+
+
+  
