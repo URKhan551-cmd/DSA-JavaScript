@@ -121,6 +121,7 @@ An anagram means:
 Two strings contain exactly the same characters, 
 with exactly the same frequency, but the characters can be in a different order.
 
+  // BRUTE FORCE APPROACH
 function anagram(s, t){
  if(s.length !== t.length){
   return false;
@@ -141,5 +142,126 @@ return sortedS.join("") === sortedT.join("")
 // If two strings are anagrams, their
 //  sorted versions must be identical.
 
+
+  // HASH MAP APPROACH
+
+    function anagram(s, t){
+ if(s.length !== t.length){
+  return false;
+}
+
+const arr = new Array(26).fill(0);
+for(let i=0; i<s.length; i++){
+  arr[s.charCodeAt(i) - 97]++;
+  arr[t.charCodeAt(i) - 97]--;
+}
+return !arr.some(item => item !== 0);
+}
+
+   
+anagram("listen", "silent")
+Both contain exactly the same characters with the same frequencies:
+listen :  silent
+ So:   true
+
+Your algorithm uses an array of 26 positions to represent:
+a b c d e f g ... z
+0 1 2 3 4 5 6 ... 25
+
+  if (s.length !== t.length) {
+    return false;
+}
+
+Anagrams must have the same length.
+For example:
+"cat" → 3 characters
+"dog" → 3 characters
+Could potentially be anagrams.
+This is an optimization because we don't need to  inspect the characters if the lengths are different.
+
+s.charCodeAt(i)
+JavaScript strings internally represent characters  using numeric character codes.
+For ordinary English characters, these are based on Unicode code points / UTF-16 code units, anD the ASCII values for a-z are consecutive.
+  
+What does charCodeAt(i) actually mean?
+Suppose: const word = "cat";
+The indexes are:
+index:  0   1   2
+        ↓   ↓   ↓
+       "c" "a" "t"
+
+word.charCodeAt(0)
+means: Give me the numeric UTF-16 code unit of the character at index 0.
+
+word.charCodeAt(1)   gives:  "a" → 97
+word.charCodeAt(2)  gives:  "t" → 116
+
+So subtract 97.
+
+For example:  a: 97 - 97 = 0
+b: 98 - 97 = 1    c:99 - 97 = 2    d:100 - 97 = 3
+...
+z:122 - 97 = 25       That's how we convert a character into an array index.
+
+s → +1
+t → -1
+
+This is a very clever trick.
+Instead of creating two frequency arrays:
+frequencyS    frequencyT    you use one array.
+
+
+  arr[s.charCodeAt(i) - 97]++;  Let's break it apart.
+Suppose:
+s[i] = "c "
+s.charCodeAt(i)
+
+gives:
+99  
+99 - 97 = 2
+arr[2]++;
+Therefore we're saying:
+Increase the count of c.
+arr[t.charCodeAt(i) - 97]--;
+does the opposite.
+It subtracts the frequency of characters from t.
+return !arr.some(item => item !== 0);
+Let's understand .some() separately;
+.some() asks:
+Does at least one element satisfy this condition?
+
+
+JavaScript checks:
+2 > 5 ❌
+4 > 5 ❌
+7 > 5 ✅
+As soon as it finds 7, .some() returns:
+true
+It doesn't need to check the remaining elements.
+
+
+  arr = [0,0,0,0,0,...]
+
+There is no non-zero element.
+Therefore;
+arr.some(item => item !== 0)
+returns:
+false
+!arr.some(item => item !== 0)
+So:
+!false
+becomes:
+true
+If every frequency difference is zero →
+ the strings are anagrams → return true.
+
+
+
+   arr.some(item => item !== 0)
+finds -1.
+Therefore:
+true
+Then:
+!true  === false
 
   
