@@ -69,3 +69,42 @@ for(let i =0; i<n-1; i++){
 return false;
 }
   
+
+// OPTIMIZE HASH MAP APPROACH 
+
+function contains(arr){
+let n = arr.length;
+if(n === 0) return arr;
+
+let seen = new Map();
+for(let i=0; i<n; i++){
+  if(seen.has(arr[i])){
+   return true;
+ } 
+seen.set(arr[i], i);
+}
+
+return false;
+}
+
+//  2ND VERSION 
+
+function containsDuplicate(nums) {
+    let seen = new Set();
+
+    for (let num of nums) {
+        if (seen.has(num)) {
+            return true;
+        }
+
+        seen.add(num);
+    }
+
+    return false;
+}
+
+
+// We use a Set to keep track of the values we have already seen. For each number, we check whether it is 
+// already in the Set; if it is, we immediately know there is a duplicate. Otherwise, 
+// we add it and continue. We use a Hash Set because it gives us average O(1) lookup, 
+// reducing the solution from O(n²) brute force to O(n) time at the cost of O(n) extra space.
