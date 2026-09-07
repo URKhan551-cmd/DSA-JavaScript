@@ -508,3 +508,19 @@ because:
 
     return result;
 };
+
+
+  Can you optimize your solution?"
+
+You can say:
+
+"The initial solution counts frequencies 
+and sorts the unique elements by frequency, 
+which takes O(n log n). We can avoid the 
+sorting step using bucket sort because an 
+element's frequency is bounded between 1 and n. 
+I create an array where each index represents a 
+frequency, place each number into the bucket 
+corresponding to its frequency, and then traverse 
+the buckets from n down to 1 until I've collected 
+k elements. This gives us O(n) time and O(n) space."
