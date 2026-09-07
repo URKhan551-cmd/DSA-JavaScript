@@ -461,3 +461,50 @@ because:
  ↑  ↑
  0  1
 
+
+  // OPTIMIZED SOLUTION 
+  var topKFrequent = function(nums, k) {
+
+    const frequencyMap = new Map();
+
+    // Count the frequency of every number
+    for (let num of nums) {
+        frequencyMap.set(
+            num,
+            (frequencyMap.get(num) || 0) + 1
+        );
+    }
+
+    // Create buckets.
+    // Index = frequency
+    // Value = numbers having that frequency
+    const buckets = new Array(nums.length + 1);
+
+    // Initialize every bucket as an empty array
+    for (let i = 0; i <= nums.length; i++) {
+        buckets[i] = [];
+    }
+
+    // Put each number into its frequency bucket
+    for (let [num, frequency] of frequencyMap) {
+        buckets[frequency].push(num);
+    }
+
+    // Traverse from highest frequency to lowest
+    const result = [];
+
+    for (let frequency = buckets.length - 1;
+         frequency >= 1;
+         frequency--) {
+
+        for (let num of buckets[frequency]) {
+            result.push(num);
+
+            if (result.length === k) {
+                return result;
+            }
+        }
+    }
+
+    return result;
+};
