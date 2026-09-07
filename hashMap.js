@@ -524,3 +524,35 @@ frequency, place each number into the bucket
 corresponding to its frequency, and then traverse 
 the buckets from n down to 1 until I've collected 
 k elements. This gives us O(n) time and O(n) space."
+
+
+
+
+  // ***********************************************************************
+
+  Product of Array Except Self
+LeetCode #238
+↗
+Medium
+
+›
+details
+Prefix × suffix · no division, O(n)
+Given an integer array, return an array where output[i] equals the product of every element except arr[i]. Solve it in O(n) time without using the division operation.
+
+function product(arr){
+let n = arr.length;
+if(n === 0) return arr;
+let result = [];
+
+for (let i=0;i<n; i++){
+let product = 1;
+for(let j=0; j<n; j++){
+  if(i !== j){
+  product *= arr[j];
+}
+}
+result.push(product);
+}
+return result;
+};
