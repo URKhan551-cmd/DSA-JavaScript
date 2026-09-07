@@ -308,3 +308,41 @@ charMap.set(char, charMap.get(char) -  1);
 
  
   // ********************************************
+
+
+// PROBLEM 
+Top K Frequent Elements
+LeetCode #347
+↗
+Medium
+
+▶
+details
+Frequency map · return the k most common values
+Given an integer array and a number k, return the k most frequent elements. The answer is guaranteed to be unique; it may be returned in any order.
+
+  function topK(arr, k){
+  if(arr.length === 0 )return arr;
+let n = arr.length;
+let map = new Map();
+for(let num of arr){
+ if(map.has(num)){
+   map.set(num, map.get(num) + 1);
+  } else {
+  map.set(num, 1);
+  }
+} 
+let frequencyArr = [];
+
+for(let [num, frequency] of map){
+  frequencyArr.push([num, frequency]);
+
+}
+
+frequencyArr.sort((a, b) => b[1] - a[1]);
+let result = [];
+for(let i=0;i<k;i++){
+  result.push(frequencyArr[i][0]);
+}
+return result;
+}
