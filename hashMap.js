@@ -600,4 +600,21 @@ Result:
 
 
 
-  
+function product(arr){
+let n = arr.length;
+if(n === 0) return arr;
+
+let result = new Array(n).fill(1);
+
+let prefix = 1;
+let suffix = 1;
+for(let i=0; i<n; i++){
+result[i] = prefix;
+prefix *= arr[i];
+}
+for(let i=n-1; i>=0; i--){
+  result[i] *= suffix;
+  suffix *= arr[i];
+}
+return result;
+}
