@@ -556,3 +556,48 @@ result.push(product);
 }
 return result;
 };
+
+
+  Prefix = product of everything before the current index.
+
+Let's look at:
+
+nums = [1, 2, 3, 4]
+
+For every position:
+
+index 0 → nothing before it → 1
+index 1 → 1             → 1
+index 2 → 1 × 2         → 2
+index 3 → 1 × 2 × 3     → 6
+
+So the prefix products are:
+
+[1, 1, 2, 6]
+index     nums     prefix
+  0         1        1
+  1         2        1
+  2         3        2
+  3         4        6
+The prefix value at index i does not include nums[i] itself.
+Suffix = product of everything after the current index.
+Again:
+nums = [1, 2, 3, 4]
+From the right:
+index 0 → 2 × 3 × 4 = 24
+index 1 → 3 × 4     = 12
+index 2 → 4         = 4
+index 3 → nothing   = 1
+suffix = [24, 12, 4, 1]
+Now look at the magic:
+answer = prefix × suffix
+index 0 → 1 × 24 = 24
+index 1 → 1 × 12 = 12
+index 2 → 2 × 4  = 8
+index 3 → 6 × 1  = 6
+Result:
+[24, 12, 8, 6]
+
+
+
+  
