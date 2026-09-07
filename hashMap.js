@@ -346,3 +346,118 @@ for(let i=0;i<k;i++){
 }
 return result;
 }
+
+
+ // Think of the Map as a table:
+number → frequency Initially:
+frequencyMap = {}
+for (let num of nums) {
+This means:  Take each element from nums, one at a time.
+if (frequencyMap.has(num)) {
+Map.has() asks:
+"Does this key already exist in the Map?" 
+
+  First time we see a number
+frequencyMap.set(num, 1);
+This means:
+Put num into the Map with frequency 1.
+
+  frequencyMap.get(num)
+We're asking: What is the current frequency of num?
+For 1:
+frequencyMap.get(1)   returns:  1
+
+  frequencyMap.set(1, 2);  Now:  1 → 2
+
+  const frequencyArray = [];
+
+This will eventually contain
+[
+    [1, 3],
+    [2, 2],
+    [3, 1]
+]
+
+Why?  Because sorting a Map directly isn't convenient for what we want.  An array is easier to sort.
+
+  Loop through the Map
+for (let [num, frequency] of frequencyMap) {
+This is destructuring.
+Each Map entry looks like:
+[num, frequency]
+  [1, 3]
+
+So:
+
+let [num, frequency]
+means:
+num       = 1
+frequency = 3
+Then the next:
+num       = 2
+frequency = 2
+
+  Put those pairs into our array
+frequencyArray.push([num, frequency]);
+push() adds something to the end of an array.
+So eventually:
+frequencyArray = [
+    [1, 3],
+    [2, 2],
+    [3, 1]
+];
+
+  [ELEMENT,  FREQUENCY];    EACH DESIGN IN THAT WAY.
+
+    Sort by frequency
+Now comes the important part:
+frequencyArray.sort((a, b) => b[1] - a[1]);
+This sorts our array according to frequency.
+B KA FIRST INDEX  NOT ZERO   BECAUSE ZERO INDEX P NUMBER HA FREQUENCY NAHI 
+A KA BI 1 INDEX LIYA HA ZERO INDEX PA NUMBER HA FREQUENCY NAHI 
+HAMAIN FREQUENCY CHAHIYE.
+
+  Take the first k
+We know:
+k = 2
+So we only need the first 2 elements.
+Create an empty result:
+const result = [];
+
+  Loop k times
+for (let i = 0; i < k; i++) {
+Since:
+k = 2
+the loop runs:
+i = 0
+i = 1
+That's exactly two times.
+
+
+  Get the number
+result.push(frequencyArray[i][0]);
+
+This looks complicated, but it's actually simple.
+
+Our array:
+
+frequencyArray = [
+    [1, 3],
+    [2, 2],
+    [3, 1]
+];
+
+  i = 0
+we have:
+frequencyArray[0]
+which gives:
+[1, 3]
+
+  frequencyArray[0][0]
+gives:
+1
+because:
+[1, 3]
+ ↑  ↑
+ 0  1
+
