@@ -84,3 +84,33 @@ longest = Math.max(longest, streak);
 return longest;
 
 }
+
+
+
+                          //********************************************
+
+function encode(arr){
+let result = "";
+
+for(let str of arr){
+ result += str.length + "#" + str;
+} 
+return result;
+}
+
+function decode(str){
+  let result = [];
+let i=0;
+while(i < str.length){
+ let j=i;
+while(str[j] !== "#"){
+ j++;
+}
+let length = parseInt(str.substring(i, j), 10);
+let start= j+1;
+let end = start + length;
+result.push(str.substring(start, end));
+i=end;
+}
+return result;
+}
