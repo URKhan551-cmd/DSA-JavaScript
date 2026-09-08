@@ -88,6 +88,18 @@ return longest;
 
 
                           //********************************************
+Encode and Decode Strings
+LeetCode #271
+↗
+Medium
+✓ Solved
+
+›
+details
+Round-trip a list of strings · survive any character
+Design encode(list<string>) → string and decode(string) → list<string> so that the original list is recovered exactly. 
+    The strings may contain ANY characters, including whatever you pick as a delimiter.
+
 
 function encode(arr){
 let result = "";
@@ -113,4 +125,23 @@ result.push(str.substring(start, end));
 i=end;
 }
 return result;
+}
+
+
+    Encode: Each string is prefixed with its length followed by #. This creates an unambiguous boundary: the number before # tells us exactly how many characters to read.
+
+Decode: We repeatedly read the length up to the next #, then take exactly that many characters as the string.
+
+Complexity
+Time: O(N) for both encode and decode, where N is the total number of characters in all strings.
+
+Space: O(N) for the encoded string and the result list.
+
+    // Brute force: join with '#' and split on '#'
+encode(strs) {
+    return strs.join('#');
+}
+
+decode(s) {
+    return s.split('#');
 }
