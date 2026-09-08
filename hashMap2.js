@@ -58,3 +58,29 @@ return longest;
 }
 
 
+//***************************
+optimize O(n) Approach 
+
+function longest(arr){
+let setVal = new Set(arr);
+
+let longest = 0;
+
+for(let num of setVal){
+  if(!setVal.has(num - 1)){
+   let current = num;
+   let streak = 1;
+
+  while(setVal.has(current + 1)){
+  current++;
+streak++;
+}
+
+longest = Math.max(longest, streak);
+  }
+
+
+}
+return longest;
+
+}
