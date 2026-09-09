@@ -396,3 +396,41 @@ more different types than the total number of candies she consumes.
 
 Time: O(n) – Building the Set requires one pass over the array of length n.
 Space: O(n) – In the worst case, all candies are of different types, so the Set stores n elements.
+
+
+
+
+    //***************************************
+
+    Count Inversions
+✓ Solved
+
+›
+details
+Counted in blocks during a merge
+An inversion is a pair of indices i < j where arr[i] > arr[j] — a measure of how far the array is from sorted. Count them all.
+
+An inversion is simply a pair of numbers that are in the wrong order.
+The definition says:
+i < j
+AND
+arr[i] > arr[j]
+In normal language:
+Pick two positions. The left number must be bigger than the right number.
+
+    function countInversion(arr){
+let n= arr.length;
+let count = 0;
+for(let i=0; i<n-1;i++){
+  for(let j=i+1; j<n;j++){
+  if(arr[i] > arr[j]){
+  count++;
+}
+}
+}
+
+return count;
+}
+
+
+    
