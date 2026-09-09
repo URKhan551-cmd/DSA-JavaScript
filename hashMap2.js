@@ -371,4 +371,28 @@ return Math.min(seen.size(), halfSheKeep);
 
 
 
-    
+    function distributeCandies(candies) {
+    const uniqueTypes = new Set(candies);
+
+    const numberOfTypes = uniqueTypes.size;
+
+    const candiesAliceCanKeep = candies.length / 2;
+
+    return Math.min(
+        numberOfTypes,
+        candiesAliceCanKeep
+    );
+}
+
+
+    Count distinct types – Create a Set from the candyType array. The 
+Set automatically stores only unique values, so its size gives the total number of different candy types available.
+Compute the limit – Alice can eat exactly n / 2 candies (n is always even).
+Return the minimum – The maximum number of different types she can eat is limited by two factors:
+The number of different types she actually has (uniqueTypes.size).
+The number of candies she is allowed to eat (candyType.length / 2).
+She cannot eat more different types than she has, and she cannot eat 
+more different types than the total number of candies she consumes.
+
+Time: O(n) – Building the Set requires one pass over the array of length n.
+Space: O(n) – In the worst case, all candies are of different types, so the Set stores n elements.
