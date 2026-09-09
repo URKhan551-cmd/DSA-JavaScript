@@ -307,3 +307,44 @@ continue;
 
 return result;
 }
+
+
+
+var intersection = function(nums1, nums2) {
+    const result = [];
+    const seen = new Set();  // keeps track of values already added to result
+
+    for (let i = 0; i < nums1.length; i++) {
+        for (let j = 0; j < nums2.length; j++) {
+            if (nums1[i] === nums2[j]) {
+                // Found a common element
+                if (!seen.has(nums1[i])) {
+                    seen.add(nums1[i]);
+                    result.push(nums1[i]);
+                }
+                break; // No need to keep checking the rest of nums2 for this element
+            }
+        }
+    }
+return result;
+}
+
+
+Nested loops – For every element num in nums1, we scan through 
+all elements of nums2 to see if it exists.
+Uniqueness – A Set (seen) is used to make sure we only add each
+ common value once. Without it, duplicates in the input
+ arrays would cause duplicate values in the result (which is not allowed).
+
+Early exit – Once we find a match for the current nums1[i], 
+we break the inner loop. This avoids extra work because 
+we already know this value is present and have recorded it (if it was new).
+
+Return – The result array contains all unique common elements. 
+The order follows the order of first appearance in nums1.
+
+    Time: O(n × m) where n = nums1.length and m = nums2.length. In the 
+worst case (no common elements), every pair is compared.
+
+Space: O(min(n, m)) for the seen set and the result array 
+(at most the number of distinct common elements).
