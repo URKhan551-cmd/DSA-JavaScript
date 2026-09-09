@@ -145,3 +145,34 @@ encode(strs) {
 decode(s) {
     return s.split('#');
 }
+
+
+
+    // *********************************************8
+
+Majority Element
+LeetCode #169
+↗
+Easy
+
+›
+details
+Boyer-Moore voting — one candidate, one counter
+Given an array of size n, return the element that appears more than ⌊n/2⌋ times. You may assume such an element always exists.
+
+function majority(arr){
+let n = arr.length;
+
+let count = 0;
+let candidate= null;
+
+for(let num of arr){
+if(count === 0){
+candidate = num;
+}
+count += (num === candidate) ? 1 : -1;
+
+}
+return candidate;
+}
+
