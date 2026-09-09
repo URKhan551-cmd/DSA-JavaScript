@@ -273,3 +273,37 @@ var plusOneOptimizedInPlace = function(digits) {
     return [1, ...digits];
 }
     
+// ********************************************************
+
+Intersection of Two Arrays
+LeetCode #349
+↗
+Easy
+
+›
+details
+The set is the shape of the answer
+Given two integer arrays, return an array of their intersection. Each value in the result must appear only once, and the order does not matter.
+
+
+function intersection(arr1, arr2){
+let n1 = arr1.length;
+let n2 = arr2.length;
+
+if(n1 ===0 || n2 === 0)return 0;
+let result =[];
+
+for(let i=0;i<n1;i++){
+  for(let j=0;j<n2;j++){
+   if(arr1[i] === arr2[j]){
+   if(!result.includes(arr1[i])){
+  result.push(arr1[i]);
+} else { 
+continue;
+}
+  }
+}
+}
+
+return result;
+}
