@@ -186,5 +186,90 @@ If the current element equals candidate, increment count; otherwise, decrement c
 At the end, candidate will be the majority element.
 
 
+// ******************************
+    Plus One
+LeetCode #66
+↗
+Easy
+✓ Solved
 
+›
+details
+The carry that runs off the front
+A non-negative integer is given as an array of digits, most significant first. Add one to it and return the resulting array of digits.
+
+
+Brute Force (Using BigInt)
+Convert the digit array to a string, then to a BigInt, add one, convert back to a string, and finally map each character to a number.
+
+javascript
+var plusOneBruteForce = function(digits) {
+    // Convert array -> string -> BigInt -> add 1 -> string -> array of numbers
+    const num = BigInt(digits.join('')) + 1n;
+    return Array.from(String(num), Number);
+};
+Complexity
+Time: O(n) – join, BigInt operations, and mapping each run in linear time.
+
+Space: O(n) – additional strings and the resulting array.
+
+
+    Returning a New Array
+javascript
+var plusOneOptimizedNewArray = function(digits) {
+    const result = [...digits]; // copy to avoid mutating input
+    for (let i = result.length - 1; i >= 0; i--) {
+        if (result[i] < 9) {
+            result[i]++;
+            return result;
+        }
+        result[i] = 0;
+    }
+    result.unshift(1);
+    return result;
+};
+
+Complexity
+
+Time: O(n) – single pass over the array.
+
+Space: O(1) extra for the in‑place version (excluding the input array); O(n) for the new‑array version due to the copy.
+
+Key Idea
+Instead of converting to a number, we directly simulate decimal addition. 
+A digit less than 9 can be incremented without a carry, so we stop
+ early. Otherwise we set it to 0 and continue. After the loop, 
+if we haven’t returned, all digits were 9, so we add a leading 1.
+
+
+    In‑Place Mutation
+javascript
+var plusOneOptimizedInPlace = function(digits) {
+    for (let i = digits.length - 1; i >= 0; i--) {
+        if (digits[i] < 9) {
+            digits[i]++;
+            return digits;
+        }
+        digits[i] = 0; // carry over
+    }
+    // If we are here, all digits were 9 -> [9,9,9] becomes [1,0,0,0]
+    digits.unshift(1);
+    return digits;
+};
+
+
+
+    function plusOne(digits) {
+    for (let i = digits.length - 1; i >= 0; i--) {
+
+        if (digits[i] < 9) {
+            digits[i]++;
+            return digits;
+        }
+
+        digits[i] = 0;
+    }
+
+    return [1, ...digits];
+}
     
