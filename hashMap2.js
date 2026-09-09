@@ -176,3 +176,15 @@ count += (num === candidate) ? 1 : -1;
 return candidate;
 }
 
+Optimized Boyer-Moore Voting Algorithm (O(n) time, O(1) space)
+The Boyer-Moore Voting Algorithm is the most efficient solution for this problem. It identifies the majority element in a single pass without using extra space.
+How it works
+Maintain two variables: candidate and count.
+Traverse the array:
+If count is 0, set candidate = current element.
+If the current element equals candidate, increment count; otherwise, decrement count.
+At the end, candidate will be the majority element.
+
+
+
+    
