@@ -348,3 +348,27 @@ worst case (no common elements), every pair is compared.
 
 Space: O(min(n, m)) for the seen set and the result array 
 (at most the number of distinct common elements).
+
+
+     // ******************************
+
+         Distribute Candies
+LeetCode #575
+↗
+Easy
+
+›
+details
+Whichever ceiling binds first
+Alice has n candies of various types and her doctor tells her to eat only n/2 of them. 
+    Return the maximum number of different types she can keep while eating exactly n/2 candies.
+
+    function candies(arr){
+let seen = new Set(arr);
+let halfSheKeep = arr.length/2;
+return Math.min(seen.size(), halfSheKeep);
+}
+
+
+
+    
