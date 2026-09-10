@@ -20,16 +20,41 @@ var findMaxAverage = function(nums, k) {
 };   
 
 
-
-
-
-
-
-
 If the problem asks for maximum sum, return maxSum.
 If it asks for maximum average, return maxSum / k.
 
+// ***************************************************
 
+    Max Sum Subarray of Size K
+LeetCode #643
+↗
+Easy
+✓ Solved
+
+›
+details
+Find the K-length contiguous subarray with the largest sum
+Given an integer array and a window size k, find the maximum sum among all contiguous subarrays of length k.
+
+    function maxSumSubarrayBrute(nums, k) {
+  if (k <= 0 || k > nums.length) return null;
+
+  let maxSum = -Infinity;
+
+  // Number of windows = n - k + 1
+  for (let start = 0; start <= nums.length - k; start++) {
+    let sum = 0;
+
+    // Recompute sum for current window
+    for (let i = start; i < start + k; i++) {
+      sum += nums[i];
+    }
+
+    maxSum = Math.max(maxSum, sum);
+  }
+
+  return maxSum;
+}
 
 
 
