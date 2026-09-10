@@ -57,11 +57,34 @@ Given an integer array and a window size k, find the maximum sum among all conti
 }
 
 
+// optimized approach
+function buteForce(arr, k){
+let n = arr.length;
+if(n < k || k <= 0) return 0;
+let windowSum = 0;
+
+for(let i=0; i<k; i++){
+  windowSum += arr[i];
+}
+let left = 0;
+let maxVal = windowSum;
+for(let right=k; right<arr.length; right++){
+ windowSum += arr[right];
+ windowSum -= arr[left];
+left++;
+maxVal = Math.max(maxVal, windowSum);
+}
+
+
+
+return maxVal;
+
+}
 
 
 
 
-
+// *************************
 
 Max Sum of Distinct Subarrays, Size K
 LeetCode #2461
