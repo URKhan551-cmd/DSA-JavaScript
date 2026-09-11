@@ -160,3 +160,36 @@ if(valid){
 };
 return maxSum
 }
+
+
+
+    If an interviewer asks "How did you 
+optimize this?", a strong answer would be:
+
+"The brute-force approach examines every 
+window and recalculates its sum and 
+distinctness in O(k), resulting in O(nk). 
+Since consecutive windows overlap by k - 1 
+elements, I maintain a fixed-size sliding window. 
+I add the incoming element to a frequency 
+map and running sum, and when the window exceeds k, 
+I remove the outgoing element from both. 
+A window is valid when its size is k and 
+freq.size === k, meaning all elements are distinct. 
+This reduces the time complexity to O(n) 
+with O(k) auxiliary space."
+
+    For LeetCode #2461, the constraints make 
+nums[i] positive, so your 0 initialization is fine. 
+But as a general sliding-window algorithm, 
+I'd initialize from the first valid window or use -Infinity.
+
+For example:
+
+let maxSum = -Infinity;
+
+Then:
+
+maxSum = Math.max(maxSum, sum);
+
+works even with negative numbers.
