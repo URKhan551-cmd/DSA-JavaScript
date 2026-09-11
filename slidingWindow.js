@@ -97,7 +97,7 @@ Fixed window + a frequency map gate
 Given an integer array and a length k, find the maximum sum among all contiguous subarrays of length k whose elements are all distinct.
 
 // Brute force approach 
-function slidiing(arr, k){
+function slidiing2(arr, k){
 if(k <= 0 || arr.length < k) return null;
 let n = arr.length;
 let maxSum = 0;
@@ -193,3 +193,39 @@ Then:
 maxSum = Math.max(maxSum, sum);
 
 works even with negative numbers.
+
+
+
+    // OPTIMIZED APPROACH 
+
+    function slidiingOptimized(arr, k){
+if(k <= 0 || arr.length < k) return 0;
+let n = arr.length;
+let freq = new Map();
+let sum =0;
+let maxSum = -Infinity;
+let left = 0;
+
+for(let right=0; right<n; right++){
+  let val = arr[right];
+
+freq.set(val, (freq.get(val) || 0) + 1);
+sum += val;
+if(right - left + 1> k){
+const leftVal = arr[left];
+sum -= leftVal;
+
+const count = freq.get(leftVal);
+if(count === 1){
+ freq.delete(leftVal);
+}else {
+ freq.set(leftVal, count - 1)
+}
+left++;
+}
+if(right - left + 1 === k && freq.size === k ){
+ maxSum = Math.max(maxSum, sum);
+}
+ }
+return maxSum;
+}
