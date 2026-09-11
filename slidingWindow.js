@@ -269,3 +269,53 @@ Given a row of cards with point values, take exactly k cards from either the sta
 
     return best;
 }
+
+
+
+
+// OPTIMIZED APPROACH
+
+We must take exactly k cards from either the left end, right end, or a combination of both.
+Try every possible number of cards taken from the left: 0 → k.
+For each leftCount, calculate rightCount = k - leftCount.
+Sum the first leftCount cards from the left.
+Sum the last rightCount cards from the right.
+Add both sums to get the score for that particular combination.
+Compare that score with best and keep the larger one.
+After testing all k + 1 combinations, return best.
+
+Core idea:
+leftCount + rightCount = k, so we try every possible way to distribute the k selected cards between the two ends.
+
+    function maxScore2(cardPoints, k) {
+    const n = cardPoints.length;
+
+    const total = cardPoints.reduce(
+        (sum, value) => sum + value,
+        0
+    );
+
+    const windowSize = n - k;
+
+    if (windowSize === 0) {
+        return total;
+    }
+
+    let windowSum = 0;
+
+    // First window
+    for (let i = 0; i < windowSize; i++) {
+        windowSum += cardPoints[i];
+    }
+    let minWindowSum = windowSum;
+
+    // Slide the window
+    for (let right = windowSize; right < n; right++) {
+        windowSum += cardPoints[right];
+        windowSum -= cardPoints[right - windowSize];
+
+        minWindowSum = Math.min(minWindowSum, windowSum);
+    }
+
+    return total - minWindowSum;
+}
