@@ -229,3 +229,43 @@ if(right - left + 1 === k && freq.size === k ){
  }
 return maxSum;
 }
+
+
+    // ************************************
+
+Max Points From Cards
+LeetCode #1423
+↗
+Medium
+✓ Solved
+
+›
+details
+Take K from either end · complement window
+Given a row of cards with point values, take exactly k cards from either the start or the end, and return the maximum total points obtainable.
+
+
+    function maxScore(cardPoints, k) {
+    const n = cardPoints.length;
+    let best = 0;
+
+    // Try every possible number of cards taken from the left
+    for (let leftCount = 0; leftCount <= k; leftCount++) {
+        const rightCount = k - leftCount;
+        let currentSum = 0;
+
+        // Take leftCount cards from the beginning
+        for (let i = 0; i < leftCount; i++) {
+            currentSum += cardPoints[i];
+        }
+     
+     // Take rightCount cards from the end
+        for (let i = n - rightCount; i < n; i++) {
+            currentSum += cardPoints[i];
+        }
+
+        best = Math.max(best, currentSum);
+    }
+
+    return best;
+}
