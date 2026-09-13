@@ -1,3 +1,16 @@
+Longest Substring Without Repeats
+LeetCode #3
+↗
+Medium
+✓ Solved
+
+›
+details
+Variable-size sliding window over a string
+Given a string, find the length of the longest contiguous substring that contains no repeated characters.
+
+
+
 let left = 0;
 let sum =0;
 let best = 0;
@@ -60,3 +73,18 @@ maxLength = Math.max(maxLength, right - left + 1);
 }
 return maxLength;
 }
+
+
+    right expands the window one character at a time.
+The Map stores each character's most recent index.
+When a duplicate is found, left jumps to one position after the previous occurrence: map.get(char) + 1.
+Math.max(left, ...) prevents left from ever moving backward.
+After repairing the window, right - left + 1 gives the current valid window length, and we update maxLength.
+
+Interview summary:
+
+“I use a sliding window with two pointers and a hash map. 
+  The map stores the latest index of each character. 
+  When I encounter a duplicate inside the current window, 
+  I move the left pointer past its previous occurrence. 
+  This keeps the window free of duplicates and gives an O(n) time and O(n) space solution.”
