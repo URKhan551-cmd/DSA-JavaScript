@@ -31,6 +31,24 @@ for(let right=0;right<nums.length;right++){
 }
 
 
+function longest1(string){
+let maxLength =0;
+for(let start=0;start<string.length; start++){
+  let seen = new Set();
+for(let end=start; end<string.length; end++){
+ const char = string[end];
+
+if(seen.has(char)){
+ break;
+}
+seen.add(char);
+let currentLength = end - start + 1
+maxLength = Math.max(currentLength, maxLength);
+
+}
+}
+return maxLength;
+}
 
 
 
