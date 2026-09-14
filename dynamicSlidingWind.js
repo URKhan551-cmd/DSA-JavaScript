@@ -301,3 +301,65 @@ keep shrinking while valid
 record smallest window
 
 This is slightly different from the previous problems you've done.
+
+
+
+function shortest(s, t){
+if(t.length > s.length) return "";
+
+let minWindow = "";
+
+for(let left=0; left<s.length; left++){
+ let windowCount = new Map();
+
+ // expand the string
+for(let right=left; right<s.length; right++){
+  let char = s[right];
+
+  windowCount.set(char, (windowCount.get(char) || 0) + 1);
+  }
+// check if current window countain t
+if(countainAll(windowCount, t)){
+   const currentWindow = s.slice(left, right + 1);
+
+// first valid window or smaler window
+
+if(minWindow === ""  || currentWindow.length < minWindow.length){
+    minWindow = currentWindow;
+     }
+
+  }
+
+}
+
+
+}
+return minWindow;
+}
+
+
+
+function containAll(minWindow, t){
+  let requiredCount = new Map();
+  for(const char of t){
+ requiredCount.set(char, (requiredCount.get(char) || 0) + 1);
+} 
+
+for(const [char, needed] of requiredCount){
+    const have = windowCount.get(char) || 0;
+
+  if(have < needed) {
+   return false;
+    }
+ }
+return true;
+
+}
+
+
+
+Minimum Window Substring asks me to find the smallest contiguous part of s that contains all the characters required by t, including the required number of duplicates; I expand until the window is valid, then shrink it to make it as small as possible.
+
+Once that sentence is completely clear, the code becomes much easier.
+
+Next, the best move is to implement the brute-force JavaScript solution first, and we'll trace it on s = "ADOBECODEBANC", t = "ABC" before touching the optimized solution.
