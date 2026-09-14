@@ -134,3 +134,38 @@ best= Math.max(best, windowLength);
 }
 return best;
 }
+
+
+  // **********************************
+
+Longest Repeating Character Replacement
+LeetCode #424
+↗
+Medium
+✓ Solved
+
+›
+details
+Variable window · invariant len − maxFreq ≤ k
+Given a string and a budget of k character changes, find the length of the longest substring made of a 
+  single repeated character after performing at most k replacements.
+
+
+
+
+    When you see Longest Repeating Character Replacement, think:
+Grow window
+     ↓
+Count characters
+     ↓
+Find most frequent character
+     ↓
+How many other characters must I replace?
+     ↓
+windowLength - maxFrequency
+     ↓
+If > k → shrink
+If <= k → record answer
+And remember this sentence:
+The window can contain different characters. We are checking whether we can replace the minority characters and turn the whole window into one repeated character using at most k replacements.
+That is the core idea behind LeetCode 424.
