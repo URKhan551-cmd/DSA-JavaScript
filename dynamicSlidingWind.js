@@ -259,3 +259,45 @@ I use a variable-size sliding window with a frequency map. The window is valid w
 
 Time: O(n)
 Space: O(1) for the standard uppercase-English-character version.
+
+
+
+
+// *****************************************************
+
+
+  Minimum Window Substring
+LeetCode #76
+↗
+Hard
+
+›
+details
+Smallest window of s covering all of t
+Given strings s and t, return the smallest substring of s that contains every character of t, 
+  counting multiplicity. If no such window exists, return the empty string.
+
+
+  The pattern
+
+For this problem, memorize:
+
+EXPAND → become valid → SHRINK → record smallest
+
+More specifically:
+
+right++
+   ↓
+add character
+   ↓
+does window contain everything in t?
+   ↓
+    YES
+     ↓
+move left forward
+     ↓
+keep shrinking while valid
+     ↓
+record smallest window
+
+This is slightly different from the previous problems you've done.
