@@ -207,3 +207,55 @@ If <= k → record answer
 And remember this sentence:
 The window can contain different characters. We are checking whether we can replace the minority characters and turn the whole window into one repeated character using at most k replacements.
 That is the core idea behind LeetCode 424.
+
+
+
+
+OPTIMIZED APPROACH 
+function characterReplacement(s, k) {
+    const count = new Map();
+
+    let left = 0;
+    let maxFreq = 0;
+    let maxLength = 0;
+
+    for (let right = 0; right < s.length; right++) {
+
+        const char = s[right];
+
+        // Add current character
+        count.set(char, (count.get(char) || 0) + 1);
+
+        // Update highest frequency
+        maxFreq = Math.max(maxFreq, count.get(char));
+
+        // Current window length
+        const windowLength = right - left + 1;
+
+        // Characters that need replacement
+        const replacements = windowLength - maxFreq;
+       
+ // Window is invalid
+        if (replacements > k) {
+
+            const leftChar = s[left];
+
+            count.set(leftChar, count.get(leftChar) - 1);
+
+            left++;
+        }
+
+        // Record valid window
+        maxLength = Math.max(
+            maxLength,
+            right - left + 1
+        );
+    }
+
+    return maxLength;
+}
+
+I use a variable-size sliding window with a frequency map. The window is valid when windowLength - maxFreq <= k, because that value represents how many characters must be replaced to make the entire window one repeated character. I expand with right, shrink with left when replacements exceed k, and track the maximum valid window length.
+
+Time: O(n)
+Space: O(1) for the standard uppercase-English-character version.
