@@ -363,3 +363,113 @@ Minimum Window Substring asks me to find the smallest contiguous part of s that 
 Once that sentence is completely clear, the code becomes much easier.
 
 Next, the best move is to implement the brute-force JavaScript solution first, and we'll trace it on s = "ADOBECODEBANC", t = "ABC" before touching the optimized solution.
+
+
+
+
+function minWindow(s, t) {
+
+    if (t.length > s.length) {
+        return "";
+    }
+
+    // 1. What characters do we need?
+    const need = new Map();
+
+    for (const char of t) {
+        need.set(
+            char,
+            (need.get(char) || 0) + 1
+        );
+    }
+
+    // 2. What characters are currently inside our window?
+    const windowCount = new Map();
+
+    let left = 0;
+ 
+ // Number of character requirements currently satisfied
+    let have = 0;
+
+    // Number of unique character requirements
+    const required = need.size;
+
+    // Best answer found so far
+    let minLength = Infinity;
+    let resultStart = 0;
+
+    // 3. Expand the window
+    for (let right = 0; right < s.length; right++) {
+
+        const char = s[right];
+
+        // Add current character to the window
+        windowCount.set(
+            char,
+            (windowCount.get(char) || 0) + 1
+        );
+
+
+        // Did this character just satisfy a requirement?
+        if (
+            need.has(char) &&
+            windowCount.get(char) === need.get(char)
+        ) {
+            have++;
+        }
+
+        // 4. If window is valid, try to make it smaller
+        while (have === required) {
+
+            const windowLength = right - left + 1;
+
+            // Is this our smallest valid window?
+            if (windowLength < minLength) {
+                minLength = windowLength;
+                resultStart = left;
+            }
+
+            // Remove the leftmost character
+            const leftChar = s[left];
+
+ windowCount.set(
+                leftChar,
+                windowCount.get(leftChar) - 1
+            );
+
+            // Did removing it break a requirement?
+            if (
+                need.has(leftChar) &&
+                windowCount.get(leftChar) < need.get(leftChar)
+            ) {
+                have--;
+            }
+
+            left++;
+        }
+    }
+
+    // No valid window found
+    if (minLength === Infinity) {
+        return "";
+    }
+
+    // Return the best window
+    return s.slice(
+        resultStart,
+        resultStart + minLength
+    );
+}
+
+
+When our window contains:
+A → enough
+B → enough
+C → enough
+we have:
+have = 3
+need = 3
+Therefore:
+have === need
+means:
+The current window is valid.
