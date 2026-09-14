@@ -151,6 +151,44 @@ Given a string and a budget of k character changes, find the length of the longe
   single repeated character after performing at most k replacements.
 
 
+    function characterReplacement(s, k) {
+    let maxLength = 0;
+
+    // Choose the starting point
+    for (let start = 0; start < s.length; start++) {
+
+        // Frequency of characters in current substring
+        const count = new Map();
+
+        // Extend the substring
+        for (let end = start; end < s.length; end++) {
+
+            const char = s[end];
+
+            // Increase frequency
+            count.set(char, (count.get(char) || 0) + 1);
+
+            // Find the highest frequency
+            let maxFreq = 0;
+
+            for (const freq of count.values()) {
+                maxFreq = Math.max(maxFreq, freq);
+            }
+// Current substring length
+            const windowLength = end - start + 1;
+
+            // Characters that need to be replaced
+            const replacements = windowLength - maxFreq;
+
+            // Is this substring possible?
+            if (replacements <= k) {
+                maxLength = Math.max(maxLength, windowLength);
+            }
+        }
+    }
+
+    return maxLength;
+}
 
 
     When you see Longest Repeating Character Replacement, think:
