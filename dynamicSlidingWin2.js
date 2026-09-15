@@ -38,4 +38,18 @@ move i one step
    ↓
 repeat
 
+
+
+
+  // OPTIMIZED APPROACH
+
+Maintain a deque of indices where the values nums[deque[i]] are in strictly decreasing order.
+
+Front of deque = index of the maximum in the current window.
+
+Before adding a new index i, pop from the back any indices whose value is ≤ nums[i] — they can never be the max again while i is in the window.
+
+Pop from the front any index that has slid out of the window (< i - k + 1).
+
+Each index is pushed once and popped at most once → O(n) time.
     //*************************************************
