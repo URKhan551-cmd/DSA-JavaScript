@@ -22,3 +22,20 @@ maxResult.push(max);
 }
 return maxResult;
 }
+
+
+nums + k
+   ↓
+choose window starting at i
+   ↓
+look at k elements using j
+   ↓
+find maximum
+   ↓
+push maximum into result
+   ↓
+move i one step
+   ↓
+repeat
+
+    //*************************************************
