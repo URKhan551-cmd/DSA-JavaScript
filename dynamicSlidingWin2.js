@@ -77,3 +77,36 @@ if(i>=k-1) maxResult[i-k+1] = arr[q[head]];
 }
 return maxResult;
 }
+
+
+
+
+  function maxSlidingWindow(nums, k) {
+    const result = [];
+    const deque = [];
+
+    for (let i = 0; i < nums.length; i++) {
+
+        // Remove expired indexes
+        while (deque.length > 0 && deque[0] <= i - k) {
+            deque.shift();
+        }
+
+        // Remove indexes whose values are smaller
+        while (
+            deque.length > 0 &&
+            nums[deque[deque.length - 1]] <= nums[i]
+        ) {
+            deque.pop();
+        }
+        // Add current index
+        deque.push(i);
+
+        // Window is complete
+        if (i >= k - 1) {
+            result.push(nums[deque[0]]);
+        }
+    }
+
+    return result;
+}
