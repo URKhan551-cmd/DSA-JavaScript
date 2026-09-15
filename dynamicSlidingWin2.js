@@ -53,3 +53,27 @@ Pop from the front any index that has slid out of the window (< i - k + 1).
 
 Each index is pushed once and popped at most once → O(n) time.
     //*************************************************
+
+
+
+
+
+
+  function maxWindow(arr, k){
+if(!Array.isArray(arr)k> arr.length || k<=0) return [];
+let n = arr.length;
+let maxResult = new Array(n-k+1);
+let q = new Int32Array(n);
+let head =0, tail =0;
+for(let i=0;i<n;i++){
+ while(tail > head && arr[q[tail - 1]] <= arr[i]){
+  tail--;
+ }
+
+q[tail++] = i;
+
+if(q[head] < i-k+1) head++;
+if(i>=k-1) maxResult[i-k+1] = arr[q[head]];
+}
+return maxResult;
+}
