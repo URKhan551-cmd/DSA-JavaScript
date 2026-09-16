@@ -51,3 +51,39 @@ function isValid22(s) {
 }
 }
 return stack.length === 0;
+
+
+Recursive / Divide-and-Conquer
+A valid string can be split as A + B where A and B are valid, or it's open + X + close where X is valid.
+ 
+function isValidRecursiveApproach(s) {
+  if (s.length === 0) return true;
+  if (s.length % 2 !== 0) return false;
+
+  const pairs = { '(': ')', '[': ']', '{': '}' };
+  const open = s[0];
+
+  // First char must be an opener
+  if (!pairs[open]) return false;
+
+  // Find where this opener's matching closer sits
+  let depth = 0;
+  let matchIndex = -1;
+  for (let i = 0; i < s.length; i++) {
+    if (pairs[s[i]]) depth++;                 // opener
+    else depth--;                             // closer
+
+
+    if (depth === 0) { matchIndex = i; break; }
+    if (depth < 0) return false;              // too many closers
+  }
+
+  if (matchIndex === -1) return false;
+  if (s[matchIndex] !== pairs[open]) return false;
+
+  // Inside + remainder after the matched pair
+  return (
+    isValid(s.slice(1, matchIndex)) &&
+    isValid(s.slice(matchIndex + 1))
+  );
+}
