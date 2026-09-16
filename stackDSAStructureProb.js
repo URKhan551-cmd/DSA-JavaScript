@@ -29,3 +29,25 @@ if (!foundPair) {
  } // If nothing remains, e verything was matched 
 return s.length === 0;
  }
+
+
+function isValid22(s) {
+  // Odd-length strings can never be balanced
+  if (s.length % 2 !== 0) return false;
+
+  const pairs = { ')': '(', ']': '[', '}': '{' };
+  const stack = [];
+
+  for (let i = 0; i < s.length; i++) {
+    const ch = s[i];
+
+    // Opening bracket → push
+    if (ch === '(' || ch === '[' || ch === '{') {
+      stack.push(ch);
+    }
+    // Closing bracket → top of stack must match
+    else if (stack.pop() !== pairs[ch]) {
+      return false;
+}
+}
+return stack.length === 0;
