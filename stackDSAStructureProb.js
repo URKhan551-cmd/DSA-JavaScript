@@ -159,3 +159,33 @@ Op        Action        record
 "D"        push 5×2        [5, 10]
 "+"        push 5+10        [5, 10, 15]
 Sum = 5 + 10 + 15 = 30 ✅
+
+
+
+ function game2(ops) {
+  const stack = [];
+
+  for (const op of ops) {
+    if (op === "C") {
+      stack.pop();
+    } else if (op === "D") {
+      stack.push(stack.at(-1) * 2);
+    } else if (op === "+") {
+      stack.push(stack.at(-1) + stack.at(-2));
+    } else {
+      stack.push(Number(op));
+    }
+  }
+
+  return stack.reduce((sum, n) => sum + n, 0);
+}
+
+stack.at(-1) is the modern way to get the top (ES2022).
+
+stack.at(-2) is the second-from-top.
+
+No index juggling.
+
+Time: O(n) · Space: O(n)
+
+Your instincts were right — it was just the small details that tripped you up. 👍
