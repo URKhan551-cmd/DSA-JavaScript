@@ -87,3 +87,29 @@ function isValidRecursiveApproach(s) {
     isValid(s.slice(matchIndex + 1))
   );
 }
+
+
+ function isValid44(s) {
+  const pairs = { ')': '(', ']': '[', '}': '{' };
+  const used = new Array(s.length).fill(false);
+
+  for (let i = 0; i < s.length; i++) {
+    const ch = s[i];
+    if (pairs[ch]) {
+      // closing bracket — find nearest unused matching opener
+      let found = -1;
+      for (let j = i - 1; j >= 0; j--) {
+        if (!used[j] && s[j] === pairs[ch]) { found = j; break; }
+        if (!used[j] && !pairs[s[j]]) return false; // an opener blocks it
+      }
+      if (found === -1) return false;
+      used[found] = true;
+      used[i] = true;
+    }
+  }
+
+  // Every bracket must be used (paired)
+  return used.every(Boolean) && s.length % 2 === 0;
+}
+Time: O(n²) — inner backward scan.
+Space: O(n) for the used array.
