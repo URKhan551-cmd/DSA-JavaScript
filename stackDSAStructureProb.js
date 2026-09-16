@@ -113,3 +113,49 @@ function isValidRecursiveApproach(s) {
 }
 Time: O(n²) — inner backward scan.
 Space: O(n) for the used array.
+
+
+   // ********************************************
+ Baseball Game
+LeetCode #682
+↗
+Easy
+
+›
+details
+Every operation is about the top
+You are given a list of operations: an integer records that score, 
+"+" records the sum of the previous two, "D" records double 
+the previous one, and "C" cancels the previous one. Return the sum of all scores at the end.
+
+function game(arr){
+ let n = arr.length;
+if(n===0) return 0;
+let record = [];
+ for(let i=0;i<n;i++){
+  let char = arr[i];
+   if(char === "C"){
+  record.pop();
+ }else if(char === "D"){
+ let last = record[record.length - 1];
+record.push(last * 2);
+} else if(char === "+"){
+  let last = record[record.length - 1];
+  let prevLast = record[record.length - 2];
+  
+record.push(last + prevLast);
+}else {
+  record.push(Number(char));
+}
+ }
+return record.reduce((a, b) => a + b, 0);
+}
+
+ Dry Run — ["5","2","C","D","+"]
+Op        Action        record
+"5"        push 5        [5]
+"2"        push 2        [5, 2]
+"C"        pop        [5]
+"D"        push 5×2        [5, 10]
+"+"        push 5+10        [5, 10, 15]
+Sum = 5 + 10 + 15 = 30 ✅
