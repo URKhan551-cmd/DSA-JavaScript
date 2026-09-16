@@ -110,3 +110,54 @@ return maxResult;
 
     return result;
 }
+
+
+
+
+
+  //
+function maxSlidingWindow(nums, k) {
+    const result = [];
+    const deque = [];
+    let head = 0;
+
+    for (let i = 0; i < nums.length; i++) {
+
+        // Remove expired indexes
+        while (head < deque.length && deque[head] <= i - k) {
+            head++;
+        }
+
+        // Remove smaller values from the back
+        while (
+            deque.length > head &&
+            nums[deque[deque.length - 1]] <= nums[i]
+        ) {
+            deque.pop();
+        }
+
+        // Add current index
+        deque.push(i);
+    // Window is complete
+        if (i >= k - 1) {
+            result.push(nums[deque[head]]);
+        }
+    }
+
+    return result;
+}
+
+
+I use a monotonic decreasing deque that stores indexes rather than values. For each new element, 
+I remove indexes from the front that have fallen outside the current window, 
+then remove smaller values from the back because they can never become the maximum while the new larger value is present.
+The index at the front therefore always points to the maximum of the current window. 
+Each index enters and leaves the deque at most once, giving O(n) time and O(k) auxiliary space.
+
+"Why do you compare deque[0] with i - k instead of comparing the value?"
+
+Your answer:
+
+"Because deque[0] is an index, and i - k represents the last index outside the current window. 
+  I'm checking whether the index has expired, not whether its value is small."
+    
