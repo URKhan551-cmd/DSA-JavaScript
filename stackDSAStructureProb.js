@@ -384,3 +384,30 @@ if(balance === 0){
 }
 return max
 }
+
+
+ // optimized approach 
+
+function validParenthesis223(str){
+if(str.length === 0)return "";
+let n = str.length;
+let max =0;
+const stack = [-1]
+
+for(let i=0;i<n;i++){
+ if(str[i] === "("){
+  stack.push(i);
+} else {
+  stack.pop();
+
+if(stack.length === 0){
+ stack.push(i);
+} else {
+ let top = stack[stack.length - 1];
+max = Math.max(max, i - top);
+}
+}
+}
+
+return max;
+}
