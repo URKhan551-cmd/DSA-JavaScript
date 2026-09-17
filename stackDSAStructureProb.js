@@ -362,3 +362,25 @@ Given a string containing only the characters ( and ),
  return the length of the longest contiguous substring that forms a well-formed (properly matched) sequence of parentheses.
 
  
+function validParenthesis(str){
+if(str.length === 0)return "";
+let n = str.length;
+let max =0;
+
+for(let i=0;i<n;i++){
+  let balance =0;
+for(let j=i; j<n;j++){
+  if(str[j] === "("){
+  balance++;
+} else {
+  balance--;
+}
+if(balance < 0){ break; }
+
+if(balance === 0){
+ max = Math.max(max, j-i+1);
+}
+}
+}
+return max
+}
