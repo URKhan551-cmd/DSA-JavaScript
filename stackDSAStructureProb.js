@@ -189,3 +189,70 @@ No index juggling.
 Time: O(n) · Space: O(n)
 
 Your instincts were right — it was just the small details that tripped you up. 👍
+
+
+
+ //*************************************************************************
+
+
+Decode String
+LeetCode #394
+↗
+Medium
+✓ Solved
+
+›
+details
+k[body] with nesting · "]" collapses the top
+Given an encoded string using the rule k[encoded] meaning the bracketed substring is repeated k times, 
+ return the fully decoded string. Encodings may be nested.
+
+ function decodeString(s) {
+    while (s.includes("[")) {
+
+        let open = -1;
+        let close = -1;
+
+        // Find an innermost [...]
+        for (let i = 0; i < s.length; i++) {
+
+            if (s[i] === "[") {
+                open = i;
+            }
+
+            if (s[i] === "]") {
+                close = i;
+                break;
+            }
+        }
+
+        // Find the number before [
+        let start = open - 1;
+
+while (start >= 0 && !isNaN(s[start])) {
+            start--;
+        }
+
+        start++;
+
+        let k = Number(s.slice(start, open));
+
+        // Extract the content inside brackets
+        let body = s.slice(open + 1, close);
+
+        // Repeat body k times
+        let decoded = "";
+
+        for (let i = 0; i < k; i++) {
+            decoded += body;
+        }
+
+        // Replace k[body] with decoded string
+        s =
+            s.slice(0, start) +
+            decoded +
+            s.slice(close + 1);
+  }
+
+    return s;
+}
