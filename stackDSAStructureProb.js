@@ -282,3 +282,36 @@ str = str.slice(0, start) + expanded + str.slice(close + 1);
 }
 return str
 }
+
+
+
+
+function decodeString22(s) {
+  const countStack = []; // stores repeat counts
+  const stringStack = []; // stores previous strings
+  let current = "";
+  let num = 0;
+
+  for (const ch of s) {
+    if (ch >= "0" && ch <= "9") {
+      // Build multi-digit number
+      num = num * 10 + Number(ch);
+    } else if (ch === "[") {
+      // Start a new nested block
+      countStack.push(num);
+      stringStack.push(current);
+      num = 0;
+    current = "";
+    } else if (ch === "]") {
+      // Finish current block
+      const repeatTimes = countStack.pop();
+      const prev = stringStack.pop();
+      current = prev + current.repeat(repeatTimes);
+    } else {
+      // Normal character
+      current += ch;
+    }
+  }
+
+  return current;
+}
