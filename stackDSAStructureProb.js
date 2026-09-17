@@ -315,3 +315,50 @@ function decodeString22(s) {
 
   return current;
 }
+
+
+               3[a2[c]]
+                    │
+                    │ find first ]
+                    ↓
+                3[a2[c]]
+                    │
+                    │ walk backwards
+                    ↓
+                 2[c]
+                    │
+                    │ find count
+                    ↓
+                 count = 2
+                    │
+                    │ find body
+                    ↓
+                  body = c
+                    │
+                    │ repeat
+                    cc
+                    │
+                    │ replace
+                    ↓
+                 3[acc]
+                    │
+                    │ repeat process
+                    ↓
+              accaccacc
+                    │
+                    ↓
+                  DONE/
+                   // *****************************************************************************************************
+
+  Longest Valid Parentheses
+LeetCode #32
+↗
+Hard
+
+›
+details
+Stack of indices · a base below every run
+Given a string containing only the characters ( and ), 
+ return the length of the longest contiguous substring that forms a well-formed (properly matched) sequence of parentheses.
+
+ 
