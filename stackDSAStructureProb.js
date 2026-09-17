@@ -256,3 +256,29 @@ while (start >= 0 && !isNaN(s[start])) {
 
     return s;
 }
+
+
+
+ function decode22(str){
+while(str.includes("[")){
+  let close = str.indexof("]")
+let open = close - 1;
+
+while(str[open] !== "["){
+open--;
+}
+
+let start = open - 1;
+while(start >= 0 && str[start] >= "0" && str[start] <= "9"){
+  start--;
+}
+start++;
+
+let count = Number(str.slice(start, open));
+let body = str.slice(open + 1, close);
+let expanded = body.repeat(count);
+
+str = str.slice(0, start) + expanded + str.slice(close + 1);
+}
+return str
+}
