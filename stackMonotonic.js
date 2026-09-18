@@ -138,4 +138,19 @@ Complexity:
 Time: O(n^2)
 Space: O(1) extra, aside from the result array
 
-  
+
+//
+function dailyTemp2(arr){
+let n = arr.length;
+if(n === 0) return [];
+const stack = [];
+let result = new Array(n).fill(0);
+for(let  i=0;i<n;i++){
+  while(stack.length > 0 && arr[stack[stack.length - 1]] < arr[i]){
+ let prev = stack.pop();
+ result[prev] = i - prev; 
+}
+stack.push(i);
+}
+return result;
+}
