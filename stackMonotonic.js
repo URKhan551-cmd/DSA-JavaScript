@@ -1,0 +1,41 @@
+What does "Monotonic Stack" mean?
+A monotonic stack is simply:
+A stack that we deliberately(puely intentionaly) keep ordered while we process elements.
+Normal stack:
+push whatever comes i
+Monotonic stack:
+push an element
+↓
+but first remove elements that violate our desired order
+
+then push the new element
+But a monotonic stack lets us remember the elements that are still waiting for their answer.
+That's where this phrase comes from:
+"Bigger arrivals resolve the waiters."
+
+Let's start with a classic problem
+Next Greater Element
+Given:
+[2, 1, 5, 3, 4]
+For every element, find the first greater number to its right.
+Expected:
+2 → 5
+1 → 5
+5 → -1
+3 → 4
+4 → -1
+Result:
+[5, 5, -1, 4, -1]
+Now change your perspective
+Instead of asking:
+"What is the next greater element for this number?"
+ask:
+"Which previous numbers are currently waiting for a greater number?"
+This is the mental shift that makes monotonic stacks click.
+So:
+5
+↓
+resolves 1
+↓
+resolves 2
+The while keeps resolving waiters until the top is no longer smaller.
