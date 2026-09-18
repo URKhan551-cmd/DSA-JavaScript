@@ -188,3 +188,38 @@ return max;
 }
 
   
+// 
+function rectangle2(arr){
+ let n = arr.length;
+if(n === 0)return [];
+const stack = [];
+let max = 0;
+for(let i=0;i<=n;i++){
+ let current = i === n ? 0 : arr[i];
+while(stack.length > 0 && arr[stack[stack.length - 1]] > current){
+let heightIndex = stack.pop();
+let height = arr[heightIndex];
+let width = stack.length === 0 ? i : i - stack[stack.length - 1] - 1;
+let area = height * width;
+max = Math.max(max, area);
+}
+
+stack.push(i);
+}
+
+return max;
+}
+
+I use an increasing monotonic stack of bar indices. 
+The stack stores bars whose left and right boundaries 
+haven't been determined yet. 
+When I encounter a shorter bar, 
+it means every taller bar on top of the stack 
+must end before the current index, so I pop 
+those bars and calculate their rectangle area 
+using the popped bar's height and the distance 
+between the current index and the new stack top. 
+I append a virtual zero-height bar at the end to
+ force any remaining bars to be processed. 
+Each index is pushed and popped at most 
+once, giving O(n) time and O(n) space."
