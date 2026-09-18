@@ -100,3 +100,42 @@ Therefore:  stack[stack.length - 1]  => stack[1]
 which is:  0 or 1 depending on stac  Suppose it is: 1
 Then: nums[1]   gets the actual number.
 So: nums[stack[stack.length - 1]] means:  "Give me the value at the index stored at the top of the stack."
+
+
+  //* *****************************************************************
+
+  Daily Temperatures
+LeetCode #739
+↗
+Medium
+
+›
+details
+Monotonic stack · new days resolve waiting days
+Given an array of daily temperatures, return an array where each entry is the number of 
+days you must wait after that day to encounter a warmer temperature. Use 0 if no warmer day ever follows.
+
+  function dailyTemp(arr){
+let n = arr.length;
+if(n === 0) return [];
+const stack = [];
+let result = new Array(n).fill(0);
+for(let i=0;i<n;i++){
+ for(let j=i+1; j<n;j++){
+   if(arr[i] < arr[j]){
+    result[i] = j - i;
+break;
+  }
+}
+}
+return result;
+}
+
+For each day i, look ahead to every future day j.
+If temperatures[j] > temperatures[i], store j - i and stop looking.
+If no warmer day is found, it stays 0.
+Complexity:
+Time: O(n^2)
+Space: O(1) extra, aside from the result array
+
+  
