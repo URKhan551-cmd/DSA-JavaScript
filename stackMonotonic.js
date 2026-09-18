@@ -62,3 +62,41 @@ We don't know where those values came from.
 For DSA problems, we usually need the index.
 So let's improve it.
 * here we are not updating result 
+
+
+
+function monotonic2(arr){
+ let stack =[];
+let result = new Array(arr.length).fill(-1);
+
+for(let i=0; i<arr.length;i++){
+  let current = arr[i];
+
+  while(stack.length > 0 && arr[stack[stack.length -1]] < current){
+  let prev = stack.pop();
+  result[prev] = current;
+}
+stack.push(i);
+}
+return result;
+}
+
+Understand this strange-looking expression
+This:
+nums[stack[stack.length - 1]]
+looks ugly at first.
+Break it apart.
+Suppose:
+stack = [0, 1]
+Then:      
+stack.length
+is:
+2
+So:
+stack.length - 1
+is:
+1
+Therefore:  stack[stack.length - 1]  => stack[1]
+which is:  0 or 1 depending on stac  Suppose it is: 1
+Then: nums[1]   gets the actual number.
+So: nums[stack[stack.length - 1]] means:  "Give me the value at the index stored at the top of the stack."
