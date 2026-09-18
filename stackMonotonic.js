@@ -39,3 +39,26 @@ resolves 1
 ↓
 resolves 2
 The while keeps resolving waiters until the top is no longer smaller.
+
+
+  function monotonic1(arr){
+ let stack =[];
+let result = new Array(arr.length).fill(-1);
+
+for(let i=0; i<arr.length;i++){
+  let current = arr[i];
+
+  while(stack.length > 0 && stack[stack.length -1] < current){
+  let prev = stack.pop();
+}
+stack.push(current)
+}
+return result;
+}
+
+But there's a problem.
+We're only storing values.
+We don't know where those values came from.
+For DSA problems, we usually need the index.
+So let's improve it.
+* here we are not updating result 
