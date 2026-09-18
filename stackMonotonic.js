@@ -154,3 +154,37 @@ stack.push(i);
 }
 return result;
 }
+
+
+  // ***********************************
+
+  Largest Rectangle in Histogram
+LeetCode #84
+↗
+Hard
+✓ Solved
+
+›
+details
+Increasing stack · shorter bars close rectangles
+Given an array of bar heights representing a histogram where each bar has width 1, 
+  return the area of the largest rectangle that can be formed within the histogram.
+
+  function rectangle(arr){
+ let n = arr.length;
+if(n === 0)return [];
+
+let max = 0;
+for(let i=0; i<n; i++){
+ let minHeight = arr[i];
+for(let j=i+1; j<n; j++){
+  minHeight = Math.min(minHeight, arr[j]);
+  let width = j - i + 1;
+  let area = width * minHeight;
+ max = Math.max(max, area);
+}
+}
+return max;
+}
+
+  
