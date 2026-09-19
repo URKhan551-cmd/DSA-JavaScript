@@ -380,3 +380,29 @@ Operand stack · postfix evaluation
 Evaluate an arithmetic expression in Reverse Polish (postfix) Notation. Valid operators are +, −, *, and /; 
 division truncates toward zero. Return the integer the expression evaluates to.
   
+function polish(arr){
+ if(arr.length === 0) return 0;
+ let n = arr.length;
+const stack = [];
+for(let token of arr){
+  if(token !== "-" && token !== "+" && token !== "*" && token !== "/"){
+  stack.push(Number(token));
+continue;
+}
+let b = stack.pop();
+let a = stack.pop();
+
+if(token === "+"){ 
+  stack.push(a + b);
+} else if(token === "-"){
+  stack.push(a - b);
+} else if(token === "*" ){
+  stack.push(a * b);
+} else if(token === "/"){
+  stack.push(Math.trunc(a/b))
+}
+ }
+return stack.pop();
+}
+
+  
