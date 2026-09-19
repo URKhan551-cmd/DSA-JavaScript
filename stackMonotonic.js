@@ -321,3 +321,38 @@ console.log(ms.getMin()); // -3
 ms.pop();
 console.log(ms.top());    // 0
 console.log(ms.getMin()); // -2
+
+
+  //
+
+  class TwinStack2 {
+  constructor(){
+   this.stack = [];
+   this.minStack = [];
+}
+
+push(val){
+ this.stack.push(val);
+   if(this.minStack.length === 0){
+    this.minStack.push(val);
+  } else {
+   let currentMin = Math.min(val, this.minStack[this.minStack.length - 1]);
+   this.minStack.push(currentMin);
+  }
+}
+
+pop(){
+  this.stack.pop();
+ this.minStack.pop();
+}
+
+top(){
+ return this.stack[this.stack.length - 1];
+}
+
+getMin(){
+  return this.minStack[this.minStack.length - 1];
+}
+}
+
+     
