@@ -406,3 +406,32 @@ return stack.pop();
 }
 
   
+//
+The algorithmic pattern
+This is another important stack pattern for your DSA toolbox:
+When you see:
+Postfix / Reverse Polish Notation / evaluate expression
+Think:
+Create stack
+For every token:
+    if number:
+        push number
+    if operator:
+        b = pop()
+        a = pop()
+        calculate a operator b
+        push result
+Return stack top
+
+
+How would you solve Evaluate Reverse Polish Notation?"
+
+You can say:
+
+"I use a stack to evaluate the postfix expression from
+ left to right. When I encounter an operand, I push it onto the stack. 
+When I encounter an operator, I pop the top two operands, keeping
+ the second popped value as the left operand and the first popped value
+ as the right operand. I perform the operation, truncate division toward zero using Math.trunc(), 
+and push the result back onto the stack. After processing all tokens, 
+the stack contains the final result. The time complexity is O(n) and the space complexity is O(n)."
