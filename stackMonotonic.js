@@ -271,3 +271,53 @@ getMin() must be O(1).
 That means:
 We must already know the minimum when getMin() is called.
 We cannot start searching through the stack.
+
+
+
+  Option 1: Function constructor + prototype
+js
+function MinStack() {
+  this.stack = [];
+  this.minStack = [];
+}
+
+MinStack.prototype.push = function (val) {
+  this.stack.push(val);
+
+  if (
+    this.minStack.length === 0 ||
+    val <= this.minStack[this.minStack.length - 1]
+  ) {
+    this.minStack.push(val);
+}
+};
+
+MinStack.prototype.pop = function () {
+  const removed = this.stack.pop();
+
+  if (removed === this.minStack[this.minStack.length - 1]) {
+    this.minStack.pop();
+  }
+
+  return removed;
+};
+
+MinStack.prototype.top = function () {
+  return this.stack[this.stack.length - 1];
+};
+
+MinStack.prototype.getMin = function () {
+  return this.minStack[this.minStack.length - 1];
+};
+
+Usage:
+const ms = new MinStack();
+
+ms.push(-2);
+ms.push(0);
+ms.push(-3);
+
+console.log(ms.getMin()); // -3
+ms.pop();
+console.log(ms.top());    // 0
+console.log(ms.getMin()); // -2
