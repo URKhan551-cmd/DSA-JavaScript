@@ -223,3 +223,51 @@ I append a virtual zero-height bar at the end to
  force any remaining bars to be processed. 
 Each index is pushed and popped at most 
 once, giving O(n) time and O(n) space."
+
+
+
+  // **********************************************************************
+Min Stack
+LeetCode #155
+↗
+Medium
+✓ Solved
+
+›
+details
+O(1) getMin · a twin min-stack
+Design a stack that supports push, pop, top, and retrieving the minimum element, all in O(1) time.
+
+
+  How can I remember the minimum value at every point in the stack so that getMin() never has to search?
+The key requirement is O(1).
+1. First understand what the problem is asking
+A normal JavaScript stack can do:
+push()
+pop()
+and we can look at the top:
+stack[stack.length - 1]
+But suppose:
+
+stack:
+
+   3  ← top
+   5
+   2
+   7
+
+Someone asks:
+"What is the minimum?"
+You would have to search:
+7
+2 ← minimum
+5
+3
+That's O(n).
+But LeetCode says:
+
+getMin() must be O(1).
+
+That means:
+We must already know the minimum when getMin() is called.
+We cannot start searching through the stack.
