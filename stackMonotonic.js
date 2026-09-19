@@ -355,4 +355,28 @@ getMin(){
 }
 }
 
-     
+
+
+I use two synchronized stacks. The main stack stores the actual values, 
+while the auxiliary min stack stores the minimum value at each corresponding 
+position. Whenever I push a value, 
+I push Math.min(value, currentMinimum) onto the min stack. Whenever I pop, 
+I pop from both stacks. Therefore the top of the min stack is always the 
+current minimum, allowing getMin() to run in O(1). All operations are O(1), 
+with O(n) auxiliary space.
+
+
+      //******************************************************************
+
+
+  Evaluate Reverse Polish Notation
+LeetCode #150
+↗
+Medium
+
+›
+details
+Operand stack · postfix evaluation
+Evaluate an arithmetic expression in Reverse Polish (postfix) Notation. Valid operators are +, −, *, and /; 
+division truncates toward zero. Return the integer the expression evaluates to.
+  
