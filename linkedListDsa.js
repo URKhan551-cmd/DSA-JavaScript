@@ -48,3 +48,32 @@ while(current !== null){
 }
 return prev;
 }
+
+
+// 
+
+OPTIMIZED RECURSIVE APPROACH 
+
+function recursiveLink1(head){
+  if(head === null || head.next === null ){  // until unless the recursive call happen
+  return head;                              // when head =null stop /  or head.next=null stop.
+}
+
+let newHead = recursiveLink(head.next); 
+ 
+// if i do have  12345 with each head recursive call
+// happen for head = 1  recursive call for 1 > 2 head.next
+// second recursive call  head=2 head.next = 3
+// third call with head=3 and head.next =4
+// fourth call head=4 and head.next = 5
+// fith call with head= 5 head.next = null stopppppp
+
+// stack is full of recursive call now pop happen
+// the last one call with head=4 head.next =5 now
+// head.next =5  then head.next.next = nullbut put head = 4
+
+head.next.next = head;
+head.next = null; //  porane head.next ko null karo ab naya head 
+
+return newHead;
+ }
