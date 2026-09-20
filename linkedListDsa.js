@@ -117,3 +117,42 @@ for(let val of values){
 
 return dummy.next;
 }
+
+
+//
+
+function sorted22(list1, list2){
+let dummy = new ListNode(0); // aik object link banayega 0 se
+let tail = dummy;    usko tail allocate kiya.
+
+let pt1 = list1;
+let pt2 = list2;
+
+while(pt1 !== null && pt2 !== null){
+// her point pa or node pa dono point ma jo bi kam 
+// hoga wahi hum assig karenge tail.next ko
+ if(pt1.val <= pt2.val){  
+  tail.next = pt1;
+  pt1 = pt1.next;
+  // yaha pt1 hamare sath aik point aage chala jayega 
+   // take loop dobara check kare upcoming nodes ko.
+} else {
+  tail.next = pt2;
+  pt2 = pt2.next;
+}
+tail = tail.next;
+// last ma tail ka jo bi next pa node hoga usko hum tail 
+  // consider karte ha issi tarah tail move karega aage.
+}
+
+if(pt1 !== null){
+tail.next = pt1;
+} else {
+  tail.next = pt2;
+}
+return dummy.next
+// yaha dummy jo k 0 node ha uska jo bi next hoga
+// woo to ya pt1 ka small node hoga
+// ya to pt2 ka small node hoga 
+
+}
