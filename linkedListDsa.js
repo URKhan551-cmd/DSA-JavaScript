@@ -77,3 +77,43 @@ head.next = null; //  porane head.next ko null karo ab naya head
 
 return newHead;
  }
+
+
+// **********************************************
+
+
+Merge Two Sorted Lists
+LeetCode #21
+↗
+Easy
+
+›
+details
+Splice the smaller head · dummy node
+Merge two sorted linked lists into one sorted list by splicing their nodes together, and return its head.
+
+    function sorted(list1, list2){
+let values = [];
+let current = list1;
+while(current !== null){
+ values.push(current.value);
+ current = current.next;
+}
+
+current = list2;
+while(current !== null){
+ values.push(current.value);
+current = current.next;
+}
+
+values.sort((a,b) => a - b);
+let dummy = new ListNode(0);
+let currentNew = dummy;
+
+for(let val of values){
+  currentNew.next = new ListNode(val);
+ currentNew = currentNew.next;
+}
+
+return dummy.next;
+}
