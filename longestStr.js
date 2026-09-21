@@ -39,5 +39,18 @@ for (let right = 0; right < n; right++) {
         
         maxFreq = Math.max(maxFreq, count.get(char));
 
- 
+ // If the window requires more changes than k, shift left pointer
+        if ((right - left + 1) - maxFreq > k) {
+            const leftChar = s[left];
+            count.set(leftChar, count.get(leftChar) - 1);
+            left++;
+        }
+
+        maxLength = Math.max(maxLength, right - left + 1);
+    }
+
+    return maxLength;
+}
+
+
 
