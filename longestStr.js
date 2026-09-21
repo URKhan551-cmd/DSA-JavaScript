@@ -18,3 +18,26 @@ best= Math.max(best, windowLength);
 }
 return best;
 }
+
+
+// **********"*"
+function characterReplacement(s, k) {
+    const n = s.length;
+    
+    // Edge case: budget is larger than or equal to string length
+    if (k >= n) {
+        return n;
+    }
+
+    const count = new Map();
+    let left = 0;
+    let maxFreq = 0;
+    let maxLength = 0;
+for (let right = 0; right < n; right++) {
+        const char = s[right];
+        count.set(char, (count.get(char) || 0) + 1);
+        
+        maxFreq = Math.max(maxFreq, count.get(char));
+
+ 
+
