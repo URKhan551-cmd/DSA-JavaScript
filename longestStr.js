@@ -54,3 +54,64 @@ for (let right = 0; right < n; right++) {
 
 
 
+
+// *************
+
+function permutations(s1, s2) {
+    if (s1.length > s2.length) {
+        return false;
+    }
+
+    // What s1 requires
+    const map1 = new Map();
+
+    for (let char of s1) {
+        map1.set(char, (map1.get(char) || 0) + 1);
+    }
+
+    const windowSize = s1.length;
+
+    // What the current window has
+    const map2 = new Map();
+
+    let left = 0;
+
+for (let right = 0; right < s2.length; right++) {
+
+        // 1. Add right character
+        const rightChar = s2[right];
+
+        map2.set(
+            rightChar,
+            (map2.get(rightChar) || 0) + 1
+        );
+
+        // 2. If window became too large,
+        // remove the character at left
+        if (right - left + 1 > windowSize) {
+
+            const leftChar = s2[left];
+
+            map2.set(
+                leftChar,
+                map2.get(leftChar) - 1
+            );
+
+            if (map2.get(leftChar) === 0) {
+                map2.delete(leftChar);
+            }
+
+            left++;
+        }
+
+        // 3. Now the window has exactly s1.length
+        if (right - left + 1 === windowSize) {
+
+            if (mapsAreEqual(map1, map2)) {
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
