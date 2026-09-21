@@ -7,3 +7,14 @@ let maxFreq= 0;
 for(let right=left; right<n; right++){
 let index = s.charCodeAt(right);
 freq[index]++;
+maxFreq= Math.max(maxFreq, freq[index]);
+
+let windowLength= right - left + 1;
+let changeNeed = windowLength - maxFreq;
+if(changeNeed <= k){
+best= Math.max(best, windowLength);
+}
+}
+}
+return best;
+}
