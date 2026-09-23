@@ -246,12 +246,12 @@ Same idea for:
 floor(10 / 10) = 1
 
 
-function ListNode(val, next){
+function ListNode245(val, next){
  this.val = (val === undefined ? 0 : val);
  this.next = (next === undefined ? null : next);
 }
-function implementation(l1, l2){
- let dummy = new ListNode(0);
+function implementationOfNode(l1, l2){
+ let dummy = new ListNode245(0);
  let current = dummy;
 
 let carry = 0;
@@ -264,7 +264,7 @@ let sum = digit1 + digit2 + carry;
 let digit = (sum % 10);
 carry = Math.floor(sum / 10);
 
-current.next = new ListNode(digit);
+current.next = new ListNode245(digit);
 current = current.next;
 
 if(l1 !== null){
