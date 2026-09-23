@@ -309,3 +309,47 @@ current = current.next;
 return false;
 }
 
+
+while (fast !== null && fast.next !== null)
+
+Because fast moves two steps:
+
+fast = fast.next.next;
+
+We need to make sure those two steps are safe.
+
+Suppose:
+1 → 2 → 3 → null
+Eventually:
+fast → 3
+If we blindly do:
+fast = fast.next.next;
+then:
+fast.next → null
+and we'd be trying to access:
+null.next
+So:
+fast !== null
+and:
+fast.next !== null
+protect us.
+Interview sentence
+"Because the fast pointer advances by two nodes, 
+I need to ensure both fast and fast.next exist before advancing it."
+
+
+//
+
+
+function markOptimised(head){
+ let slow = head;
+let fast = head;
+while(fast !== null && fast.next !== null){
+  slow = slow.next;
+fast = fast.next.next;
+if(fast === slow){
+return true;
+}
+}
+return false;
+}
