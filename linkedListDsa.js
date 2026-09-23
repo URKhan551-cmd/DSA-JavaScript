@@ -156,3 +156,65 @@ return dummy.next
 // ya to pt2 ka small node hoga 
 
 }
+
+
+    // ******************************
+Add Two Numbers
+LeetCode #2
+↗
+Medium
+
+›
+details
+Elementary addition · carry
+Two non-negative numbers are stored as linked lists of digits in reverse order. 
+    Add them and return the sum as a linked list, also in reverse order.
+
+
+
+ Because the digits are stored in reverse order:
+
+l1 represents 342
+l2 represents 465
+So:
+342
++465
+---
+807
+The answer must also be reversed:
+[7 → 0 → 8]
+
+The most important mental model
+Don't think:
+"I'm adding two linked lists."
+Think:
+"At every position, I'm performing one elementary-school addition."
+Each iteration is:
+       digit1
+     + digit2
+     + carry
+     --------
+       sum
+Then split sum into:
+       sum
+                /     \
+               /       \
+          digit          carry
+        sum % 10      floor(sum / 10)
+
+So the algorithm is essentially:
+while something remains:
+    get digit from l1
+    get digit from l2
+    add:
+        digit1
+        digit2
+        carry
+
+    extract:
+        current digit
+        new carry
+create result node
+    move l1
+    move l2
+
