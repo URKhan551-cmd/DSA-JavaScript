@@ -218,3 +218,62 @@ create result node
     move l1
     move l2
 
+Why do we use % 10?
+
+This is worth understanding deeply.
+
+Suppose:
+sum = 17
+We need to put only:
+7
+inside the current node.
+17 % 10
+7
+And the remaining:
+1
+becomes the carry.
+Math.floor(17 / 10)
+gives:
+1
+So:
+17
+ ↓
+7  ← current digit
+1  ← carry
+Same idea for:
+10
+10 % 10 = 0
+floor(10 / 10) = 1
+
+
+function ListNode(val, next){
+ this.val = (val === undefined ? 0 : val);
+ this.next = (next === undefined ? null : next);
+}
+function implementation(l1, l2){
+ let dummy = new ListNode(0);
+ let current = dummy;
+
+let carry = 0;
+while(l1 !== null || l2 !== null || carry !== 0){
+  let digit1 = l1 !== null ? l1.val : 0;
+ let digit2 = l2 !== null ? l2.val : 0;
+
+let sum = digit1 + digit2 + carry;
+
+let digit = (sum % 10);
+carry = Math.floor(sum / 10);
+
+current.next = new ListNode(digit);
+current = current.next;
+
+if(l1 !== null){
+  l1 = l1.next;
+}
+
+if(l2 !== null){
+ l2 = l2.next;
+}
+}
+return dummy.next
+}
