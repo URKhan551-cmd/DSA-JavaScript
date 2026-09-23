@@ -277,3 +277,35 @@ if(l2 !== null){
 }
 return dummy.next
 }
+
+
+// (((((((***************************
+
+Linked List Cycle
+LeetCode #141
+↗
+Easy
+
+›
+details
+Floyd's tortoise & hare
+Given the head of a singly linked list, determine whether the list contains a cycle, 
+meaning some node can be reached again by repeatedly following next pointers.
+
+    brute force visited set approach  
+
+function markedAsDone(head){
+ const visited = new Set();
+let current = head;
+while(current !== null){
+  if(visited.has(current)){
+  return true;
+}
+
+visited.add(current);
+current = current.next;
+
+}
+return false;
+}
+
