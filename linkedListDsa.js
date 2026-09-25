@@ -353,3 +353,43 @@ return true;
 }
 return false;
 }
+// *********************************************************
+
+Remove Nth Node From End
+LeetCode #19
+↗
+Medium
+
+›
+details
+Two pointers locked n apart
+Given the head of a singly linked list, remove the nth node counting from the 
+    end of the list and return the head of the modified list.
+
+
+
+
+class ListNode999(value){
+this.value = value;
+this.next = next;
+}
+
+function removeN(head, n){
+  let dummy = new ListNode(0);
+  dummy.next = head;
+let slow = dummy;
+let fast = dummy;
+for(let i=0;i<n;i++){
+fast = fast.next;
+}
+
+while(fast.next !== null){
+ slow = slow.next;
+fast = fast.next;
+}
+
+slow.next = slow.next.next;
+
+return dummy.next;
+
+}
