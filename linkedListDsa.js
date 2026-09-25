@@ -432,3 +432,79 @@ slow.next = slow.next.next;
 return dummy.next;
 
 }
+
+
+// ******************************************
+
+Reorder List
+LeetCode #143
+↗
+Medium
+✓ Solved
+
+›
+details
+Middle + reverse + alternate merge
+Given the head of a singly linked list, reorder it in place by interleaving nodes from the front and back so the order becomes 
+first, last, second, second-to-last, and so on. Only the node links may be changed, not the values.
+
+function reorderList(head){
+const nodes = [];
+let current = head;
+while(current !== null){
+  nodes.push(current);
+current = current.next;
+}
+
+let left = 0;
+let right = nodes.length - 1;
+
+while(right > left){
+  nodes[left].next = nodes[right];
+ left++;
+nodes[right].next = nodes[left];
+right--;
+}
+nodes[left].next = null;
+}
+
+
+What pattern are they asking for?
+The original list:
+1 → 2 → 3 → 4 → 5
+We take:
+first → last → second → second-last → ...
+Visually:
+1 → 2 → 3 → 4 → 5
+↑               ↑
+first           last
+1 → 5
+Then:
+2 → 4
+Then:
+3
+Combine them:
+1 → 5 → 2 → 4 → 3
+So this is essentially interleaving the front half and reversed back half.
+Important requirement: don't change values
+This sentence is very important:
+Only the node links may be changed, not the values.
+Suppose we have actual nodes:
+Node A       Node B       Node C
+value: 1     value: 2     value: 3
+   ↓            ↓            ↓
+  next         next         next
+We're not allowed to do something like:
+node.value = ...
+We're supposed to change:
+node.next
+So we're actually rearranging the nodes.
+What does "in place" mean?
+Eventually the optimized solution will rearrange the existing linked-list nodes without creating another list of nodes.
+But for our brute-force solution, we're deliberately going to use extra memory:
+Linked List
+     ↓
+[Node1, Node2, Node3, Node4, Node5]
+That's your idea:
+Put references to all the existing nodes into an array.
+This makes the problem much easier to understand.
