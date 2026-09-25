@@ -367,7 +367,46 @@ Given the head of a singly linked list, remove the nth node counting from the
     end of the list and return the head of the modified list.
 
 
+function removeN(head, n){
+let length = 0;
+let current = head;
+while(current !== null){
+length++;
+current = current.next;
+}
 
+let targetIndex = length - n;
+if(targetIndex === 0){
+ return head.next;
+}
+current = head;
+for(let i=0; i< target.length - 1; i++){
+  current = current.next;
+}
+current.next = current.next.next;
+return head;
+}
+
+    FIRST PASS
+──────────
+Count nodes
+     ↓
+length = 5
+
+SECOND PASS
+───────────
+Find where target is
+     ↓
+targetIndex = length - n
+     ↓
+Walk to node BEFORE target
+     ↓
+Stop walking
+     ↓
+Delete ONCE
+     ↓
+current.next = current.next.next
+//
 
 class ListNode999(value){
 this.value = value;
