@@ -508,3 +508,42 @@ Linked List
 That's your idea:
 Put references to all the existing nodes into an array.
 This makes the problem much easier to understand.
+
+
+    // optimized  
+function reorderList2(head){
+let slow = head;
+let fast = head;
+while(fast !== null && fast.next !== null){
+ slow = slow.next;
+fast = fast.next.next;
+}
+ let second = slow.next;
+ slow.next = null;
+
+let prev = null;
+let current = second;
+// current = 4
+while(current !== null){
+  let next = current.next;
+// next = 5
+
+current.next = prev; // prev=null
+prev = current;  //pev = 5
+current = next;
+}
+
+second = prev;
+
+let first = head;
+while(second !== null){
+ let firstNext = first.next;
+let secondNext = second.next;
+
+first.next = second;
+second.next = firstNext;
+first = firstNext;
+second= secondNext;
+}
+
+}
