@@ -612,3 +612,101 @@ prev = first;
 }
 return dummy.next;
 }
+
+
+
+// *************************************************
+
+LRU Cache
+LeetCode #146
+↗
+Medium
+✓ Solved
+
+›
+details
+Hash map + doubly linked list · O(1) get / put
+Design a data structure for a Least-Recently-Used (LRU) cache with a fixed capacity. Support get(key) and put(key, value),
+both in O(1) average time. When the cache is full, evict the least-recently-used entry.
+
+class ListNode{
+constructor(key, value){
+this.key = key;
+this.value = value;
+this.prev = null;
+this.next = null;
+}
+}
+
+class LRUCache{
+constructor(){
+ this.capacity = capacity;
+ this.map = new Map();
+
+this.head = new ListNode(0, 0);
+this.tail = new ListNode(0, 0);
+
+this.head.next = this.tail;
+this.tail.prev = this.head
+}
+
+addToFront(node){
+  node.next = this.head.next;
+ node.prev = this.head;
+
+this.head.next.prev = node;
+this.head.next = node;
+}
+remove(node){
+ node.prev.next = node.next;
+ node.next.prev = node.prev;
+}
+
+get(key){
+ if(!this.map.has(key)){
+  return -1;
+}
+let node = this.map.get(key);
+
+this.remove(node);
+this.addToFront(node);
+return node.value;
+}
+
+put(key, value){
+  if(this.map.has(key)){
+  let node =  this.map.get(key);
+  node.value = value;
+
+ this.remove(node);
+this.addToFront(node);
+return;
+ }
+  const node = new ListNode(key, value);
+  this.map.set(key, node);
+  this.addToFront(node);
+if(this.map.size() > this.capacity){
+  let lru = this.tail.prev;
+
+this.remove(lru);
+this.map.delete(lru.key);
+ }
+  
+}
+}
+
+The entire LRU idea in one sentence
+
+Map finds the node in O(1), while the doubly linked list moves that node between MRU/LRU positions in O(1).
+
+And the most important mental picture to remember is:
+
+                 HashMap
+              key ───────► node
+                            │
+                            ▼
+HEAD <-> MRU <-> ... <-> LRU <-> TAIL
+
+Every get() makes the accessed node MRU.
+Every new put() makes the new node MRU.
+When capacity is exceeded, tail.prev is the LRU node, so we remove it.
