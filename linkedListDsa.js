@@ -547,3 +547,46 @@ second= secondNext;
 }
 
 }
+
+
+// *************************************************
+
+Swap Nodes in Pairs
+LeetCode #24
+↗
+Medium
+
+›
+details
+Three arrows per pair · dummy head
+Given the head of a singly linked list, swap every two adjacent nodes and return the new head. 
+You must swap the actual nodes rather than just their values.
+
+function swapNodes(head){
+let nodes = [];
+let current = head;
+while(current !== null){
+ nodes.push(current);
+current = current.next;
+}
+if(nodes.length < 2){
+return head;
+}
+
+let newHead = nodes[1];
+for(let i=0; i+1 <nodes.length; i += 2){
+ let first = nodes[i];
+let second = nodes[i + 1];
+
+second.next = first;
+if(i+3<nodes.length){
+  first.next = nodes[i+3]
+}else if(i+2<nodes.length){
+  first.next = nodes[i+2];
+}else{
+ first.next = null;
+}
+
+}
+return newHead;
+}
