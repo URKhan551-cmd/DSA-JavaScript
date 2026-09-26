@@ -590,3 +590,25 @@ if(i+3<nodes.length){
 }
 return newHead;
 }
+
+
+    // 
+:: OPTIMIZED SOLUTION
+
+function swapNodes22(head){
+  let dummy = new ListNode(0);
+dummy.next = head;
+let prev = dummy;
+while(prev.next !== null && prev.next.next !== null){
+  let first = prev.next;
+ let second = first.next;
+ let nextPair = second.next;
+
+prev.next = second;
+second.next = first;
+first.next = nextPair;
+
+prev = first;
+}
+return dummy.next;
+}
