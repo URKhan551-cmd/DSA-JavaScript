@@ -191,3 +191,92 @@ Already valid:
 5 < 10
 5 < 7
 Done.
+Insert 2
+
+Put it at the end:
+
+[5, 10, 7, 2]
+
+Tree:
+
+       5
+      / \
+    10   7
+   /
+  2
+
+Problem:
+5 > 2
+Swap:
+[5, 2, 7, 10]
+Tree:
+Tree:
+
+       5
+      / \
+     2   7
+    /
+   10
+
+Still problem:
+
+5 > 2
+
+Swap again:
+
+[2, 5, 7, 10]
+
+Now:
+
+       2
+      / \
+     5   7
+    /
+   10
+The phrase "heapify"
+
+You'll hear this word constantly.
+
+Heapify means restoring the heap property.
+
+For example:
+
+       5
+      / \
+     2   7
+This isn't a valid min-heap because:
+
+5 > 2
+
+We heapify:
+
+       2
+      / \
+     5   7
+
+Now valid.
+
+There are two directions:
+Heapify Up
+
+Usually happens after insertion.
+
+new element
+     ↑
+     ↑
+     ↑
+   root
+
+The element moves toward the root.
+
+Heapify Down
+
+Usually happens after removing the root.
+
+root
+ ↓
+ ↓
+ ↓
+leaf
+
+We'll get into this carefully.
