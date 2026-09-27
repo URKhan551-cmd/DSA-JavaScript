@@ -112,3 +112,38 @@ parent = Math.floor((i - 1) / 2)
 *Insert into a heap
 *Remove from a heap
 *A few examples by hand
+//
+
+        Let's use:
+
+[10, 7, 8, 2, 5]
+
+Visualize it:
+
+             10
+           /    \
+          7      8
+        /   \
+       2     5
+
+Array:
+
+index:   0   1   2   3   4
+value:  10   7   8   2   5
+
+For 10:
+
+index = 0;
+
+
+children:
+
+2(0) + 1 = 1
+2(0) + 2 = 2
+
+So:
+
+array[1] = 7
+array[2] = 8
+
+Exactly.
