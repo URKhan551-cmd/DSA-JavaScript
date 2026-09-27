@@ -280,3 +280,62 @@ root
 leaf
 
 We'll get into this carefully.
+// ***********************
+
+JavaScript doesn't have a native built-in MinHeap class that we normally use for LeetCode.
+
+So we can build one ourselves.
+
+class MinHeap{
+constructor(){
+        this.heap = [];
+}
+        getParentIndex(i){
+
+                return Math.floor((i - 1) / 2);
+        }
+
+        getLeftIndex(i){
+               return 2 * i + 1; 
+        }
+
+        getRightIndex(i){
+
+                return 2 * i + 2;
+        }
+
+        insert(value){
+
+                this.heap.push(value);
+                let index = this.heap.length - 1;
+                while (index > 0){
+
+                   const parent = this.getParentIndex(index);
+                        if(this.heap[parent] <= this.heap[index]){
+                          break;
+                        }
+                        [this.heap[parent], this.heap[index]] = [this.heap[index], this.heap[parent]];
+
+                        index = parent;
+                }
+        }
+}
+
+
+const heap = new MinHeap(); // []
+minHeap.insert(10);  // [10]
+minHeap.insert(5); // [10, 5]   swap [5, 10]
+minHeap.insert(8); // [5, 10, 8]   no swap
+minHeap.insert(2);  // [2, 5, 8, 10]
+minHeap.insert(1);  // [1, 2, 8, 5, 10]
+        1
+       / \
+      2   8
+     / \
+    10  5
+
+Notice:
+
+heap[0] === 1
+
+The minimum is immediately available.
