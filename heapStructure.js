@@ -143,7 +143,51 @@ children:
 
 So:
 
+
 array[1] = 7
 array[2] = 8
 
 Exactly.
+
+
+INSERTION :
+        Let's understand Min-Heap insertion
+
+Suppose we have an empty min-heap.
+Insert:
+10
+We get:
+[10]
+Tree:
+10
+Now insert:
+5
+First, we put it at the end:
+[10, 5]
+Tree:
+    10
+   /
+  5
+But this violates the min-heap rule:
+parent <= child
+because:
+10 > 5
+So we bubble up / heapify up.
+Swap them:
+[5, 10];
+NOW VALID;
+Insert 7
+
+Put it at the end:
+[5, 10, 7]
+
+Tree:
+
+      5
+     / \
+    10  7
+
+Already valid:
+5 < 10
+5 < 7
+Done.
