@@ -307,17 +307,51 @@ constructor(){
         insert(value){
 
                 this.heap.push(value);
-                let index = this.heap.length - 1;
+                let index = this.heap.length - 1;  // the newly added element index position 
                 while (index > 0){
 
                    const parent = this.getParentIndex(index);
-                        if(this.heap[parent] <= this.heap[index]){
+                        if(this.heap[parent] <= this.heap[index]){  // yaha values compare ki jati ha 
                           break;
                         }
-                        [this.heap[parent], this.heap[index]] = [this.heap[index], this.heap[parent]];
+                        [this.heap[parent], this.heap[index]] = [this.heap[index], this.heap[parent]];  // ager parent index ki value as compare to index zyada ha to swap karo bhaadi value ko index p karo parent p chooti value karo
 
                         index = parent;
                 }
+        }
+
+        removeMin(){
+           if(this.heap.length === 0) return undefined;
+           if(this.heap.length === 1) return this.heap.pop();
+
+        let min = this.heap[0];
+        this.heap[0] = this.heap.pop();
+        let index = 0;
+        while(true){
+                let leftIndex = this.getLeftIndex(index);  // return 2 * index + 1
+                let rightIndex = this.getRightIndex(index); // return 2 * index + 2
+
+                let smallestIndex = index;
+
+                if(leftIndex < this.heap.length && 
+                   this.heap[leftIndex] < this.heap[smallestIndex]){
+                        smallestIndex = leftIndex;
+                   }
+                if(rightIndex < this.heap.length && 
+                   this.heap[rightIndex] < this.heap[smallestIndex]){
+                        smallestIndex = rightIndex;
+                   }
+
+                if(smallestIndex === index ){
+                        break;
+                }
+
+                [this.heap[index], this.heap[smallestIndex]] = [this.heap[smallestIndex], this.heap[index]];
+
+                index = smallestIndex;
+        }
+        return min;
+                
         }
 }
 
@@ -339,3 +373,8 @@ Notice:
 heap[0] === 1
 
 The minimum is immediately available.
+
+
+        // ****************************
+
+        
