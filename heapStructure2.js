@@ -131,3 +131,25 @@ return max;
 }
 }
 
+// optimized approach 
+function kClosest(points, k) {
+    const maxHeap = new MaxHeap();
+
+    for (const point of points) {
+        const [x, y] = point;
+
+        const distance = x * x + y * y;
+
+        maxHeap.insert({
+            point,
+            distance
+        });
+
+        if (maxHeap.size() > k) {
+            maxHeap.removeMax();
+        }
+    }
+
+    return maxHeap.heap.map(item => item.point);
+}
+
