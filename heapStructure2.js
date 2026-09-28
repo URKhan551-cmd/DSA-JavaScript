@@ -35,3 +35,99 @@ return distanceA - distanceB;
 })
 return arr.slice(0, k);
 }
+
+
+// max heap by ourown 
+
+class MaxHeap{
+
+  constructor(){
+   this.heap = [];
+ }
+
+getParentIndex(){
+   return Math.floor((index - 1) / 2); 
+ }
+
+
+getLeftIndex(){
+   return index * 2 + 1;
+  }
+
+getRightIndex(){
+   return index * 2 + 2;
+ }
+
+peek(){
+ return this.heap[0];
+}
+
+size(){
+  return this.heap.length;
+}
+
+insert(item){
+ this.heap.push(item);
+
+let index = this.heap.length - 1;  // last element
+
+while(index > 0){
+   let parentIndex = getParentIndex(index);
+
+  if(this.heap[parentIndex].distance > this.heap[index].distance ){
+      break;
+     }
+
+[this.heap[parentIndex], this.heap[index]] 
+= 
+[this.heap[index], this.heap[parentIndex]];
+
+index = parentIndex;
+
+ }
+}
+
+
+removeMax(){
+  if(this.heap.length === 0) { return undefined; }
+
+if(this.heap.length === 1){return this.heap.pop()};
+
+
+let max = this.heap[0];
+
+this.heap[0] = this.heap.pop();
+let index = 0;
+ 
+while(true){
+  let leftIndex = this.getLeftIndex(index);
+ let rightIndex = this.getRightIndex(index);
+let largestIndex = index;
+
+if( leftIndex < this.heap.length &&  
+    this.heap[leftIndex].distance > this.heap[largestIndex].distance 
+   ){  
+    largestIndex = leftIndex  
+   }
+
+if(rightIndex < this.heap.length && 
+   this.heap[rightIndex].distance > this.heap[largestIndex].distnace  ){
+
+    largestIndex = rightIndex;
+   }
+
+if(largestIndex === index){
+   break;
+   }
+
+[this.heap[index], this.heap[largestIndex]] 
+=
+ [this.heap[largestIndex], this.heap[index]];
+
+index = largestIndex;
+} 
+
+return max;
+}
+}
+
