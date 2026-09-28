@@ -271,3 +271,21 @@ if (
       return min;
     }
 }
+
+
+
+function findKthLargest(nums, k) {
+    const minHeap = new MinHeap();
+
+    for (const num of nums) {
+        minHeap.insert(num);
+
+        if (minHeap.size() > k) {
+            minHeap.removeMin();
+        }
+    }
+
+    return minHeap.peek();
+}
+
+Test:
