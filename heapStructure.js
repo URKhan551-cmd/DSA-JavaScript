@@ -377,4 +377,26 @@ The minimum is immediately available.
 
         // ****************************
 
-        
+        function findKthLargest555(nums, k) {
+    const minHeap = new MinHeap();
+
+    for (const num of nums) {
+        minHeap.insert(num);
+
+        if (minHeap.size() > k) {
+            minHeap.removeMin();
+        }
+    }
+
+    return minHeap.peek();
+}
+
+Test:
+
+console.log(
+    findKthLargest([3, 2, 1, 5, 6, 4], 2)
+);
+
+Output:
+
+5
