@@ -529,3 +529,14 @@ remove maximum
 At the end:
 heap root = kth smallest
 This is one of the most useful heap patterns for interviews.
+
+
+      //
+        The brute-force approach is to sort the array and return the element
+at index n - k, which takes O(n log n). An optimized approach is
+to maintain a min-heap containing only the k largest elements. For
+every number, I insert it into the heap, and if the heap grows beyond
+k, I remove the minimum. This ensures the heap always contains the
+top k elements seen so far. At the end, the minimum element in that
+heap is the kth largest element. The time complexity is O(n log k)
+and the space complexity is O(k)."
