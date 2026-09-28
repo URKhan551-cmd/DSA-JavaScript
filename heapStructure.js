@@ -400,3 +400,132 @@ console.log(
 Output:
 
 5
+
+// ***********************
+
+Why Is the Root Guaranteed to Be the Kth Largest?
+This is the heart of the proof.
+Suppose:
+k = 3
+At the end, our heap contains:
+[10, 20, 30]
+These are the three largest values.
+Because it's a min-heap:
+
+        10
+       /  \
+      20  30
+The root is:
+10
+Among the three largest values, 10 is the smallest.
+Therefore:
+
+10 = 3rd largest
+
+Generalizing:
+heap contains top k
+        ↓
+root is smallest of top k
+        ↓
+root is kth largest
+
+Complexity
+
+There are n numbers.
+
+For every number we perform:
+
+insert → O(log k)
+
+If the heap becomes too large:
+
+removeMin → O(log k)
+
+Therefore:
+
+n × O(log k)
+
+Overall:
+
+Time: O(n log k)
+
+The heap contains at most k elements:
+
+Space: O(k)
+
+Compare this with sorting:
+
+Brute force:
+Time:  O(n log n)
+Space: depends on sorting implementation
+Optimized heap:
+Time:  O(n log k)
+Space: O(k)
+This is particularly useful when
+k << n
+For example:
+n = 10,000,000
+k = 10
+We don't need to maintain a heap containing a million elements.
+We maintain:
+only 10
+
+Important Edge Cases
+
+k = 1
+
+nums = [3, 2, 1, 5, 6, 4]
+k = 1
+We maintain only one element.
+Eventually:
+[6]
+Answer: 6
+
+k = nums.length
+nums = [3, 2, 1, 5]
+k = 4
+We keep all four numbers.
+The smallest among them is:
+1
+which is the 4th largest.
+
+Duplicate values
+nums = [5, 5, 4, 3]
+k = 2
+Largest ranks:
+5 → 1st
+5 → 2nd
+Answer:
+5
+The algorithm handles this naturally.
+
+16. The Pattern You Should Remember
+Don't memorize the code first.
+Memorize this pattern:
+Need TOP K largest
+        ↓
+Use MIN-HEAP
+        ↓
+Keep heap size <= K
+        ↓
+If size > K
+        ↓
+remove minimum
+        ↓
+At the end:
+heap root = kth largest
+
+And the opposite pattern:
+Need TOP K smallest
+        ↓
+Use MAX-HEAP
+        ↓
+Keep heap size <= K
+        ↓
+If size > K
+        ↓
+remove maximum
+        ↓
+At the end:
+heap root = kth smallest
+This is one of the most useful heap patterns for interviews.
