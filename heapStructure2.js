@@ -178,3 +178,96 @@ return target;
 
 
   
+// optimized appproach 
+
+class MinHeap {
+    constructor() {
+        this.heap = [];
+    }
+
+    getParentIndex(index) {
+        return Math.floor((index - 1) / 2);
+    }
+
+    getLeftChildIndex(index) {
+        return index * 2 + 1;
+    }
+
+    getRightChildIndex(index) {
+        return index * 2 + 2;
+    }
+
+    peek() {
+        return this.heap[0];
+    }
+
+size() {
+        return this.heap.length;
+    }
+
+    insert(value) {
+        this.heap.push(value);
+
+        let index = this.heap.length - 1;
+
+        while (index > 0) {
+            const parentIndex = this.getParentIndex(index);
+
+            if (this.heap[parentIndex] <= this.heap[index]) {
+                break;
+            }
+
+            [this.heap[parentIndex], this.heap[index]] =
+            [this.heap[index], this.heap[parentIndex]];
+
+            index = parentIndex;
+        }
+    }
+  
+  removeMin() {
+        if (this.heap.length === 0) {
+            return undefined;
+        }
+
+        if (this.heap.length === 1) {
+            return this.heap.pop();
+        }
+
+        const min = this.heap[0];
+
+        this.heap[0] = this.heap.pop();
+
+        let index = 0;
+
+        while (true) {
+            const leftIndex = this.getLeftChildIndex(index);
+            const rightIndex = this.getRightChildIndex(index);
+
+            let smallestIndex = index;
+
+if (
+                leftIndex < this.heap.length &&
+                this.heap[leftIndex] < this.heap[smallestIndex]
+            ) {
+                smallestIndex = leftIndex;
+            }
+
+            if (
+                rightIndex < this.heap.length &&
+                this.heap[rightIndex] < this.heap[smallestIndex]
+            ) {
+                smallestIndex = rightIndex;
+            }
+
+            if (smallestIndex === index) {
+                break;
+            }
+
+            [this.heap[index], this.heap[smallestIndex]] =
+            [this.heap[smallestIndex], this.heap[index]];
+
+            index = smallestIndex;
+        }
+      return min;
+    }
+}
