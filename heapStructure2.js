@@ -153,3 +153,28 @@ function kClosest(points, k) {
     return maxHeap.heap.map(item => item.point);
 }
 
+// ****************************************************
+
+Kth Largest Element in an Array
+LeetCode #215
+↗
+Medium
+✓ Solved
+
+›
+details
+Min-heap of size k as a top-k gate
+Given an integer array and a value k, return the kth largest element by rank in sorted order, 
+  which need not be a distinct value.
+
+  function kthLargest(arr, k){
+ let n = arr.length;
+  if(n < k  || n <=0) return [];
+let sortArr = arr.sort((a, b) => a-b);
+let target = arr[n - k];
+return target;
+
+}
+
+
+  
