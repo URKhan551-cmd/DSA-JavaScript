@@ -22,3 +22,16 @@ Given an array of points on the plane and a value k, return
     .slice(0, k)
     .map(item => item.point);
 }
+
+
+function kclosestPoints22(arr, k){
+ let n = arr.length;
+if(n < 0) return [];
+arr.sort((a,b) => {
+ let distanceA = a[0] * a[0] + a[1] * a[1];
+let distanceB = b[0] * b[0] + b[1] * b[1];
+
+return distanceA - distanceB;
+})
+return arr.slice(0, k);
+}
