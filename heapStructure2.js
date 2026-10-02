@@ -335,3 +335,42 @@ Now:
     { value: 1, distance: 2 },
     { value: 5, distance: 2 }
 ]
+
+
+  candidates.sort((a, b) => {
+    if (a.distance !== b.distance) {
+        return a.distance - b.distance;
+    }
+
+    return a.value - b.value;
+});
+
+Now the ordering is explicitly:
+
+distance ↑
+    ↓
+value ↑ when distance ties
+
+[
+    { value: 3, distance: 0 },
+    { value: 2, distance: 1 },
+    { value: 4, distance: 1 },
+    { value: 1, distance: 2 },
+    { value: 5, distance: 2 }
+]
+
+k = 4.
+
+Therefore:
+
+const result = candidates
+    .slice(0, k)
+    .map(item => item.value);
+
+[3,2,4,1]
+// but problem wants sorted
+result.sort((a, b) => a - b);
+
+Now:
+
+[1, 2, 3, 4]
