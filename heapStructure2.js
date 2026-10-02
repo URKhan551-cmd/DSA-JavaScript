@@ -479,3 +479,71 @@ peek() — inspect the root without removing it.
             if (!isWorse(this.heap[child], this.heap[parent])) {
                 break;
             }
+    [
+                this.heap[child],
+                this.heap[parent]
+            ] = [
+                this.heap[parent],
+                this.heap[child]
+            ];
+
+            child = parent;
+        }
+    }
+
+    pop() {
+        if (this.heap.length === 0) {
+            return undefined;
+        }
+
+        if (this.heap.length === 1) {
+            return this.heap.pop();
+        }
+
+        const worst = this.heap[0];
+        this.heap[0] = this.heap.pop();
+
+        let parent = 0;
+
+              while (true) {
+            const left = 2 * parent + 1;
+            const right = 2 * parent + 2;
+            let worstIndex = parent;
+
+            if (
+                left < this.heap.length &&
+                isWorse(
+                    this.heap[left],
+                    this.heap[worstIndex]
+                )
+            ) {
+                worstIndex = left;
+            }
+
+            if (
+                right < this.heap.length &&
+                isWorse(
+                    this.heap[right],
+                    this.heap[worstIndex]
+                )
+            ) {
+                worstIndex = right;
+            }
+                if (worstIndex === parent) {
+                break;
+            }
+
+            [
+                this.heap[parent],
+                this.heap[worstIndex]
+            ] = [
+                this.heap[worstIndex],
+                this.heap[parent]
+            ];
+
+            parent = worstIndex;
+        }
+
+        return worst;
+    }
+}
