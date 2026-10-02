@@ -424,3 +424,20 @@ return a.value - b.value;
 
     return result;
 }
+
+
+// Optimized approach 
+In pseudocode:
+
+FOR each number in arr:
+    calculate its distance from x
+
+    IF heap size < k:
+        insert candidate
+
+    ELSE IF candidate is better than heap root:
+        remove the root
+        insert candidate
+
+    ELSE:
+        ignore candidate
