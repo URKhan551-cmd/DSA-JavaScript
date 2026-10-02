@@ -455,6 +455,18 @@ pop() — remove the worst candidate and restore the heap.
 
 peek() — inspect the root without removing it.
 
+  
+  
+  function isWorse(a, b) {
+    if (a.distance !== b.distance) {
+        return a.distance > b.distance;
+    }
+
+    return a.value > b.value;
+}
+  
+  
+  
   class MaxHeap {
     constructor() {
         this.heap = [];
