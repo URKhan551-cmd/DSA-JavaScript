@@ -559,3 +559,39 @@ peek() — inspect the root without removing it.
         return worst;
     }
 }
+
+
+          function findClosestElements(arr, k, x) {
+    const heap = new MaxHeap();
+
+    for (const num of arr) {
+        const candidate = {
+            value: num,
+            distance: Math.abs(num - x)
+        };
+
+        // We still have an empty slot.
+        if (heap.size() < k) {
+            heap.push(candidate);
+        }
+
+        // The new candidate is better than the worst one.
+        else if (isWorse(heap.peek(), candidate)) {
+            heap.pop();
+            heap.push(candidate);
+        }
+
+        // Otherwise, ignore the candidate.
+    }
+// Extract the selected values.
+    const result = [];
+
+    while (heap.size() > 0) {
+        result.push(heap.pop().value);
+    }
+
+    // The problem requires ascending order.
+    result.sort((a, b) => a - b);
+
+    return result;
+}
