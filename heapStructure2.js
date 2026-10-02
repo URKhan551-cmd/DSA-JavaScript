@@ -441,3 +441,41 @@ FOR each number in arr:
 
     ELSE:
         ignore candidate
+
+
+Implement the max-heap in JavaScript
+
+JavaScript doesn't provide a built-in binary max-heap, so we'll implement the data structure ourselves. This is useful for understanding the heap operations rather than hiding them inside a library.
+
+We'll write three main pieces:
+
+push() — insert a candidate and bubble it up.
+
+pop() — remove the worst candidate and restore the heap.
+
+peek() — inspect the root without removing it.
+
+  class MaxHeap {
+    constructor() {
+        this.heap = [];
+    }
+
+    size() {
+        return this.heap.length;
+    }
+
+    peek() {
+        return this.heap[0];
+    }
+
+    push(candidate) {
+        this.heap.push(candidate);
+
+        let child = this.heap.length - 1;
+
+        while (child > 0) {
+            const parent = Math.floor((child - 1) / 2);
+
+            if (!isWorse(this.heap[child], this.heap[parent])) {
+                break;
+            }
