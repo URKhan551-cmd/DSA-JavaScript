@@ -311,3 +311,27 @@ for (let num of arr) {
 console.log(candidates);
 
 We get conceptually:
+
+[
+    { value: 1, distance: 2 },
+    { value: 2, distance: 1 },
+    { value: 3, distance: 0 },
+    { value: 4, distance: 1 },
+    { value: 5, distance: 2 }
+]
+
+Now we have transformed the original problem into a ranking problem.
+
+  candidates.sort((a, b) => {
+    return a.distance - b.distance;
+});
+
+Now:
+
+[
+    { value: 3, distance: 0 },
+    { value: 2, distance: 1 },
+    { value: 4, distance: 1 },
+    { value: 1, distance: 2 },
+    { value: 5, distance: 2 }
+]
