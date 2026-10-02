@@ -292,7 +292,21 @@ Test:
 
 
 // ¢$$$$$$$$
+
+
 // Prob 
+
+Find K Closest Elements
+LeetCode #658
+↗
+Medium
+
+›
+details
+Max-heap keyed by (distance, value)
+Given a sorted array, a value k, and a target x, 
+  return the k elements closest to x as a sorted list. When two elements are equally close, prefer the smaller one
+
 const arr = [1, 2, 3, 4, 5];
 const k = 4;
 const x = 3;
@@ -374,3 +388,39 @@ result.sort((a, b) => a - b);
 Now:
 
 [1, 2, 3, 4]
+
+
+
+function findClosestElements(arr, k, x) {
+    const candidates = [];
+
+    // 1. Calculate distance for every element
+    for (let num of arr) {
+        const distance = Math.abs(num - x);
+
+        candidates.push({
+            value: num,
+            distance: distance
+        });
+    }
+
+    // 2. Sort by distance
+    //    If distance ties, smaller value first
+    candidates.sort((a, b) => {
+        if (a.distance !== b.distance) {
+            return a.distance - b.distance;
+        }
+
+return a.value - b.value;
+    });
+
+    // 3. Take k closest elements
+    const result = candidates
+        .slice(0, k)
+        .map(item => item.value);
+
+    // 4. Return them sorted
+    result.sort((a, b) => a - b);
+
+    return result;
+}
