@@ -289,3 +289,25 @@ function findKthLargest(nums, k) {
 }
 
 Test:
+
+
+// ¢$$$$$$$$
+// Prob 
+const arr = [1, 2, 3, 4, 5];
+const k = 4;
+const x = 3;
+
+const candidates = [];
+
+for (let num of arr) {
+    const distance = Math.abs(num - x);
+
+    candidates.push({
+        value: num,
+        distance: distance
+    });
+}
+
+console.log(candidates);
+
+We get conceptually:
