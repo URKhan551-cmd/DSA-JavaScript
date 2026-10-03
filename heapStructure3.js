@@ -121,3 +121,38 @@ return min;
     }
 }
 
+
+
+function mergeKLists99(lists) {
+
+    const heap = new MinHeap();
+
+    // Put the first node of every list
+    // into the heap.
+    for (const list of lists) {
+
+        if (list !== null) {
+            heap.push(list);
+        }
+    }
+
+    const dummy = new ListNode(0);
+    let tail = dummy;
+
+    while (!heap.isEmpty()) {
+
+        // Get the smallest current node.
+        const node = heap.pop();
+
+        // Attach it to our answer.
+        tail.next = node;
+        tail = tail.next;
+    // This list still has nodes.
+        // Expose its next node to the heap.
+        if (node.next !== null) {
+            heap.push(node.next);
+        }
+    }
+
+    return dummy.next;
+}
