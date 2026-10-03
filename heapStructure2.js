@@ -457,14 +457,13 @@ peek() — inspect the root without removing it.
 
   
   
-  function isWorse(a, b) {
-    if (a.distance !== b.distance) {
-        return a.distance > b.distance;
-    }
+//   function isWorse(a, b) {
+//     if (a.distance !== b.distance) {
+//         return a.distance > b.distance;
+//     }
 
-    return a.value > b.value;
-}
-  
+//     return a.value > b.value;
+// }
   
   
   class MaxHeap {
@@ -472,95 +471,84 @@ peek() — inspect the root without removing it.
         this.heap = [];
     }
 
-    size() {
-        return this.heap.length;
+    // Is a above b in our "worse candidate" ordering?
+    isGreater(a, b) {
+        if (a.distance !== b.distance) {
+            return a.distance > b.distance;
+        }
+
+        return a.value > b.value;
     }
 
-    peek() {
-        return this.heap[0];
-    }
+    insert(item) {
+        this.heap.push(item);
 
-    push(candidate) {
-        this.heap.push(candidate);
+        let index = this.heap.length - 1;
 
-        let child = this.heap.length - 1;
+        while (index > 0) {
+            const parentIndex = Math.floor((index - 1) / 2);
 
-        while (child > 0) {
-            const parent = Math.floor((child - 1) / 2);
-
-            if (!isWorse(this.heap[child], this.heap[parent])) {
+            if (!this.isGreater(this.heap[index], this.heap[parentIndex])) {
                 break;
             }
-    [
-                this.heap[child],
-                this.heap[parent]
-            ] = [
-                this.heap[parent],
-                this.heap[child]
-            ];
+          [this.heap[index], this.heap[parentIndex]] =
+                [this.heap[parentIndex], this.heap[index]];
 
-            child = parent;
+            index = parentIndex;
         }
     }
 
     pop() {
         if (this.heap.length === 0) {
-            return undefined;
+            return null;
         }
 
         if (this.heap.length === 1) {
             return this.heap.pop();
         }
 
-        const worst = this.heap[0];
+        const max = this.heap[0];
+
         this.heap[0] = this.heap.pop();
 
-        let parent = 0;
+        let index = 0;
 
-              while (true) {
-            const left = 2 * parent + 1;
-            const right = 2 * parent + 2;
-            let worstIndex = parent;
+    while (true) {
+            const left = 2 * index + 1;
+            const right = 2 * index + 2;
+
+            let largest = index;
 
             if (
                 left < this.heap.length &&
-                isWorse(
-                    this.heap[left],
-                    this.heap[worstIndex]
-                )
+                this.isGreater(this.heap[left], this.heap[largest])
             ) {
-                worstIndex = left;
+                largest = left;
             }
 
             if (
                 right < this.heap.length &&
-                isWorse(
-                    this.heap[right],
-                    this.heap[worstIndex]
-                )
+                this.isGreater(this.heap[right], this.heap[largest])
             ) {
-                worstIndex = right;
+                largest = right;
             }
-                if (worstIndex === parent) {
+
+            if (largest === index) {
                 break;
             }
+         
+            [this.heap[index], this.heap[largest]] =
+                [this.heap[largest], this.heap[index]];
 
-            [
-                this.heap[parent],
-                this.heap[worstIndex]
-            ] = [
-                this.heap[worstIndex],
-                this.heap[parent]
-            ];
-
-            parent = worstIndex;
+            index = largest;
         }
 
-        return worst;
+        return max;
     }
 }
+  
 
-
+// ACTUAL IMPLEMENTATION    according to isWorse function 
           function findClosestElements(arr, k, x) {
     const heap = new MaxHeap();
 
@@ -594,4 +582,29 @@ peek() — inspect the root without removing it.
     result.sort((a, b) => a - b);
 
     return result;
+}
+
+
+// implementation according to class has isGreater() METHOD
+ function findClosestElements(arr, k, x) {
+    const heap = new MaxHeap();
+
+    for (const value of arr) {
+        const distance = Math.abs(value - x);
+
+        heap.insert({
+            value,
+            distance
+        });
+
+        if (heap.heap.length > k) {
+            heap.pop();
+        }
+    }
+
+    const answer = heap.heap.map(item => item.value);
+
+    answer.sort((a, b) => a - b);
+
+    return answer;
 }
