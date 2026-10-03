@@ -36,3 +36,88 @@ for(let value of values){
 }
 return dummy.next;
 }
+//
+
+class MinHeap{
+  constructor(){
+   this.heap = [];
+}
+
+// Smallest element is always at index[0];
+
+peek() {
+    return this.heap[0];
+}
+
+
+push(node) {
+    this.heap.push(node);
+
+    let index = this.heap.length - 1;
+
+    while (index > 0) {
+
+        const parentIndex = Math.floor((index - 1) / 2);
+
+        if (this.heap[parentIndex].val <= this.heap[index].val) {
+            break;
+        }
+
+        [this.heap[parentIndex], this.heap[index]] =
+        [this.heap[index], this.heap[parentIndex]];
+
+        index = parentIndex;
+    }
+}
+
+// Now the important one: pop() We want: remove smallest
+// heap[0]  Suppose:
+ //       1
+  //     / \
+   //   3   2
+   //  / \
+ //   7   5
+
+// We need to remove 1.   But if we simply delete index 0, we'd create a hole.
+
+pop() {
+    if (this.heap.length === 0) {
+        return null;
+    }
+    if (this.heap.length === 1) {
+        return this.heap.pop();
+    }
+    const min = this.heap[0];
+    this.heap[0] = this.heap.pop();
+    let index = 0;
+    while (true) {
+        const left = 2 * index + 1;
+        const right = 2 * index + 2;
+        let smallest = index;
+}
+if (
+            left < this.heap.length &&
+            this.heap[left].val < this.heap[smallest].val
+        ) {
+            smallest = left;
+        }
+        if (
+            right < this.heap.length &&
+            this.heap[right].val < this.heap[smallest].val
+        ) {
+            smallest = right;
+        }
+        if (smallest === index) {
+            break;
+        }
+        [this.heap[index], this.heap[smallest]] =
+        [this.heap[smallest], this.heap[index]];
+        index = smallest;
+    }
+return min;
+
+ isEmpty() {
+        return this.heap.length === 0;
+    }
+}
+
