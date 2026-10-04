@@ -147,3 +147,65 @@ while (true) {
 
         return result;
 }
+
+
+              // OPTIMIZED APPROACH 
+
+  class MedianFinder {
+
+    constructor() {
+
+        // Smaller half
+        this.maxHeap = new Heap((a, b) => b - a);
+
+        // Larger half
+        this.minHeap = new Heap((a, b) => a - b);
+    }
+
+    addNum(num) {
+
+        // Decide which half gets the number.
+        if (
+            this.maxHeap.isEmpty() ||
+            num <= this.maxHeap.peek()
+        ) {
+            this.maxHeap.push(num);
+        } else {
+            this.minHeap.push(num);
+        }
+   // Rebalance the heaps.
+        if (
+            this.maxHeap.size() >
+            this.minHeap.size() + 1
+        ) {
+
+            const value = this.maxHeap.pop();
+
+            this.minHeap.push(value);
+
+        } else if (
+            this.minHeap.size() >
+            this.maxHeap.size()
+        ) {
+
+            const value = this.minHeap.pop();
+
+            this.maxHeap.push(value);
+        }
+    }
+findMedian() {
+
+        if (
+            this.maxHeap.size() ===
+            this.minHeap.size()
+        ) {
+
+            return (
+                this.maxHeap.peek() +
+                this.minHeap.peek()
+            ) / 2;
+        }
+
+        return this.maxHeap.peek();
+    }
+}
