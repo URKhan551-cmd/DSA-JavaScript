@@ -209,3 +209,71 @@ findMedian() {
         return this.maxHeap.peek();
     }
 }
+
+
+         // *************************************************************************************
+
+
+  Task Scheduler
+LeetCode #621
+↗
+Medium
+✓ Solved
+
+›
+details
+Most-frequent-first · max-heap vs. the frame formula
+Given task labels and a cooldown n, the same task must run at least n intervals apart. 
+Return the minimum number of intervals (including idles) needed to finish every task.
+
+
+  function leastIntervalBrute(tasks, n) {
+  const freq = new Map();
+  for (const task of tasks) {
+    freq.set(task, (freq.get(task) || 0) + 1);
+  }
+
+  const labels = [...freq.keys()];
+  const counts = labels.map(label => freq.get(label));
+  const memo = new Map();
+
+  function dfs(counts, cooldowns) {
+    let remaining = 0;
+    for (const c of counts) remaining += c;
+    if (remaining === 0) return 0;
+const key = counts.join(',') + '|' + cooldowns.join(',');
+    if (memo.has(key)) return memo.get(key);
+
+    let best = Infinity;
+    let canRun = false;
+
+    for (let i = 0; i < counts.length; i++) {
+      if (counts[i] > 0 && cooldowns[i] === 0) {
+        canRun = true;
+
+        counts[i]--;
+
+        const nextCooldowns = cooldowns.map(c => Math.max(0, c - 1));
+        nextCooldowns[i] = n;
+
+        best = Math.min(best, 1 + dfs(counts, nextCooldowns));
+
+counts[i]++;
+      }
+    }
+
+    if (!canRun) {
+      const nextCooldowns = cooldowns.map(c => Math.max(0, c - 1));
+      best = 1 + dfs(counts, nextCooldowns);
+    }
+
+    memo.set(key, best);
+    return best;
+  }
+
+  return dfs(counts, new Array(labels.length).fill(0));
+}
+
+console.log(leastIntervalBrute(["A","A","A","B","B","B"], 2)); // 8
+
+  
