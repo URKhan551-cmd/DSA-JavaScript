@@ -277,3 +277,62 @@ counts[i]++;
 console.log(leastIntervalBrute(["A","A","A","B","B","B"], 2)); // 8
 
   
+//
+
+  function leastInterval_bruteForce(tasks, n) {
+  // 1. Frequency map
+  const freq = {};
+  for (let t of tasks) {
+    freq[t] = (freq[t] || 0) + 1;
+  }
+
+  // 2. When can each task be used again?
+  const nextValid = {};
+  for (let t in freq) {
+    nextValid[t] = 0;
+  }
+
+  let time = 0;
+  let remaining = tasks.length;  // 6 number of element in tasks arr
+  const schedule = []; // to see what we scheduled
+
+// 3. Simulate until all done
+  while (remaining > 0) {  // jab tak remainig jo k ab 6 ha 
+    let bestTask = null;   // wo remaining 6 to 0 nahi hota loop run
+    let maxCount = -1;
+
+    // Brute force scan: O(26) at each time -> try every task type
+    for (let task in freq) {    // freq k ander 2 Task ha [A] & [B]
+      if (freq[task] > 0 && nextValid[task] <= time) {  // ab deko [A] value 
+        if (freq[task] > maxCount) {     // ager [A] ki value 0 se zyada ha tab
+           // // ager [A] value maxCount 
+          maxCount = freq[task];       //maxCount = -1 pehle ab 3 ho jayega.
+          bestTask = task;     //        bestTask=null ta ab [A] ho jayega.
+        }
+      }
+    }
+    if (bestTask!== null) {
+      // Run the best task
+      freq[bestTask]--;    // bestTask wale ko freq se decrement karo 
+      nextValid[bestTask] = time + n + 1;     // 
+      remaining--;   // 5  bad ma 4 bad ma 3.....
+      schedule.push(bestTask);
+      console.log(`Time ${time}: Run ${bestTask}`);
+    } else {
+      // No task available -> idle
+      schedule.push('idle');
+      console.log(`Time ${time}: idle`);
+    }
+
+    time++;
+  }
+ console.log('Schedule:', schedule.join(' -> '));
+  return time; // time is total intervals including idles
+}
+
+// Test
+console.log(leastInterval_bruteForce(["A","A","A","B","B","B"], 2));
+// Output: A -> B -> idle -> A -> B -> idle -> A -> B = 8
+
+console.log(leastInterval_bruteForce(["A","A","A","B","B","B"], 0)); // 6
+console.log(leastInterval_bruteForce(["A","A","A","A","A","A","B","C","D","E","F","G"], 2)); // 16
