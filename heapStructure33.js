@@ -336,3 +336,83 @@ console.log(leastInterval_bruteForce(["A","A","A","B","B","B"], 2));
 
 console.log(leastInterval_bruteForce(["A","A","A","B","B","B"], 0)); // 6
 console.log(leastInterval_bruteForce(["A","A","A","A","A","A","B","C","D","E","F","G"], 2)); // 16
+
+
+  // ********************
+
+  function leastInterval(tasks, n) {
+    // Count how many times each task appears
+    const frequencies = {};
+
+    for (const task of tasks) {
+        frequencies[task] = (frequencies[task] || 0) + 1;
+    }
+
+    // Tasks currently cooling down.
+    // Each object tells us when the task becomes available.
+    const cooldown = [];
+
+    let time = 0;
+
+    while (true) {
+        // Remove tasks whose cooldown has finished
+        for (let i = cooldown.length - 1; i >= 0; i--) {
+            if (cooldown[i].availableAt <= time) {
+                cooldown.splice(i, 1);
+            }
+        }
+    
+        // Find the available task with the highest frequency
+        let bestTask = null;
+
+        for (const task in frequencies) {
+            // Task is already cooling down
+            const isCooling = cooldown.some(
+                item => item.task === task
+            );
+
+            if (isCooling) {
+                continue;
+            }
+
+            // Choose the task with the largest remaining count
+            if (
+                bestTask === null ||
+                frequencies[task] > frequencies[bestTask]
+            ) {
+                bestTask = task;
+            }
+        }
+
+    // Nothing available → CPU idles
+        if (bestTask === null) {
+            time++;
+            continue;
+        }
+
+        // Execute the task
+        frequencies[bestTask]--;
+
+        // If there are more copies of this task,
+        // put it into cooldown.
+        if (frequencies[bestTask] > 0) {
+            cooldown.push({
+                task: bestTask,
+                availableAt: time + n + 1
+            });
+        }
+
+        // Remove task completely when finished
+        if (frequencies[bestTask] === 0) {
+            delete frequencies[bestTask];
+        }
+
+        time++;
+   // Everything is finished
+        if (Object.keys(frequencies).length === 0) {
+            return time;
+        }
+    }
+}
+
+  // **************************
