@@ -515,3 +515,82 @@ console.log(leastInterval_bruteForce(["A","A","A","A","A","A","B","C","D","E","F
         }
     }
 }
+
+  // ***************************
+
+  function leastInterval(tasks, n) {
+    // --------------------------------
+    // 1. Count task frequencies
+    // --------------------------------
+
+    const frequencyMap = new Map();
+
+    for (const task of tasks) {
+        frequencyMap.set(
+            task,
+            (frequencyMap.get(task) || 0) + 1
+        );
+    }
+
+   // --------------------------------
+    // 2. Put frequencies into max heap
+    // --------------------------------
+
+    const maxHeap = new MaxHeap();
+
+    for (const count of frequencyMap.values()) {
+        maxHeap.push(count);
+    }
+
+    // --------------------------------
+    // 3. Cooldown queue
+    // --------------------------------
+
+    const cooldownQueue = [];
+
+    let time = 0;
+
+    // --------------------------------
+    // 4. Simulate CPU
+    // --------------------------------
+
+  while (
+        maxHeap.size > 0 ||
+        cooldownQueue.length > 0
+    ) {
+
+        // Move tasks whose cooldown finished
+        // back into the heap.
+        while (
+            cooldownQueue.length > 0 &&
+            cooldownQueue[0].readyAt <= time
+        ) {
+            const task = cooldownQueue.shift();
+
+            maxHeap.push(task.count);
+        }
+
+        // --------------------------------
+        // Execute a task if possible
+        // --------------------------------
+
+        if (maxHeap.size > 0) {
+            let count = maxHeap.pop();
+
+            count--;
+
+        // Task still has copies remaining
+            if (count > 0) {
+                cooldownQueue.push({
+                    count: count,
+                    readyAt: time + n + 1
+                });
+            }
+        }
+
+        // CPU used one interval
+        time++;
+    }
+
+    return time;
+}
