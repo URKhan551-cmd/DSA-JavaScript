@@ -147,25 +147,4 @@ sort find.
                     //
     optimized approach 
 
-function relativeRanks22(score){
- let sorted = [...score].sort((a,b) => b - a);
-let map = new Map();
-for(let i=0; i<sorted.length; i++){
-  map.set(sorted[i], i+1);
-}
-let result = new Array(score.length);
-for(let i=0; i< score.length; i++){
-  let rank =  map.get(score[i]);
 
-if(rank === 1){
- result[i] = "Gold Medal";
-} else if (rank === 2){
-  result[i] = "Silver Medal";
-} else if(rank === 3){
- result[i] = "Bronze Medal";
-} else {
- result[i] = String(rank);
-}
-}
-return result;
-} 
