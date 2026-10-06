@@ -113,30 +113,7 @@ Sort the indices so the scores keep their owners
 Given distinct scores, return each athlete’s rank in the same order as the input. The top three receive 
 "Gold Medal", "Silver Medal" and "Bronze Medal"; the rest receive their placement number as a string.
 
- function relativeRanks(score){
- let find = [];
 
-for(let i=0;i<score.length;i++){
- find.push(i);
-}
-find.sort((a,b) => score[b] - score[a]);
-const result = new Array(score.length);
-for(let i=0;i<find.length;i++){
-  let originalIndex = find[i];
-let rank = i+1;
-if(rank === 1){
-  result[originalIndex] = "Gold Medal";
-}else if (rank === 2){
-  result[originalIndex] = "Silver Medal";
-} else if(rank === 3){
- result[originalIndex] = "Bronze Medal";
-} else {
-  result[originalIndex] = String(rank);
-}
-}
-
-return result;
-} 
 
 actually we are pushing element in result 
 through originalIndex wise.
