@@ -1,3 +1,16 @@
+Binary Search
+LeetCode #704
+↗
+Easy
+
+›
+details
+The canonical template · halve [lo, hi]
+Given a sorted array of distinct integers and a target, 
+return its index, or −1 if it is not present. Must run in O(log n).
+
+
+
 function binarySearch(arr, target){
  if(arr.length === 0)return [];
 let low = 0;
