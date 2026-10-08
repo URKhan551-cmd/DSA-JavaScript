@@ -91,3 +91,19 @@ But low is now:
 And index 1 is exactly where 2 belongs.
 So the important interview insight is:
 When searching for an insertion position, low becomes the first valid position for the target.
+
+
+
+ function linearSearch(arr, target){
+ let low = 0;
+let high = arr.length - 1;
+while(low <= high){
+ let mid = Math.floor((low + high) / 2);
+if(arr[mid] < target){
+ low = mid + 1;
+} else {
+ high = mid-1;
+}
+}
+return low;
+}
