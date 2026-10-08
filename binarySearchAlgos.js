@@ -36,7 +36,17 @@ return -1;
 
  // *************
 
+Search Insert Position
+LeetCode #35
+↗
+Easy
+✓ Solved
 
+›
+details
+Where lo lands when the target is missing
+Given a sorted array of distinct integers and a target, return the index of the target. If it is not present, 
+return the index where it would be inserted to keep the array sorted. Must run in O(log n).
 Understand the problem first
 
 Suppose:
@@ -117,3 +127,7 @@ if(arr[i] >= target){
 }
 return arr.length;
 }
+
+
+
+
