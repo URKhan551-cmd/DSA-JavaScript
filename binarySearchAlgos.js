@@ -94,7 +94,7 @@ When searching for an insertion position, low becomes the first valid position f
 
 
 
- function linearSearch(arr, target){
+ function biSearchInsertion(arr, target){
  let low = 0;
 let high = arr.length - 1;
 while(low <= high){
@@ -106,4 +106,14 @@ if(arr[mid] < target){
 }
 }
 return low;
+}
+
+
+ function linearSearch(arr, target){
+for(let i=0;i<arr.length;i++){ 
+if(arr[i] >= target){
+ return i;
+}
+}
+return arr.length;
 }
