@@ -1,4 +1,4 @@
-Binary Search
+//Binary Search
 LeetCode #704
 ↗
 Easy
@@ -130,4 +130,14 @@ return arr.length;
 
 
 
+//
 
+ Peak Index in a Mountain Array
+LeetCode #852
+↗
+Medium
+
+›
+details
+Binary search without a sorted array
+An array rises strictly to a single peak and then falls strictly away from it. Return the index of that peak in O(log n) time.
