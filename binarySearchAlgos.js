@@ -155,3 +155,18 @@ An array rises strictly to a single peak and then falls strictly away from it. R
 
 console.log(peakIndexInMountainArray([0, 2, 5, 8, 6, 3, 1]));
 // 3
+
+
+Can we make the linear solution even simpler?
+yes. The mountain property gives us another way to recognize the peak: the peak is the element immediately before the array starts decreasing.
+We can compare adjacent elements:
+
+function peakIndexInLinear(arr) {
+  for (let i = 0; i < arr.length - 1; i++) {
+    if (arr[i] > arr[i + 1]) {
+      return i;
+    }
+  }
+
+  return -1;
+}
