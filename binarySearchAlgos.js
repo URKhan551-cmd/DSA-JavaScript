@@ -141,3 +141,17 @@ Medium
 details
 Binary search without a sorted array
 An array rises strictly to a single peak and then falls strictly away from it. Return the index of that peak in O(log n) time.
+
+
+ function peakIndexInMountainArray(arr) {
+  for (let i = 1; i < arr.length - 1; i++) {
+    if (arr[i] > arr[i - 1] && arr[i] > arr[i + 1]) {
+      return i;
+    }
+  }
+
+  return -1;
+}
+
+console.log(peakIndexInMountainArray([0, 2, 5, 8, 6, 3, 1]));
+// 3
