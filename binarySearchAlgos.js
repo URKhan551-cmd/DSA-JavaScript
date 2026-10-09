@@ -170,3 +170,27 @@ function peakIndexInLinear(arr) {
 
   return -1;
 }
+
+
+
+function peakIndexInBinary(arr) {
+  let left = 0;
+  let right = arr.length - 1;
+
+  while (left < right) {
+    const mid = Math.floor((left + right) / 2);
+
+    if (arr[mid] < arr[mid + 1]) {
+      // We are climbing: peak is to the right
+      left = mid + 1;
+    } else {
+      // We are descending: peak is at mid or to the left
+      right = mid;
+    }
+  }
+
+  return left;
+}
+
+console.log(peakIndexInMountainArray([1, 3, 5, 7, 6, 4, 2]));
+// Output: 3
