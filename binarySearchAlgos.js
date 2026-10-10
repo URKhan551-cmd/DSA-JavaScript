@@ -251,3 +251,29 @@ Our loop checks x = 1:
 ⌊2/1⌋+⌊3/1⌋=5
 Since 5 < 10, we break and return the initial value answer = 0.
 That matches the problem requirement: return 0 when no positive allocation is possible.
+
+
+ //
+
+ optimized approach 
+
+function candies(arr, k, x){
+let left =0;
+let right = Math.max(...arr);
+let answer = 0;
+while(left <= right){
+ let mid = Math.floor((left + right)/2);
+ let children = 0;
+for(let pile of arr){
+  children += Math.floor(pile / mid);
+}
+if(children >= k){
+ answer = mid;
+left = mid + 1;
+} else {
+right = mid - 1;
+}
+
+}
+return answer;
+}
