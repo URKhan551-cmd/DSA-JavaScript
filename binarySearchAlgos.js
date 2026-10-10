@@ -212,3 +212,31 @@ details
 Binary search the answer, not the array
 You have piles of candies and k children. A pile may be split into equal sub-piles, and leftovers are discarded; piles cannot be combined.
  Find the largest number of candies each child can receive, or 0 if it is impossible.
+
+
+ BRUTE FORCE APPROACH 
+
+function maximumCandies(candies, k) {
+  const maxPile = Math.max(...candies);
+  let answer = 0;
+
+  // Try every possible positive number of candies per child
+  for (let x = 1; x <= maxPile; x++) {
+    let childrenServed = 0;
+
+    // Count how many children each pile can serve
+    for (const pile of candies) {
+      childrenServed += Math.floor(pile / x);
+    }
+
+    // Keep the candidate if it can serve everyone
+    if (childrenServed >= k) {
+      answer = x;
+    } else {
+      // Larger allocations cannot work either
+      break;
+    }
+  }
+
+  return answer;
+}
