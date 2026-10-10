@@ -1,3 +1,7 @@
+
+
+
+
 //Binary Search
 LeetCode #704
 ↗
@@ -194,3 +198,17 @@ function peakIndexInBinary(arr) {
 
 console.log(peakIndexInMountainArray([1, 3, 5, 7, 6, 4, 2]));
 // Output: 3
+
+
+
+ //
+Maximum Candies Allocated to K Children
+LeetCode #2226
+↗
+Medium
+
+›
+details
+Binary search the answer, not the array
+You have piles of candies and k children. A pile may be split into equal sub-piles, and leftovers are discarded; piles cannot be combined.
+ Find the largest number of candies each child can receive, or 0 if it is impossible.
