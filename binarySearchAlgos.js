@@ -240,3 +240,14 @@ function maximumCandies(candies, k) {
 
   return answer;
 }
+
+
+ What if it is impossible to give every child even one candy
+For example:
+candies = [2, 3];
+k = 10;
+There are only two piles, containing five candies in total. Each child must receive at least one candy, so serving ten children is impossible.
+Our loop checks x = 1:
+⌊2/1⌋+⌊3/1⌋=5
+Since 5 < 10, we break and return the initial value answer = 0.
+That matches the problem requirement: return 0 when no positive allocation is possible.
