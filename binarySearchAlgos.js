@@ -293,4 +293,19 @@ Given piles of bananas and a fixed number of hours, find the minimum constant ea
  finish all piles within the hour limit. Each hour you eat from a single pile, 
  and if a pile has fewer bananas than your speed you still spend the whole hour on it.
 
-  
+
+  function appleHarvest(arr, h){
+ let maxPile = Math.max(...arr);
+for(let speed=1;speed<=maxPile;speed++){
+ let hours = 0;
+
+for(let pile of arr){
+ hours += Math.ceil(pile/speed);
+}
+
+if(hours <= h){
+  return speed;
+ }
+}
+return maxPile;
+}
