@@ -309,3 +309,34 @@ if(hours <= h){
 }
 return maxPile;
 }
+
+
+ function appleHarvest22(arr, h){
+ let left =1;
+let right=0;
+
+for(const pile of arr){
+ if(pile > right) right = pile; 
+}
+
+const coFound = (speed){
+ let hours = 0;
+for(const pile of arr){
+ hours += Math.ceil(pile/speed);
+}
+if(hours > h){
+ return false;
+}
+true;
+}
+
+while(left < right){
+ let mid = left + Math.floor((right - left)/2);
+if(coFound(mid)){
+ right = mid;
+} else {
+ left = mid + 1;
+}
+}
+return left;
+}
