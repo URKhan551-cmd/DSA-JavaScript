@@ -340,3 +340,28 @@ if(coFound(mid)){
 }
 return left;
 }
+
+
+
+const canFinish = (speed) => {
+    let hours = 0;
+    for (const pile of piles) {
+      hours += Math.ceil(pile / speed);
+      if (hours > h) return false; // early exit
+    }
+    return true;
+  };
+
+  while (left <= right) {
+    const mid = left + Math.floor((right - left) / 2);
+
+    if (canFinish(mid)) {
+      answer = mid;
+      right = mid - 1; // try to find smaller
+    } else {
+    left = mid + 1;
+    }
+  }
+
+  return answer;
+}
