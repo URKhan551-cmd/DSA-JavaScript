@@ -277,3 +277,20 @@ right = mid - 1;
 }
 return answer;
 }
+
+
+ //
+
+ Apple Harvest (Koko Eating Bananas)
+LeetCode #875
+↗
+Medium
+
+›
+details
+Binary search on the answer · feasibility probe
+Given piles of bananas and a fixed number of hours, find the minimum constant eating speed (bananas per hour) that lets you 
+ finish all piles within the hour limit. Each hour you eat from a single pile, 
+ and if a pile has fewer bananas than your speed you still spend the whole hour on it.
+
+  
