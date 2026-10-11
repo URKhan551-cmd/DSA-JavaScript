@@ -365,3 +365,31 @@ const canFinish = (speed) => {
 
   return answer;
 }
+
+
+
+function appleHarvest33(piles, h) {
+  let left = 1;
+  let right = Math.max(...piles);
+
+  const canFinish = (speed) => {
+    let hours = 0;
+    for (const pile of piles) {
+      hours += Math.floor((pile + speed - 1) / speed);
+      if (hours > h) return false;
+    }
+    return true;
+  };
+
+  while (left < right) {
+    const mid = left + ((right - left) >> 1); // bitshift = faster floor div by 2
+
+if (canFinish(mid)) {
+      right = mid;
+    } else {
+      left = mid + 1;
+    }
+  }
+
+  return left;
+}
