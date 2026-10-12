@@ -8,3 +8,14 @@ details
 One half is always sorted, use it to steer
 Given an ascending sorted array that has been rotated at an unknown pivot, 
 find the index of a target value in O(log n) time, returning -1 if it is not present.
+
+  function sortedReverse(arr, target){
+ for(let i=0; i<arr.length; i++){
+ if(arr[i] === target){
+  return i;
+}
+}
+return -1;
+}
+
+  
