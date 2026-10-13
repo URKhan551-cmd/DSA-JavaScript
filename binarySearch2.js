@@ -64,3 +64,23 @@ Compare the middle element with the rightmost element.
 - If nums[mid] > nums[right], the minimum must be to the right of mid.
 - If nums[mid] <= nums[right], the minimum is at mid or to its left.
 Why compare against right? It tells us which side contains the rotation boundary, or cliff.
+
+// BEST prcatices  
+// let mid = Math.floor(left + (right - left) / 2)
+  
+  function findMin(nums) {
+  let left = 0;
+  let right = nums.length - 1;
+
+  while (left < right) {
+    const mid = Math.floor((left + right) / 2);
+
+    if (nums[mid] > nums[right]) {
+      left = mid + 1;
+    } else {
+      right = mid;
+    }
+  }
+
+  return nums[left];
+}
