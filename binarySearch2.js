@@ -44,3 +44,23 @@ if(nums[left] <= nums[mid]){
 }
 return -1;
 }
+
+
+//
+
+Find Minimum in Rotated Sorted Array
+LeetCode #153
+↗
+Medium
+✓ Solved
+
+›
+details
+Compare mid to hi to find the cliff
+An ascending sorted array of unique values was rotated at an unknown pivot. Return its minimum element in O(log n) time.
+
+Key observation
+Compare the middle element with the rightmost element.
+- If nums[mid] > nums[right], the minimum must be to the right of mid.
+- If nums[mid] <= nums[right], the minimum is at mid or to its left.
+Why compare against right? It tells us which side contains the rotation boundary, or cliff.
