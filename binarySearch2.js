@@ -84,3 +84,30 @@ Why compare against right? It tells us which side contains the rotation boundary
 
   return nums[left];
 }
+
+
+  //
+
+Search a 2D Matrix
+LeetCode #74
+↗
+Medium
+✓ Solved
+
+›
+details
+Treat the grid as one flat sorted array · binary search 0..m·n−1
+Given an m x n matrix where each row is sorted left-to-right and the first integer of each 
+  
+row is greater than the last integer of the previous row, 
+  determine whether a target value exists in the matrix in O(log(m·n)) time.
+  
+const matrix = [
+  [1,  3,  5,  7],
+  [10, 11, 16, 20],
+  [23, 30, 34, 60]
+];
+
+
+Suppose the target is 16.
+We must return true because 16 exists in the matrix. If the target were 13, we would return false
