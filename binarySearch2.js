@@ -111,3 +111,24 @@ const matrix = [
 
 Suppose the target is 16.
 We must return true because 16 exists in the matrix. If the target were 13, we would return false
+
+
+  function searchMatrixBruteForce(matrix, target) {
+  for (let row = 0; row < matrix.length; row++) {
+    for (let col = 0; col < matrix[row].length; col++) {
+      if (matrix[row][col] === target) {
+        return true;
+      }
+    }
+  }
+
+  return false;
+}
+
+
+Understand the loops
+- row selects a row.
+- col selects a column within that row.
+- matrix[row][col] accesses an individual element.
+- If the element equals target, return true immediately.
+- If both loops finish without finding it, return false.
