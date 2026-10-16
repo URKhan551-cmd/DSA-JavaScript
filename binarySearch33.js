@@ -13,6 +13,25 @@ find the kth smallest element in the matrix considering its sorted order, counti
 
 
 function kthSmallest(matrix, k) {
+  const values = [];
+
+  // Step 1: Collect every element.
+  for (let row = 0; row < matrix.length; row++) {
+    for (let col = 0; col < matrix[row].length; col++) {
+      values.push(matrix[row][col]);
+    }
+  }
+
+  // Step 2: Sort numerically in ascending order.
+  values.sort((a, b) => a - b);
+
+  // Step 3: Convert the 1-based rank to a 0-based index.
+  return values[k - 1];
+}
+
+ // optimized solution 
+
+function kthSmallest(matrix, k) {
   const n = matrix.length;
 
   let left = matrix[0][0];
