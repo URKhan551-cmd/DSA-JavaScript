@@ -1,3 +1,17 @@
+Kth Smallest in a Sorted Matrix
+LeetCode #378
+↗
+Medium
+✓ Solved
+
+›
+details
+Binary search on values · count ≤ x probes
+Given an n x n matrix whose rows and columns are each sorted in ascending order, 
+find the kth smallest element in the matrix considering its sorted order, counting duplicate values separately.
+
+
+
 function kthSmallest(matrix, k) {
   const n = matrix.length;
 
