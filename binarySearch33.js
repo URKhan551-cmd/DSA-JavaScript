@@ -81,3 +81,17 @@ Given package weights that must be shipped in their given order,
   find the minimum ship capacity such that all packages can be shipped within a given number of days, 
   where each day loads consecutive packages without exceeding the capacity.
 
+
+function findDaysTo(weights, days, capacity){
+  let countDay = 1;
+  let countCap = 0;
+  for(let weight of weights){
+    if(countCap + weight > capacity){
+        countDay++;
+        countCap = 0;
+      
+    }
+    countCap += weight 
+  }
+  return countDay <= days;
+}
