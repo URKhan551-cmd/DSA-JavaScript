@@ -67,3 +67,17 @@ function kthSmallest(matrix, k) {
   return left;
 }
 
+//
+
+Minimum Shipping Capacity
+LeetCode #1011
+↗
+Medium
+
+›
+details
+Ship packages in D days · search the capacity
+Given package weights that must be shipped in their given order,
+  find the minimum ship capacity such that all packages can be shipped within a given number of days, 
+  where each day loads consecutive packages without exceeding the capacity.
+
