@@ -95,3 +95,17 @@ function findDaysTo(weights, days, capacity){
   }
   return countDay <= days;
 }
+
+
+function shipWithInDays(weights, days){
+
+  let low = Math.max(... weights);
+  let high = weights.reduce((a,b) => a + b, 0);
+
+  for(let cap = low; cap <= high; cap++){
+    if(findDaysTo(weights, days, cap)){
+
+      return cap;
+    }
+  }
+}
