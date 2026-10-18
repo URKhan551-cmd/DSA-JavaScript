@@ -109,3 +109,22 @@ function shipWithInDays(weights, days){
     }
   }
 }
+
+
+// optimized approach 
+function daysToShip(weights, days, capacity){
+let daysCount = 1;
+  let totalCap = 0;
+  for (const weight of weights){
+
+    if(totalCap + weight > capacity){
+
+      daysCount++;
+      totalCap = 0;
+    }
+    totalCap += weight;
+  }
+  return daysCount <= days;
+}
+
+
