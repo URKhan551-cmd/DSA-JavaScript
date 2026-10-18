@@ -128,3 +128,21 @@ let daysCount = 1;
 }
 
 
+
+function findWithBinaryOptimized(weights, days){
+
+let left = Math.max(...weights);
+  let right= weights.reduce((a,b) => a+b, 0);
+
+  while(left<right){
+    let mid = Math.floor((right+ left)/2);
+    if(daysToShip(weights,days,mid)){
+      right= mid;
+    } else {
+      left  = mid + 1;
+    }
+    
+  }
+return left;
+  
+}
