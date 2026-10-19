@@ -89,3 +89,13 @@ Given the root of a binary tree, return its maximum depth: the number of nodes a
     longest path from the root down to the farthest leaf.
 
         
+function dfs22(node){
+if(node === null){
+ return 0;
+}
+
+const left = dfs(node.left);
+const = right = dfs(node.right);
+
+return 1 + Math.max(left, right);
+}
