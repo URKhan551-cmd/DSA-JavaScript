@@ -73,3 +73,19 @@ The values bubble back up through the recursive call stack until the root return
 4. Complexity
 - Time: \(O(n)\) — each node is visited once.
 - Auxiliary space: \(O(h)\) — the recursion stack depends on the tree height, reaching \(O(n)\) for a skewed tree.
+
+
+    //
+
+    Maximum Depth of Binary Tree
+LeetCode #104
+↗
+Easy
+
+›
+details
+Depth = 1 + max(left, right)
+Given the root of a binary tree, return its maximum depth: the number of nodes along the 
+    longest path from the root down to the farthest leaf.
+
+        
