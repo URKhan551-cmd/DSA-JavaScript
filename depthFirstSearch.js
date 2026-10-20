@@ -208,6 +208,21 @@ func dfsGoPathSum(root *TreeNode, targetSum int) bool {
 }
 
 
+// In Path Sum (LeetCode #112), we are given a binary tree and a targetSum. Our job is to check whether there is a path 
+// from the root node to a leaf node where the sum of all node values equals the target. 
+// A root is the first node of the tree, and a leaf is a node that has no left or right child. 
+// We must follow one connected path downward; we cannot add values from different branches.
+
+// We solve this problem using Depth-First Search (DFS), which means exploring one branch as far as 
+// possible before moving to another branch. At each node, we subtract its value from the targetSum and continue 
+// to its children with the remaining sum. For example, if the target is 22 and the path contains 5 → 4 → 11 → 2, 
+// the total is \(5+4+11+2=22\). Since this path reaches a leaf and the sum matches the target, we return true.
+
+// There are two important conditions. First, if the current node is null, there is no path through it, 
+// so we return false. Second, if we reach a leaf, we check whether its value equals the remaining target; 
+// if it does, we return true, otherwise false. If neither condition applies, we recursively check the left 
+// and right children. If either side finds a valid path, the answer is true; if both fail, the answer is false.
+
 // Every invocation has a small responsibility:
 1. Receive one node.
 2. Stop if that node is null.
@@ -215,3 +230,5 @@ func dfsGoPathSum(root *TreeNode, targetSum int) bool {
 4. Explore its left subtree completely.
 5. Resume and explore its right subtree completely.
 6. Return to the caller.
+
+    
