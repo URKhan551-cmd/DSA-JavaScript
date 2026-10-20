@@ -99,3 +99,18 @@ const = right = dfs(node.right);
 
 return 1 + Math.max(left, right);
 }
+
+
+
+
+    //
+
+// typescript
+
+type TreeNode = { val: number; left: TreeNode | null; right: TreeNode | null }
+function hasPathSum(root: TreeNode | null, target: number): boolean {
+  if (!root) return false;
+  if (!root.left && !root.right) return target === root.val;
+  const rem = target - root.val;
+  return hasPathSum(root.left, rem) || hasPathSum(root.right, rem);
+}
