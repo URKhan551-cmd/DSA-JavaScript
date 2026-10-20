@@ -232,3 +232,24 @@ func dfsGoPathSum(root *TreeNode, targetSum int) bool {
 6. Return to the caller.
 
     
+//
+
+Concept
+Passing Values Down and Up
+✓ Solved
+
+›
+details
+Parameters go down, returns come up
+
+function dfsValuesDown(node, sum){
+if(node === null) return 0;
+
+sum += node.val;
+
+const left = dfsValuesDown(node.left, sum);
+const right = dfsValuesDown(node.right, sum);
+
+return 1 + Math.max(left, right);
+}
+
