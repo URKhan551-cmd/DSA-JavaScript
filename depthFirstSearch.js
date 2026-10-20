@@ -253,3 +253,31 @@ const right = dfsValuesDown(node.right, sum);
 return 1 + Math.max(left, right);
 }
 
+
+// 3. What if you want to pass sum down?
+// Your original function accumulates node values, so you can preserve that idea. However, 
+// accumulating a sum and calculating maximum depth are different problems.
+
+// For example, if you want to calculate the sum along each root-to-leaf path, 
+    // pass the accumulated sum down and return the path sums when you reach a leaf:
+function dfsValuesDown33(node, sum = 0) {
+  if (node === null) return [];
+
+  sum += node.val;
+
+  if (node.left === null && node.right === null) {
+    return [sum];
+  }
+
+  const leftSums = dfsValuesDown(node.left, sum);
+  const rightSums = dfsValuesDown(node.right, sum);
+
+  return [...leftSums, ...rightSums];
+}
+
+
+// This returns an array of all root-to-leaf sums. For Path Sum (#112), you don't need to collect every sum;
+// you can pass the remaining target down and return true or false up instead.
+// The main lesson: Parameters carry information into recursive calls. 
+// Return values carry answers back out. Always decide what information needs to go down and what result 
+// needs to come up before writing your recursive function.
