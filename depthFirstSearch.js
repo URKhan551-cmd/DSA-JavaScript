@@ -114,3 +114,26 @@ function hasPathSum(root: TreeNode | null, target: number): boolean {
   const rem = target - root.val;
   return hasPathSum(root.left, rem) || hasPathSum(root.right, rem);
 }
+
+
+    //
+
+
+function dfsPathSum(root, targetSum) {
+    if (root === null) {
+        return false;
+    }
+
+    const remaining = targetSum - root.val;
+
+    // A leaf must finish the sum exactly.
+    if (root.left === null && root.right === null) {
+        return remaining === 0;
+    }
+
+    // Either subtree may contain a valid path.
+    return (
+        hasPathSum(root.left, remaining) ||
+        hasPathSum(root.right, remaining)
+    );
+}
