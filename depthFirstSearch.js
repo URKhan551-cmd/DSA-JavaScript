@@ -241,7 +241,7 @@ Passing Values Down and Up
 ›
 details
 Parameters go down, returns come up
-
+// *
 function dfsValuesDown(node, sum){
 if(node === null) return 0;
 
@@ -253,7 +253,24 @@ const right = dfsValuesDown(node.right, sum);
 return 1 + Math.max(left, right);
 }
 
+// **
+Returns come up
+Now let's calculate the maximum depth of a binary tree. Instead of passing the answer down, each node asks its children for their depths and uses their returned answers.
+function maxDepth(node) {
+  if (node === null) {
+    return 0;
+  }
 
+  const leftDepth = maxDepth(node.left);
+  const rightDepth = maxDepth(node.right);
+
+  return 1 + Math.max(leftDepth, rightDepth);
+}
+
+
+How does the answer travel upward?
+
+// ***
 // 3. What if you want to pass sum down?
 // Your original function accumulates node values, so you can preserve that idea. However, 
 // accumulating a sum and calculating maximum depth are different problems.
