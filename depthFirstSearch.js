@@ -137,3 +137,41 @@ function dfsPathSum(root, targetSum) {
         hasPathSum(root.right, remaining)
     );
 }
+
+
+//
+class TreeNode {
+    val: number;
+    left: TreeNode | null;
+    right: TreeNode | null;
+
+    constructor(
+        val = 0,
+        left: TreeNode | null = null,
+        right: TreeNode | null = null
+    ) {
+        this.val = val;
+        this.left = left;
+        this.right = right;
+    }
+}
+
+function dfsTreeNodeSUm(
+    root: TreeNode | null,
+    targetSum: number
+): boolean {
+    if (root === null) {
+        return false;
+    }
+
+    const remaining = targetSum - root.val;
+
+    if (root.left === null && root.right === null) {
+        return remaining === 0;
+    }
+
+    return (
+        hasPathSum(root.left, remaining) ||
+        hasPathSum(root.right, remaining)
+    );
+}
