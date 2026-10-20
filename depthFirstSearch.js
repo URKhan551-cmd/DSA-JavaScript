@@ -103,7 +103,18 @@ return 1 + Math.max(left, right);
 
 
 
-    //
+    // problem 4
+Path Sum
+LeetCode #112
+↗
+Easy
+✓ Solved
+
+›
+details
+Root-to-leaf sum == target · carry the remainder down
+Given the root of a binary tree and a target sum, return true if there is a 
+root-to-leaf path whose node values add up exactly to the target, and false otherwise.
 
 // typescript
 
@@ -181,7 +192,7 @@ function dfsTreeNodeSUm(
     // GOLANG
 Go solution
 // Go uses pointers to represent tree nodes and nil to represent a missing child.
-func hasPathSum(root *TreeNode, targetSum int) bool {
+func dfsGoPathSum(root *TreeNode, targetSum int) bool {
     if root == nil {
         return false
     }
