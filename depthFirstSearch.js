@@ -175,3 +175,23 @@ function dfsTreeNodeSUm(
         hasPathSum(root.right, remaining)
     );
 }
+
+
+    //
+    // GOLANG
+Go solution
+// Go uses pointers to represent tree nodes and nil to represent a missing child.
+func hasPathSum(root *TreeNode, targetSum int) bool {
+    if root == nil {
+        return false
+    }
+
+    remaining := targetSum - root.Val
+
+    if root.Left == nil && root.Right == nil {
+        return remaining == 0
+    }
+
+    return hasPathSum(root.Left, remaining) ||
+        hasPathSum(root.Right, remaining)
+}
