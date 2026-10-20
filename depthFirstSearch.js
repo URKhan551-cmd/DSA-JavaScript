@@ -206,3 +206,12 @@ func dfsGoPathSum(root *TreeNode, targetSum int) bool {
     return hasPathSum(root.Left, remaining) ||
         hasPathSum(root.Right, remaining)
 }
+
+
+// Every invocation has a small responsibility:
+1. Receive one node.
+2. Stop if that node is null.
+3. Process the current node.
+4. Explore its left subtree completely.
+5. Resume and explore its right subtree completely.
+6. Return to the caller.
