@@ -10,6 +10,38 @@ Carry (low, high) bounds down
 Given the root of a binary tree, determine whether it is a valid binary search tree, 
 where every node in a left subtree is strictly less than its parent and every node in a right subtree is strictly greater.
 
+function checkBruteForceDfs(root){
+
+  if(root === null) return right;
+
+  function findMax(node){
+   if(node === null) return -Infinity;
+
+    return Math.max(
+      node.val, 
+      findMax(node.left), 
+      findMax(node.right));
+    
+  }
+
+  function findMin(node){
+    if(node === null) return Infinity;
+
+    return Math.min(node.val, findMin(node.left), findMin(node.right))
+  }
+
+  const leftCal = findMax(root.left);
+  const rightCal = findMin(root.right);
+
+  if (maxLeft >= root.val || minRight <= root.val) {
+    return false;
+  }
+  return checkBruteForceDfs(root.left) && checkBruteForceDfs(root.right)
+}
+
+
+
+
 
 
 function checkDfs(root){
