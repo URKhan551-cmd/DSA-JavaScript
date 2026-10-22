@@ -76,3 +76,14 @@ Given the root of a binary tree, return the sum of every node's tilt, where a no
 between the total value of its left subtree and the total value of its right subtree.
 
   
+function subtreeSum(node) {
+  if (node === null) {
+    return 0;
+  }
+return (
+    node.val +
+    subtreeSum(node.left) +
+    subtreeSum(node.right)
+  );
+}
+
