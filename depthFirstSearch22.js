@@ -87,3 +87,25 @@ return (
   );
 }
 
+
+function findTilt(root) {
+  let totalTilt = 0;
+
+  function calculateTilt(node) {
+    if (node === null) {
+      return;
+    }
+
+    const leftSum = subtreeSum(node.left);
+    const rightSum = subtreeSum(node.right);
+
+    totalTilt += Math.abs(leftSum - rightSum);
+
+    calculateTilt(node.left);
+    calculateTilt(node.right);
+  }
+
+  calculateTilt(root);
+
+  return totalTilt;
+}
