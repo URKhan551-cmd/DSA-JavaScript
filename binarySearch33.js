@@ -146,3 +146,17 @@ let left = Math.max(...weights);
 return left;
   
 }
+
+
+//
+
+Diameter of a Binary Tree
+LeetCode #543
+↗
+Easy
+
+›
+details
+Post-order heights, track the widest split
+Given the root of a binary tree, return the length of its diameter: the number of edges on 
+the longest path between any two nodes, which need not pass through the root.
