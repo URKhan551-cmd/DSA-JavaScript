@@ -113,6 +113,16 @@ function findTilt(root) {
 
 
 
+// example 
+function mystery(node) {
+    if (node === null) return;
+
+    mystery(node.right);
+    console.log(node.value);
+    mystery(node.left);
+}
+
+//
 //
 Path Sum II
 LeetCode #113
