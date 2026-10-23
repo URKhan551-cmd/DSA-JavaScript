@@ -135,3 +135,34 @@ details
 Backtracking: collect every root-to-leaf path == target
 Given the root of a binary tree and a target sum, return all root-to-leaf 
 paths whose node values add up exactly to the target.
+
+
+  var pathSum = function(root, targetSum) {
+    const result = [];
+    const path = [];
+
+    function dfs(node, remainingSum) {
+        if (node === null) return;
+
+        path.push(node.val);
+        remainingSum -= node.val;
+
+        // Check whether this is a valid root-to-leaf path.
+        if (
+            node.left === null &&
+            node.right === null &&
+            remainingSum === 0
+        ) {
+            result.push([...path]);
+        } else {
+            dfs(node.left, remainingSum);
+            dfs(node.right, remainingSum);
+        }
+
+        // Backtrack: remove the current node.
+        path.pop();
+  }
+  dfs(root, remaining);
+
+     return result;      
+  }
