@@ -183,3 +183,40 @@ Given the root of a binary tree, return the length, measured in edges,
 of the longest path where every node along it shares the same value. The path may or may not pass through the root.
 
   
+var longestUnivaluePath = function(root) {
+    let maxLength = 0;
+
+    function dfs(node) {
+        if (node === null) {
+            return 0;
+        }
+
+        // 1. Get the downward path lengths from both children.
+        const left = dfs(node.left);
+        const right = dfs(node.right);
+
+        // 2. Extend a branch only if the child's value matches.
+        const leftPath =
+            node.left !== null && node.left.val === node.val
+                ? left + 1
+                : 0;
+       
+                 const rightPath =
+            node.right !== null && node.right.val === node.val
+                ? right + 1
+                : 0;
+
+        // 3. Consider a path that passes through this node.
+        maxLength = Math.max(
+            maxLength,
+            leftPath + rightPath
+        );
+
+        // 4. Return one downward branch to the parent.
+        return Math.max(leftPath, rightPath);
+    }
+
+    dfs(root);
+
+    return maxLength;
+};
