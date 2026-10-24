@@ -166,3 +166,20 @@ paths whose node values add up exactly to the target.
 
      return result;      
   }
+
+
+  //  next problem
+
+Longest Univalue Path
+LeetCode #687
+↗
+Medium
+✓ Solved
+
+›
+details
+Longest chain of equal values
+Given the root of a binary tree, return the length, measured in edges, 
+of the longest path where every node along it shares the same value. The path may or may not pass through the root.
+
+  
