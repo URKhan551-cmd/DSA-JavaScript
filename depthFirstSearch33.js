@@ -19,3 +19,29 @@ per legend, once tripped up a well-known whiteboard candidate.
    invert(root.right);
     return root;
 }
+
+
+//
+
+Same Tree
+LeetCode #100
+↗
+Easy
+
+›
+details
+Lockstep pre-order DFS over both trees
+Given the roots of two binary trees p and q, return true if they are structurally identical 
+and every corresponding pair of nodes has the same value.
+
+  function sameTree(proot, qroot){
+ if(proot === null && qroot === null)return true;
+if(proot === null || qroot === null)return false;
+
+if(proot.val !== qroot.val) return false;
+return (
+ sameTree(proot.left, qroot.left) &&
+ sameTree(proot.right, qroot.right);
+)
+
+}
