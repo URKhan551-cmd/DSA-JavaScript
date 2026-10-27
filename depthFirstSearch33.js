@@ -60,3 +60,23 @@ details
 Post-order gains · clamp negative arms
 Given the root of a binary tree, return the maximum sum of any non-empty path. 
 A path is a sequence of connected nodes and need not pass through the root.
+
+
+function dfs(root){
+let maxSum = -Infinity;
+function dfs2(node){
+if(node === null) return 0;
+
+let left = dfs2(node.left);
+let right = dfs2(node.right);
+
+let leftgain = Math.max(0, left);  // it has been check the left.val is 0 or holds some value; if have some value get it
+let rightgain = Math.max(0, right); // same as like the upper one
+let currentPathSum = node.val + leftgain + rightgain;   
+maxSum = Math.max(maxSum, currentPathSum);
+return node.val + Math.max(leftgain, rightgain);
+
+}
+dfs2(root)
+return maxSum
+}
