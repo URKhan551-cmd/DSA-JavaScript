@@ -80,3 +80,14 @@ return node.val + Math.max(leftgain, rightgain);
 dfs2(root)
 return maxSum
 }
+
+// So when calculating the best path through 5, we should ignore the negative contribution from its left child.
+// This is the idea behind clamping negative gains to zero.
+// Conceptually:
+// \[
+// \text{usable gain} = \max(0,\text{child gain})
+// \]
+// If a subtree contributes -10, its usable gain becomes 0.
+// If it contributes 6, its usable gain remains 6.
+// Why zero?
+// Because the path can omit that branch entirely. Omitting a branch contributes nothing; including a negative branch reduces the total.
