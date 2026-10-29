@@ -133,3 +133,45 @@ Design an algorithm to serialize a binary tree to a string and deserialize that
 string back into the identical tree. There is no restriction on the encoding/decoding format.
 
   
+var Codec = function () {};
+
+Codec.prototype.serialize = function (root) {
+    const result = [];
+
+    function dfs(node) {
+        if (node === null) {
+            result.push("#");
+            return;
+        }
+
+        result.push(String(node.val));
+
+        dfs(node.left);
+        dfs(node.right);
+    }
+
+    dfs(root);
+
+    return result.join(",");
+};
+
+Codec.prototype.deserialize = function (data) {
+    const nodes = data.split(",");
+    let index = 0;
+
+    function buildTree() {
+        const value = nodes[index++];
+
+        if (value === "#") {
+            return null;
+        }
+
+        const node = new TreeNode(Number(value));
+
+        node.left = buildTree();
+        node.right = buildTree();
+
+        return node;
+    }
+   return buildTree;
+}
