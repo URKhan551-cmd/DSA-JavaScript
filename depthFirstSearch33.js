@@ -91,3 +91,27 @@ return maxSum
 // If it contributes 6, its usable gain remains 6.
 // Why zero?
 // Because the path can omit that branch entirely. Omitting a branch contributes nothing; including a negative branch reduces the total.
+
+
+
+
+  //
+
+Graphs Overview
+✓ Solved
+
+›
+details
+Nodes, edges, and why DFS needs a visited set
+
+  function graphsDetail(graphs, node, visited = new Set()){
+if(visited.has(node)){
+ return;
+}
+
+visited.add(node);
+console.log(node);
+for(let neighbor of graphs[node]){
+ graphsDetail(graphs, neighbor, visited);
+}
+}
