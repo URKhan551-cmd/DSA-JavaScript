@@ -115,3 +115,21 @@ for(let neighbor of graphs[node]){
  graphsDetail(graphs, neighbor, visited);
 }
 }
+
+
+  //
+
+
+Serialize and Deserialize Binary Tree
+LeetCode #297
+↗
+Hard
+✓ Solved
+
+›
+details
+Pre-order with null markers, then rebuild from the stream
+Design an algorithm to serialize a binary tree to a string and deserialize that 
+string back into the identical tree. There is no restriction on the encoding/decoding format.
+
+  
