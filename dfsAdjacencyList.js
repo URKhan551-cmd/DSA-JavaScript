@@ -257,9 +257,66 @@ function dfs(graph, start) {
 
 dfs(graph, "A");
 
-Output:
-A
-B
-D
-E
-C
+// Output:
+// A
+// B
+// D
+// E
+// C
+
+
+//
+
+. An important distinction: An adjacency list does not guarantee reachability
+Consider:
+const graph = {
+  A: ["B"],
+  B: ["A"],
+  C: ["D"],
+  D: ["C"],
+};
+
+The graph has two connected components:
+A ----- B
+
+C ----- D
+
+Calling:
+dfs(graph, "A");
+
+will visit A and B, but not C and D.
+
+The adjacency list tells us how the graph is connected. It does not mean that every node is reachable from every other node.
+
+If the task requires visiting every node, we can iterate over the nodes and start DFS from every unvisited node.
+function dfsAll(graph) {
+  const visited = new Set();
+
+  function visit(node) {
+    if (visited.has(node)) {
+      return;
+    }
+
+    visited.add(node);
+
+    for (const neighbor of graph[node]) {
+      visit(neighbor);
+    }
+  }
+
+  for (const node of Object.keys(graph)) {
+    visit(node);
+  }
+
+  return visited;
+}
+
+console.log([...dfsAll(graph)]);
+
+// The outer loop finds nodes that have not yet been reached by earlier traversals.
+
+// For an undirected graph, this approach can identify all connected components.
+
+// For directed graphs, reachability and component structure require more careful definitions.
+
+
