@@ -121,3 +121,99 @@ if (!graph[to]) {
 // graph[to].push(from);
 
 // That would introduce a reverse edge that the original graph does not contain.
+
+
+// new implementation 
+Weighted graphs: What if edges have costs?
+Not every connection is identical.
+
+Consider a flight network:
+Dubai -------- Abu Dhabi
+       140 km
+
+// Or a computer network in which each connection has a latency.
+
+// The graph may assign a value to each edge.
+
+// That value is called a weight.
+
+function buildWeightedGraph(edges) {
+  const graph = {};
+
+  for (const [a, b, weight] of edges) {
+    if (!graph[a]) {
+      graph[a] = [];
+    }
+
+    if (!graph[b]) {
+      graph[b] = [];
+    }
+
+    graph[a].push({
+      node: b,
+      weight: weight,
+    });
+
+    graph[b].push({
+      node: a,
+      weight: weight,
+    });
+  }
+
+  return graph;
+}
+
+const edges = [
+  ["Dubai", "Abu Dhabi", 140],
+  ["Dubai", "Sharjah", 30],
+  ["Sharjah", "Abu Dhabi", 160],
+];
+
+const graph = buildWeightedGraph(edges);
+
+console.log(graph);
+
+// A traversal can now examine the weight when necessary.
+
+// However, remember that storing weights and finding the minimum-cost path are different tasks.
+
+// An adjacency list stores the graph's structure. Algorithms such as Dijkstra's algorithm use that structure to calculate shortest paths when their assumptions are satisfied.
+
+const nodes = ["A", "B", "C", "D", "E"];
+
+const edges = [
+  ["A", "B"],
+  ["D", "E"],
+];
+
+// We can initialize every node before processing the edges:
+function makingGraph(nodes, edges) {
+  const graph = {};
+
+  for (const node of nodes) {
+    graph[node] = [];
+  }
+
+  for (const [a, b] of edges) {
+    graph[a].push(b);
+    graph[b].push(a);
+  }
+
+  return graph;
+}
+
+console.log(makingGraph(nodes, edges));
+
+Output:
+{
+  A: ["B"],
+  B: ["A"],
+  C: [],
+  D: ["E"],
+  E: ["D"]
+}
+
+// This is a robust approach when the problem explicitly provides the complete set of nodes.
+
+// Important: If nodes are known only through the edge list, an isolated node cannot be discovered from the edges alone. 
+// The input must provide that node separately.
