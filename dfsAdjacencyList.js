@@ -72,3 +72,52 @@ function createGraph2(edges) {
 
 // For learning purposes, the longer version is useful because it makes the initialization process explicit.
 // Once you understand it, the shorter version is equally valid.
+
+
+for (const [from, to] of edges) {
+    if (!graph[from]) {
+      graph[from] = [];
+    }
+
+    if (!graph[to]) {
+      graph[to] = [];
+    }
+
+    graph[from].push(to);
+  }
+
+  return graph;
+}
+
+const edges = [
+  ["A", "B"],
+  ["B", "C"],
+];
+
+console.log(buildDirectedGraph(edges));
+
+Output:
+{
+  A: ["B"],
+  B: ["C"],
+  C: []
+}
+
+// Notice that we initialize both nodes:
+if (!graph[from]) {
+  graph[from] = [];
+}
+
+if (!graph[to]) {
+  graph[to] = [];
+}
+
+// But we only add the outgoing connection:
+
+// But we only add the outgoing connection:
+// graph[from].push(to);
+
+// We do not write:
+// graph[to].push(from);
+
+// That would introduce a reverse edge that the original graph does not contain.
