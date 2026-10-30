@@ -217,3 +217,49 @@ Output:
 
 // Important: If nodes are known only through the edge list, an isolated node cannot be discovered from the edges alone. 
 // The input must provide that node separately.
+
+
+//
+
+Using an adjacency list with DFS
+Now let's connect graph representation to graph traversal.
+
+Suppose we have:
+const graph = {
+  A: ["B", "C"],
+  B: ["A", "D"],
+  C: ["A", "E"],
+  D: ["B", "E"],
+  E: ["C", "D"],
+};
+
+// We want to visit every node reachable from A.
+// Here is the DFS implementation:
+function dfs(graph, start) {
+  const visited = new Set();
+
+  function visit(node) {
+    if (visited.has(node)) {
+      return;
+    }
+
+    visited.add(node);
+
+    console.log(node);
+
+    for (const neighbor of graph[node]) {
+      visit(neighbor);
+    }
+  }
+
+  visit(start);
+}
+
+dfs(graph, "A");
+
+Output:
+A
+B
+D
+E
+C
