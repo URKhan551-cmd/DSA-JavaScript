@@ -320,3 +320,81 @@ console.log([...dfsAll(graph)]);
 // For directed graphs, reachability and component structure require more careful definitions.
 
 
+// ADJACENCY MATRIX
+13. Adjacency list versus adjacency matrix
+An adjacency list is not the only way to store a graph.
+
+Another common representation is an adjacency matrix.
+
+Let's compare them using the same graph:
+A ----- B
+|
+C
+
+The undirected edges are:
+const edges = [
+  ["A", "B"],
+  ["A", "C"],
+];
+
+13.1 Adjacency list
+const graph = {
+  A: ["B", "C"],
+  B: ["A"],
+  C: ["A"],
+};
+
+We store each node alongside its neighbors.
+13.2 Adjacency matrix
+A matrix represents every possible pair of nodes.
+
+First, choose an ordering:
+const nodes = ["A", "B", "C"];
+
+Then create a matrix:
+        A        B        C
+A        0        1        1
+B        1        0        0
+C        1        0        0
+
+
+A value of 1 means an edge exists. A value of 0 means no edge exists.
+
+In JavaScript:
+const matrix = [
+  [0, 1, 1],
+  [1, 0, 0],
+  [1, 0, 0],
+];
+
+With this node ordering:
+- Row 0 represents A.
+- Row 1 represents B.
+- Row 2 represents C.
+To check whether A connects to C:
+console.log(matrix[0][2]);
+
+Output:
+1
+
+To check whether B connects to C:
+console.log(matrix[1][2]);
+
+Output:
+0
+
+// Which is better?
+// Neither representation is universally better.
+
+// The choice depends on the graph's structure and the operations you need.
+// Property        Adjacency list        Adjacency matrix
+// Storage        Proportional to nodes and edges        Proportional to the square of the number of nodes
+// Check whether an edge exists        Usually requires searching the relevant neighbor list        Constant-time matrix lookup
+// Iterate through one node's neighbors        Efficient for sparse graphs        Requires scanning the entire row
+// Best suited to        Often sparse graphs        Often dense graphs or frequent edge-existence checks
+// DFS/BFS        Very common        Also possible
+
+
+// For an adjacency list, retrieving a node's neighbor array from a JavaScript object or Map is typically expected to take \(O(1)\) time. Iterating through its neighbors takes time proportional to the number of neighbors.
+
+// For an adjacency matrix, checking an edge is \(O(1)\), but finding all neighbors of a node requires scanning its entire row, which takes \(O(V)\) time.
