@@ -189,3 +189,34 @@ details
 Deep clone with an old→new map
 Given a reference to a node in a connected undirected graph, return a deep copy of the entire graph, 
 where each cloned node holds the same value and its own list of neighbor clones.
+
+class Node {
+
+      constructor(value, neighbor){
+        this.value = value;
+        this.neighbor !== neighbor ? [] : neighbor;
+      }
+}
+const copyGraph = function(original){
+
+  const clones = new Map();
+function dfs(node){
+  if(node === null){
+    return null;
+  }
+
+  if(clones.has(node.value)){
+    return clones.get(node.value);
+  }
+
+  let clone = new Node(node.value);
+  clones.set(node, clone);
+
+  for(let  neighbor of node.neighbors){
+    clone.neighbor.push(dfs(neighbor));
+  }
+
+  return clone;
+}
+  return dfs(original);
+}
