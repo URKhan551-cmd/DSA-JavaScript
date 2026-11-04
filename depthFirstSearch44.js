@@ -44,5 +44,60 @@ in disconnected graph you cannot raech to specific node through pass on ithers,
 if both condittion pass this is a tree.
 
   
+function buildGraph(node, edges){
+  const graph = new Array({length: n}, () => []);
+
+  for(const [a, b] of edges){
+    graph[a].push(b);
+    graph[b].push(a);
+  }
+
+  return graph;
+}
 
 
+
+function validateTree(n, edges){
+  // a tree msut have an exact n -1 edges.
+   if(edges.length !== n - 1){
+     return false;
+   }
+
+  // build an adjacency list
+  const graph = Array.from({length: n}, () => []);
+
+  for(const [a, b] of edges){
+
+    graph[a].push(b);
+    graph[b].push(a);
+  }
+
+  // inintialize dfs
+  const visited = new Set();
+  const stack = [0];
+
+  // explore all reacheable vertices\
+  while(stack.length > 0){
+
+    const node = stack.pop();
+    // if node already explored.
+    if(visited.has(node)){
+      continue;
+    }
+
+    // mark the current node as visited
+    visited.add(node);
+
+    // explore its neighbor
+    for(let neighbor of graph[node]){
+
+      if(!visited.has(neighbor)){
+
+        stack.push(neighbor);
+      }
+    }
+  }
+
+  // every vertx must be reacheable
+  return visited.size === n;
+}
