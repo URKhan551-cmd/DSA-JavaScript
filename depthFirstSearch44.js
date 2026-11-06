@@ -125,4 +125,26 @@ function dfs(grid, row, col, visited) {
   ) {
     return;
   }
+
+  // 3. Mark current cell as visited.
+  visited[row][col] = true;
+
+  // 4. Define four possible movements.
+  const directions = [
+    [-1, 0],
+    [1, 0],
+    [0, -1],
+    [0, 1]
+  ];
+
+    // 5. Explore all four neighbors.
+  for (const [dr, dc] of directions) {
+    dfs(
+      grid,
+      row + dr,
+      col + dc,
+      visited
+    );
+  }
+}
   }
