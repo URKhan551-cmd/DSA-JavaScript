@@ -108,4 +108,21 @@ function validateTree(n, edges){
 function dfs(grid, row, col, visited) {
   const rows = grid.length;
   const cols = grid[0].length;
+
+  if (
+    row < 0 ||
+    row >= rows ||
+    col < 0 ||
+    col >= cols
+  ) {
+    return;
+  }
+
+  // 2. Reject water or already visited cells.
+  if (
+    grid[row][col] === 0 ||
+    visited[row][col]
+  ) {
+    return;
+  }
   }
