@@ -101,3 +101,11 @@ function validateTree(n, edges){
   // every vertx must be reacheable
   return visited.size === n;
 }
+
+
+//
+
+function dfs(grid, row, col, visited) {
+  const rows = grid.length;
+  const cols = grid[0].length;
+  }
