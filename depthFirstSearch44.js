@@ -104,6 +104,13 @@ function validateTree(n, edges){
 
 
 //
+Matrices
+✓ Solved
+
+›
+details
+A grid is a graph · DFS the 4 neighbours
+  
 
 function dfs(grid, row, col, visited) {
   const rows = grid.length;
