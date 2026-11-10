@@ -1,3 +1,18 @@
+Problem
+Surrounded Regions
+LeetCode #130
+↗
+Medium
+✓ Solved
+
+›
+details
+Border-connected O's are safe
+Given a grid of X and O cells, flip to X every region of O cells that is fully surrounded, 
+that is, any region not connected 4-directionally to an O on the grid border.
+
+
+
 function sweep(board){
  let rows = board.length;
 let cols= board[0].length;
