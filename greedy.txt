@@ -1,0 +1,84 @@
+What exactly is a greedy algorithm?
+Let's translate the concept into engineering language.
+
+A greedy algorithm constructs a solution incrementally.
+
+At every step, it makes a decision based on the current available information, selecting what appears to be the best option according to a predefined rule.
+
+It does not normally explore every possible combination or undo previous decisions.
+
+There are four important characteristics:
+Characteristic	Meaning
+Local choice	Select the best available option now
+Irrevocable decision	Commit to the selected choice
+Incremental construction	Build the solution one decision at a time
+Optimization objective	Try to minimize or maximize something
+
+
+The general greedy structure
+function greedy(problem) {
+  const solution = [];
+
+  while (!isComplete(problem)) {
+    const choices = getAvailableChoices(problem);
+
+    const bestChoice = selectBest(choices);
+
+    solution.push(bestChoice);
+
+    updateProblem(problem, bestChoice);
+  }
+
+  return solution;
+}
+
+This is conceptual pseudocode, not a universal implementation.
+
+Let's understand what each operation means:
+1. getAvailableChoices() identifies decisions that are currently possible.
+2. selectBest() applies the greedy rule.
+3. solution.push() commits to that decision.
+4. updateProblem() changes the remaining problem.
+5. Repeat until the solution is complete.
+Notice what's missing:
+- No exhaustive search.
+- No exploration of every possible future.
+- No backtracking to undo decisions.
+That's the greedy mindset.
+
+
+3. Greedy versus brute force versus dynamic programming
+These paradigms can solve optimization problems, but they approach decision-making differently.
+
+Brute force — Explore possibilities
+
+Try possible combinations and compare their results.
+Greedy — Commit to the best local choice
+
+Choose one option at each step and continue.
+Dynamic programming — Reuse solutions to subproblems
+
+Solve smaller subproblems and store their results to avoid repeated work.
+An important distinction: DP does not necessarily explore every possibility at runtime. 
+It uses a recurrence and stored subproblem results to compute an optimal answer.
+
+
+When to use Greedy ? 
+Two mathematical properties are especially important.
+Property A — Greedy-choice property
+A problem has the greedy-choice property when there exists an optimal solution that begins with the locally best greedy choice.
+
+In simpler terms:
+
+We can safely make the current best decision without destroying the possibility of obtaining an optimal final solution.
+Property B — Optimal substructure
+A problem has optimal substructure when an optimal solution can be constructed using optimal solutions to its smaller subproblems.
+
+In simpler terms:
+
+After making a decision, the remaining problem must retain the structure needed to build an optimal solution.
+
+These properties help establish when a greedy strategy is correct.
+Engineering lesson: Never assume greedy works just because a local decision seems reasonable. You need a correctness argument.
+
+
