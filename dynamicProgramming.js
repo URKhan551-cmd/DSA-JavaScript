@@ -124,3 +124,40 @@ console.log(fibonacci(6)); // 8
 // - Tabulation is useful when you can establish a reliable dependency order and want to avoid recursion overhead.
 // - Both generally achieve the same asymptotic complexity when they compute the same states.
 
+// SPACE OPTIMIZATION 
+// WHY DO WE NEED FULL ARRAY WE CAN TAKE VARIABLES AND ALONG WITH NUMBER GROWS WE WILL ASIGNING NEXT NUMBERS 
+// Space optimization: Can we do better?
+// Look at the Fibonacci transition again:
+// dp[i] = dp[i - 1] + dp[i - 2];
+
+// Do we actually need the entire DP array?
+// To calculate the next number, we only need the previous two numbers.
+// That means we can discard older values.
+
+function fibonacci(n) {
+  if (n <= 1) return n;
+
+  let prev2 = 0;    // VARIABLE  min2
+  let prev1 = 1;   // VARIABLE   min1
+
+  for (let i = 2; i <= n; i++) {
+    const current = prev1 + prev2;
+
+    prev2 = prev1;   
+    prev1 = current;
+  }
+
+  return prev1;
+}
+
+console.log(fibonacci(6)); // 8
+
+Now:
+- Time: \(O(n)\)
+- Auxiliary space: \(O(1)\)
+// This is called Space Optimization.
+
+// The important engineering question is:
+// Can the next state be calculated using only a limited number of previous states?
+// If yes, you may not need a complete DP table.
+// However, don't optimize before understanding the full DP table. The table makes dependencies visible and is often easier to debug.
