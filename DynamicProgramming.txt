@@ -1,0 +1,60 @@
+How to approach an unfamiliar DP problem
+This is the most important part. I want you to develop a repeatable problem-solving method.
+
+Whenever you encounter a potential DP problem, follow these seven steps.
+1. Understand the problem
+   What is the input? What is the output? Are you counting possibilities, finding a minimum, maximizing something, or checking whether something is possible?
+2. Identify the smaller subproblem
+   Can the original problem be broken into smaller versions of itself?
+3. Check overlapping subproblems
+   Does solving one branch cause you to calculate the same smaller problem in another branch?
+4. Define the state
+   Decide what dp[i], dp[i][j], or another state represents in plain English.
+5. Derive the transition
+   Express how the current answer depends on previously solved states.
+6. Identify base cases and evaluation order
+   Determine where computation starts and which dependencies must be available first.
+7. Analyze and optimize
+   Calculate time and space complexity. Consider whether memoization, tabulation, or space optimization is appropriate.
+One important distinction: not every problem involving recursion is a DP problem. If subproblems do not overlap, ordinary recursion may be sufficient. And if a greedy choice can be proven correct, DP may be unnecessary.
+
+Our Dynamic Programming learning roadmap
+We won't jump straight into difficult 2D DP or advanced LeetCode problems. We'll build the mental models progressively.
+DP learning curriculum
+1. DP foundations
+   (Starting here)
+   - Recursion vs DP
+   - Overlapping subproblems
+   - Optimal substructure
+   - Memoization and tabulation
+   - State and transitions
+2. 1D Dynamic Programming
+   - Climbing Stairs (#70)
+   - Min Cost Climbing Stairs (#746)
+   - House Robber (#198)
+   - House Robber II (#213)
+   - Maximum Subarray (#53)
+3. 2D Dynamic Programming
+   - Unique Paths (#62)
+   - Unique Paths II (#63)
+   - Minimum Path Sum (#64)
+   - Longest Common Subsequence (#1143)
+4. Knapsack Patterns
+   - 0/1 Knapsack
+   - Partition Equal Subset Sum (#416)
+   - Coin Change (#322)
+   - Target Sum (#494)
+   - Unbounded Knapsack
+5. Subsequence and String DP
+   - Longest Increasing Subsequence (#300)
+   - Edit Distance (#72)
+   - Word Break (#139)
+   - Distinct Subsequences (#115)
+6. Advanced DP
+   - Interval DP
+   - State-machine DP
+   - Tree DP
+   - Bitmask DP
+   - DP optimization techniques.
+
+
