@@ -17,19 +17,110 @@
 
 // mutation
 
-function mutationDp(n, memo= {}){
-if(n <= 1){
-  return n;
-}
+// Approach A: Memoization (Top-Down DP)
+// Memoization means:
+// 1. Start with the original problem.
+// 2. Recursively break it into smaller problems.
+// 3. Store the answer when a subproblem is solved.
+// 4. If that subproblem appears again, return the stored answer.
+// Think of it as recursion with memory.
 
-  if(memo[n] !== undefined){
+// JavaScript implementation:
+
+function fibonacci(n, memo = {}) {
+  // Base cases
+  if (n <= 1) {
+    return n;
+  }
+
+  // Check whether we already calculated this state
+  if (memo[n] !== undefined) {
     return memo[n];
   }
 
-  memo[n] = mutationDp(n - 1, memo) + mutationDp(n-2, memo);
+  // Calculate and remember the answer
+  memo[n] =
+    fibonacci(n - 1, memo) +
+    fibonacci(n - 2, memo);
 
   return memo[n];
-  
 }
 
+console.log(fibonacci(6)); // 8
+
+// Let's understand the execution flow.
+
+// For fibonacci(5):
+// fibonacci(5)
+//     |
+//     ├── fibonacci(4)
+//     |      |
+//     |      ├── fibonacci(3)
+//     |      └── fibonacci(2)
+//     |
+//     └── fibonacci(3)
+//            |
+//            └── Already calculated!
+//                Return memo[3]
+
+// Instead of recursively calculating F(3) again, we return its stored value.
+
+// (Time: O(n)) (Space: O(n))
+
+// The time complexity becomes linear because each state is calculated only once.
+
+// The space complexity includes the memo object and the recursion call stack.
+
 // tabulation 
+Approach B: Tabulation (Bottom-Up DP)
+// Tabulation solves the same problem differently.
+
+// Instead of starting from the original problem and moving downward through recursion, we start with the smallest known answers and build upward.
+
+// JavaScript implementation:
+
+function fibonacci(n) {
+  if (n <= 1) {
+    return n;
+  }
+
+  const dp = new Array(n + 1);
+
+  // Initialize known answers
+  dp[0] = 0;
+  dp[1] = 1;
+
+  // Build answers from smaller states
+  for (let i = 2; i <= n; i++) {
+    dp[i] = dp[i - 1] + dp[i - 2];
+  }
+
+  return dp[n];
+}
+
+console.log(fibonacci(6)); // 8
+
+// Let's execute it manually.
+
+// For fibonacci(6):
+// Iteration	Calculation	Stored result
+// Initial	dp[0] = 0	0
+// Initial	dp[1] = 1	1
+// i = 2	0 + 1	1
+// i = 3	1 + 1	2
+// i = 4	2 + 1	3
+// i = 5	3 + 2	5
+// i = 6	5 + 3	8
+
+
+// Final DP array
+
+// Each cell stores an answer that can be reused by later calculations.
+
+// (Time: O(n)) (Space: O(n))
+
+// Engineering insight: Neither approach is universally better.
+// - Memoization is useful when only a fraction of possible states are needed, or when the recursive relationship is easier to express.
+// - Tabulation is useful when you can establish a reliable dependency order and want to avoid recursion overhead.
+// - Both generally achieve the same asymptotic complexity when they compute the same states.
+
