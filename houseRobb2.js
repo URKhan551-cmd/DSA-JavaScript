@@ -33,3 +33,25 @@ const n = nums.length;
 const includeLast = linearRob(nums, 1, n-1)
   return Math.max(excludeLast, includeLast);
 }
+// Engineering concern: Recursive DP is elegant, but recursion introduces call-stack overhead. 
+// In languages or environments with limited stack depth, bottom-up DP may be safer.
+
+// Tabulation bottom - up
+function robLinear(nums, start, end) {
+    const dp = new Array(end - start + 1).fill(0);
+
+    for (let i = start; i <= end; i++) {
+        const index = i - start;
+
+        const rob =
+            nums[i] + (index >= 2 ? dp[index - 2] : 0);
+
+        const skip =
+            index >= 1 ? dp[index - 1] : 0;
+
+        dp[index] = Math.max(rob, skip);
+    }
+
+    return dp[dp.length - 1];
+}
+
