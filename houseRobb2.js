@@ -66,3 +66,29 @@ function rob(nums) {
         robLinear(nums, 1, n - 1)
     );
 }
+
+
+// Because the current state only depends on two previous states:
+// - dp(i - 1)
+// - dp(i - 2)
+// Once we calculate dp(i), older states are no longer needed.
+
+// This is called a rolling-state optimization.
+
+
+function robLinear(nums, start, end) {
+    let prev2 = 0;
+    let prev1 = 0;
+
+    for (let i = start; i <= end; i++) {
+        const rob = nums[i] + prev2;
+        const skip = prev1;
+
+        const current = Math.max(rob, skip);
+
+        prev2 = prev1;
+        prev1 = current;
+    }
+
+    return prev1;
+}
