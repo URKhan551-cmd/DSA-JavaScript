@@ -92,3 +92,15 @@ function robLinear(nums, start, end) {
 
     return prev1;
 }
+
+function rob(nums) {
+    const n = nums.length;
+
+    if (n === 0) return 0;
+    if (n === 1) return nums[0];
+
+    return Math.max(
+        robLinear(nums, 0, n - 2),
+        robLinear(nums, 1, n - 1)
+    );
+}
